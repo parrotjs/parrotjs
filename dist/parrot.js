@@ -39,8 +39,12 @@
       this[obj.name] = obj.url;
       return this;
     };
-    return fn.set = function(environment) {
+    fn.set = function(environment) {
       parrot.environment = environment;
+      return this;
+    };
+    return fn.remove = function(name) {
+      delete this[name];
       return this;
     };
   })(parrot.endpoint);
@@ -48,6 +52,7 @@
   'use strict';
 
   (function(fn) {
+    fn._URLS = {};
     fn._DEFAULT = {
       method: 'GET',
       protocol: 'http'
@@ -74,7 +79,7 @@
       if (obj.protocol == null) {
         obj.protocol = this._DEFAULT.protocol;
       }
-      this[obj.name] = {
+      this[obj.name] = this._URLS[obj.name] = {
         method: obj.method,
         protocol: obj.protocol,
         path: obj.path,

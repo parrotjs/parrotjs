@@ -11,3 +11,7 @@ do (fn = parrot.endpoint)->
   fn.set = (environment) ->
     parrot.environment = environment
     this
+
+  fn.remove = (name) ->
+    delete @[name]
+    this

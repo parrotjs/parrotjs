@@ -4,6 +4,8 @@ do (fn = parrot.url)->
 
   ## -- Private -------------------------------------------------------------
 
+  fn._URLS = {}
+
   fn._DEFAULT =
     method: 'GET'
     protocol: 'http'
@@ -24,7 +26,7 @@ do (fn = parrot.url)->
     obj.method = @_DEFAULT.method unless obj.method?
     obj.protocol = @_DEFAULT.protocol unless obj.protocol?
 
-    @[obj.name] =
+    @[obj.name] = @_URLS[obj.name] =
       method   : obj.method
       protocol : obj.protocol
       path     : obj.path
