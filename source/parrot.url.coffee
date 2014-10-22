@@ -31,6 +31,6 @@ do (fn = parrot.url)->
       query    : if obj.query? then @_getQuery(obj.query) else undefined
     this
 
-  fn.remove = ->
-    delete @_URLS[name]
+  fn.remove = (name) ->
+    delete @[name]
     this

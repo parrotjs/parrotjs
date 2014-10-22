@@ -82,8 +82,8 @@
       };
       return this;
     };
-    return fn.remove = function() {
-      delete this._URLS[name];
+    return fn.remove = function(name) {
+      delete this[name];
       return this;
     };
   })(parrot.url);
