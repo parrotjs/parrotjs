@@ -1,0 +1,14 @@
+{
+  "name": "hope",
+  "description": "Native implementation of CommonJS Promises/A",
+  "main": "hope.js",
+  "homepage": "https://github.com/soyjavi/hope",
+  "license": "MIT",
+  "authors": [
+    "Javi Jimenez", "Javi Jimenez <javi@tapquo.com>"],
+  "keywords": [ "promise", "javascript", "coffeescript", "commonjs"],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/soyjavi/hope.git"
+  }
+}

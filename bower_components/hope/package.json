@@ -1,0 +1,36 @@
+{
+  "name": "hope",
+  "version": "1.0.3",
+  "description": "Native implementation of CommonJS Promises/A",
+  "homepage": "https://github.com/soyjavi/hope",
+  "author": {
+    "name": "Javi Jimenez",
+    "email": "javi@tapquo.com",
+    "url": "http://twitter.com/soyjavi"},
+  "keywords": [ "promise", "javascript", "coffeescript", "commonjs"],
+  "license": [{
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/mit-license.php"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/soyjavi/hope.git"
+  },
+ "devDependencies": {
+    "coffee-script": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-jasmine": "*"},
+  "main": "hope.js",
+  "jam": {
+    "main": "hope.js",
+    "include": [
+      "hope.js",
+      "README.md",
+      "LICENSE.txt"
+    ]
+  },
+  "readme": "# Native implementation of CommonJS Promises/A",
+  "readmeFilename": "README.md"
+}

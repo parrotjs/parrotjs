@@ -1,0 +1,6 @@
+node_modules
+.DS_Store
+desktop.ini
+.idea
+should.js.for-tests
+*.swp

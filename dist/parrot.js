@@ -11,7 +11,8 @@
     __slice = [].slice;
 
   parrot = this.parrot = {
-    version: "0.10.22",
+    version: '0.10.22',
+    environment: 'development',
     initialize: {},
     endpoint: {},
     url: {},
@@ -35,11 +36,74 @@
 
   'use strict';
 
-  parrot.endpoint = (function() {})();
+  (function(fn) {
+    fn._ENDPOINTS = {};
+    fn.add = function(obj) {
+      this._ENDPOINTS[obj.name] = obj.url;
+      return this;
+    };
+    fn.set = function(environment) {
+      parrot.environment = environment;
+      return this;
+    };
+    return fn.get = function(obj) {
+      if (arguments.length === 0) {
+        return this._ENDPOINTS;
+      }
+      if (obj.name) {
+        return this._ENDPOINTS[obj.name];
+      }
+    };
+  })(parrot.endpoint);
 
   'use strict';
 
-  parrot.url = (function() {})();
+  (function(fn) {
+    fn._DEFAULT = {
+      method: 'GET',
+      protocol: 'http'
+    };
+    fn._getQuery = function(queries) {
+      var index, option, query, _i, _len, _url;
+      _url = new Url();
+      _url.protocol = '';
+      _url.path = '';
+      for (index = _i = 0, _len = queries.length; _i < _len; index = _i += 2) {
+        option = queries[index];
+        _url.query[option] = queries[index + 1];
+      }
+      query = _url.toString();
+      if (query.charAt(0) === '?') {
+        query = query.substring(1);
+      }
+      return query;
+    };
+    fn.add = function(obj) {
+      if (obj.method == null) {
+        obj.method = this._DEFAULT.method;
+      }
+      if (obj.protocol == null) {
+        obj.protocol = this._DEFAULT.protocol;
+      }
+      this[obj.name] = {
+        method: obj.method,
+        protocol: obj.protocol,
+        path: obj.path,
+        query: obj.query != null ? this._getQuery(obj.query) : void 0
+      };
+      return this;
+    };
+    fn.get = function(name) {
+      var obj;
+      obj = this._URLS[name];
+      delete obj._url;
+      return obj;
+    };
+    return fn.remove = function() {
+      delete this._URLS[name];
+      return this;
+    };
+  })(parrot.url);
 
   'use strict';
 

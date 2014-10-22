@@ -1,0 +1,3 @@
+[submodule "bower_components/jsurl"]
+	path = bower_components/jsurl
+	url = https://github.com/Mikhus/jsurl

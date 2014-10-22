@@ -1,0 +1,14 @@
+{
+  "name": "should",
+  "homepage": "https://github.com/visionmedia/should.js",
+  "version": "3.3.1",
+  "_release": "3.3.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.3.1",
+    "commit": "283de2f8b1721432b29f98504b8d70b3992051cc"
+  },
+  "_source": "git://github.com/visionmedia/should.js.git",
+  "_target": "*",
+  "_originalSource": "should"
+}

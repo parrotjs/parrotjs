@@ -24,6 +24,17 @@
     "mocha": "*",
     "should": "*"
   },
+  "testling": {
+    "html" : "test/index.html",
+    "browsers" : [
+      "ie/6.0..latest",
+      "chrome/20..latest",
+      "firefox/ 3.0..latest",
+      "safari/latest",
+      "opera/10.0.0..latest",
+      "iphone/6", "ipad/6"
+    ]
+  },
   "engines": {
     "node": "*"
   },
@@ -38,6 +49,6 @@
   "license": "MIT",
   "repository": "sailorjs/parrotjs",
   "scripts": {
-    "test": "sh test/test.sh"
+    "test": "testling"
   }
 }
