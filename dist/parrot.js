@@ -7,13 +7,15 @@
  */
 (function() {
   'use strict';
-  var Parrot,
+  var parrot,
     __slice = [].slice;
 
-  Parrot = this.Parrot = {
+  parrot = this.parrot = {
     version: "0.10.22",
-    Device: {},
-    Storage: {},
+    initialize: {},
+    endpoint: {},
+    url: {},
+    storage: {},
     $: function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -27,10 +29,20 @@
 
   'use strict';
 
-  Parrot.Device = (function() {})();
+  parrot.initialize = (function() {
+    return console.log('hello world');
+  })();
 
   'use strict';
 
-  Parrot.Storage = (function() {})();
+  parrot.endpoint = (function() {})();
+
+  'use strict';
+
+  parrot.url = (function() {})();
+
+  'use strict';
+
+  parrot.storage = (function() {})();
 
 }).call(this);

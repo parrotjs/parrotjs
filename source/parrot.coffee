@@ -1,8 +1,10 @@
 'use strict'
 
-Parrot = @Parrot =
-  version   : "0.10.22"
-  Device    : {}
-  Storage   : {}
+parrot = @parrot =
+  version    : "0.10.22"
+  initialize : {}
+  endpoint   : {}
+  url        : {}
+  storage    : {}
   # DOM Handler Facade
   $: (args...) -> if $$? then $$ args... else $ args...

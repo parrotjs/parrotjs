@@ -15,6 +15,7 @@
     "gulp-connect": "*",
     "gulp-header": "*",
     "gulp-open": "*",
+    "gulp-rename": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
     "gulp-watch": "*"
@@ -27,7 +28,13 @@
     "node": "*"
   },
   "homepage": "http://github.com/sailor/parrotjs",
-  "keywords": ["sails", "client", "sailor", "connect", "frontend"],
+  "keywords": [
+    "sails",
+    "client",
+    "sailor",
+    "connect",
+    "frontend"
+  ],
   "license": "MIT",
   "repository": "sailorjs/parrotjs",
   "scripts": {
