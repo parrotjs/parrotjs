@@ -6,9 +6,7 @@
           name: 'development',
           url: 'http://localhost:1337'
         });
-        return parrot.endpoint.get({
-          name: 'development'
-        }).should.eql('http://localhost:1337');
+        return parrot.endpoint.development.should.eql('http://localhost:1337');
       });
       it('add concatenate', function() {
         parrot.endpoint.add({
@@ -18,12 +16,8 @@
           name: 'production',
           url: 'http://api.com'
         });
-        parrot.endpoint.get({
-          name: 'development'
-        }).should.eql('http://localhost:1334');
-        return parrot.endpoint.get({
-          name: 'production'
-        }).should.eql('http://api.com');
+        parrot.endpoint.development.should.eql('http://localhost:1334');
+        return parrot.endpoint.production.should.eql('http://api.com');
       });
       return it('set', function() {
         parrot.endpoint.set('production');

@@ -30,29 +30,18 @@
 
   'use strict';
 
-  parrot.initialize = (function() {
-    return console.log('hello world');
-  })();
+  parrot.initialize = (function() {})();
 
   'use strict';
 
   (function(fn) {
-    fn._ENDPOINTS = {};
     fn.add = function(obj) {
-      this._ENDPOINTS[obj.name] = obj.url;
+      this[obj.name] = obj.url;
       return this;
     };
-    fn.set = function(environment) {
+    return fn.set = function(environment) {
       parrot.environment = environment;
       return this;
-    };
-    return fn.get = function(obj) {
-      if (arguments.length === 0) {
-        return this._ENDPOINTS;
-      }
-      if (obj.name) {
-        return this._ENDPOINTS[obj.name];
-      }
     };
   })(parrot.endpoint);
 
@@ -92,12 +81,6 @@
         query: obj.query != null ? this._getQuery(obj.query) : void 0
       };
       return this;
-    };
-    fn.get = function(name) {
-      var obj;
-      obj = this._URLS[name];
-      delete obj._url;
-      return obj;
     };
     return fn.remove = function() {
       delete this._URLS[name];
