@@ -1,0 +1,36 @@
+{
+  "name": "parrotjs",
+  "description": "Client library to connect your frontend application with whatever sails backend",
+  "version": "0.10.22",
+  "author": {
+    "name": "Kiko Beats",
+    "email": "josefrancisco.verdu@gmail.com",
+    "url": "https://github.com/Kikobeats"
+  },
+  "dependencies": {
+    "coffee-script": "*",
+    "gulp": "*",
+    "gulp-coffee": "*",
+    "gulp-concat": "*",
+    "gulp-connect": "*",
+    "gulp-header": "*",
+    "gulp-open": "*",
+    "gulp-uglify": "*",
+    "gulp-util": "*",
+    "gulp-watch": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "homepage": "http://github.com/sailor/parrotjs",
+  "keywords": ["sails", "client", "sailor", "connect", "frontend"],
+  "license": "MIT",
+  "repository": "sailorjs/parrotjs",
+  "scripts": {
+    "test": "sh test/test.sh"
+  }
+}
