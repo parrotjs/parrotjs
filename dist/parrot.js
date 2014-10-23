@@ -24,17 +24,21 @@
 
   'use strict';
 
-  parrot.initialize = (function() {})();
+  (function() {})();
 
   'use strict';
 
   (function(fn) {
     fn.add = function(obj) {
-      this[obj.name] = obj.url;
+      this[obj.name] = function() {
+        return obj.url;
+      };
       return this;
     };
     fn.set = function(environment) {
-      parrot.environment = environment;
+      parrot.environment = function() {
+        return environment;
+      };
       return this;
     };
     return fn.remove = function(name) {
@@ -50,6 +54,17 @@
     fn._DEFAULT = {
       method: 'GET',
       protocol: 'http'
+    };
+    fn._partial = function(func) {
+      var args;
+      args = Array.prototype.slice.call(arguments, 1);
+      return (function(_this) {
+        return function() {
+          var allArguments;
+          allArguments = args.concat(Array.prototype.slice.call(arguments));
+          return func.apply(_this, allArguments);
+        };
+      })(this);
     };
     fn._getQuery = function(queries) {
       var index, option, query, _i, _len, _url;
@@ -103,8 +118,21 @@
       return promise;
     };
     fn._bindAdd = function(name, update) {
-      var obj;
-      return obj = this._URLS[name];
+      if (update != null) {
+        if (update.method != null) {
+          this._URLS[name].method = update.method;
+        }
+        if (update.protocol != null) {
+          this._URLS[name].protocol = update.protocol;
+        }
+        if (update.path != null) {
+          this._URLS[name].path = update.path;
+        }
+        if (update.query != null) {
+          this._URLS[name].query = this._getQuery(update.query);
+        }
+      }
+      return this._URLS[name];
     };
     fn.ajax = function(obj, cb) {
       var promise;
@@ -114,7 +142,7 @@
         };
       }
       if (!obj.url) {
-        obj.url = "" + parrot.endpoint[parrot.environment];
+        obj.url = "" + (parrot.endpoint[parrot.environment()]());
       }
       if (obj.path != null) {
         obj.url = "" + obj.url + "/" + obj.path;
@@ -134,12 +162,13 @@
       if (obj.protocol == null) {
         obj.protocol = this._DEFAULT.protocol;
       }
-      this[obj.name] = this._URLS[obj.name] = {
+      this._URLS[obj.name] = {
         method: obj.method,
         protocol: obj.protocol,
         path: obj.path,
         query: obj.query != null ? this._getQuery(obj.query) : void 0
       };
+      this[obj.name] = this._partial(this._bindAdd, obj.name);
       return this;
     };
     return fn.remove = function(name) {

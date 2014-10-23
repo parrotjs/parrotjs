@@ -2,14 +2,16 @@
 
 do (fn = parrot.endpoint)->
 
-  ## -- Public --------------------------------------------------------------
+  ## -- Public ---------------------------------------------------------------
 
   fn.add = (obj) ->
-    @[obj.name] = obj.url
+    # why function? for follow the API!
+    @[obj.name] = -> obj.url
     this
 
   fn.set = (environment) ->
-    parrot.environment = environment
+    # why function? for follow the API!
+    parrot.environment = -> environment
     this
 
   fn.remove = (name) ->

@@ -10,6 +10,12 @@ do (fn = parrot.url)->
     method: 'GET'
     protocol: 'http'
 
+  fn._partial = (func) -> #, 0..n args
+    args = Array::slice.call(arguments, 1)
+    =>
+      allArguments = args.concat(Array::slice.call(arguments))
+      func.apply this, allArguments
+
   fn._getQuery = (queries) ->
     _url = new Url()
     _url.protocol = ''
@@ -43,21 +49,20 @@ do (fn = parrot.url)->
     promise
 
   fn._bindAdd = (name, update) ->
-    obj = @_URLS[name]
-    # return @_URLS[name] unless update
-    # @_URLS[name].method = update.method if update.method?
-    # @_URLS[name].protocol = update.protocol if update.protocol?
-    # @_URLS[name].path = update.path if update.path?
-    # @_URLS[name].query = @_getQuery(update.query) if update.query?
+    if update?
+      @_URLS[name].method = update.method if update.method?
+      @_URLS[name].protocol = update.protocol if update.protocol?
+      @_URLS[name].path = update.path if update.path?
+      @_URLS[name].query = @_getQuery(update.query) if update.query?
+    @_URLS[name]
 
   ## -- Public --------------------------------------------------------------
 
   fn.ajax = (obj, cb) ->
-
     if typeof arguments[0] is 'string'
       obj = @_URLS[arguments[0]] or url: arguments[0]
 
-    obj.url = "#{parrot.endpoint[parrot.environment]}" unless obj.url
+    obj.url = "#{parrot.endpoint[parrot.environment()]()}" unless obj.url
     obj.url = "#{obj.url}/#{obj.path}" if obj.path?
     obj.url = "#{obj.url}?#{obj.query}" if obj.query?
 
@@ -69,13 +74,13 @@ do (fn = parrot.url)->
     obj.method = @_DEFAULT.method unless obj.method?
     obj.protocol = @_DEFAULT.protocol unless obj.protocol?
 
-    @[obj.name] = @_URLS[obj.name] =
+    @_URLS[obj.name] =
       method   : obj.method
       protocol : obj.protocol
       path     : obj.path
       query    : if obj.query? then @_getQuery(obj.query) else undefined
 
-     # = @_bindAdd(obj.name)
+    @[obj.name] = @_partial(@_bindAdd, obj.name)
     this
 
   fn.remove = (name) ->

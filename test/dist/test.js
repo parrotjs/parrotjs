@@ -6,7 +6,7 @@
           name: 'development',
           url: 'http://localhost:1337'
         });
-        return parrot.endpoint.development.should.eql('http://localhost:1337');
+        return parrot.endpoint.development().should.eql('http://localhost:1337');
       });
       it('add concatenate', function() {
         parrot.endpoint.add({
@@ -16,12 +16,12 @@
           name: 'production',
           url: 'http://api.com'
         });
-        parrot.endpoint.development.should.eql('http://localhost:1334');
-        return parrot.endpoint.production.should.eql('http://api.com');
+        parrot.endpoint.development().should.eql('http://localhost:1334');
+        return parrot.endpoint.production().should.eql('http://api.com');
       });
       return it('set', function() {
         parrot.endpoint.set('production');
-        return parrot.environment.should.eql('production');
+        return parrot.environment().should.eql('production');
       });
     });
     describe('url ::', function() {
@@ -36,7 +36,7 @@
         parrot.url.add({
           name: 'login'
         });
-        return parrot.url.login.should.eql(_default);
+        return parrot.url.login().should.eql(_default);
       });
       it('add with query', function() {
         var _default;
@@ -50,7 +50,7 @@
           name: 'tweets',
           query: ['sort', 'id asc']
         });
-        return parrot.url.tweets.should.eql(_default);
+        return parrot.url.tweets().should.eql(_default);
       });
       it('add with path and query', function() {
         var _default;
@@ -65,23 +65,25 @@
           path: 'tweet',
           query: ['sort', 'id asc']
         });
-        return parrot.url.tweets.should.eql(_default);
+        return parrot.url.tweets().should.eql(_default);
       });
-      it('ajax', function() {
+      it('ajax', function(done) {
         var _url;
         _url = 'http://echo.jsontest.com/key/value/one/two';
         return parrot.url.ajax({
           url: _url
         }, function(err, result) {
-          return result.one.should.eql('two');
+          result.one.should.eql('two');
+          return done();
         });
       });
-      it('ajax with default values', function() {
+      it('ajax with default values', function(done) {
         return parrot.url.ajax('http://echo.jsontest.com/key/value/one/two', function(err, result) {
-          return result.one.should.eql('two');
+          result.one.should.eql('two');
+          return done();
         });
       });
-      it('ajax using url object', function() {
+      it('ajax using url object', function(done) {
         parrot.endpoint.add({
           name: 'testing',
           url: 'http://echo.jsontest.com'
@@ -89,11 +91,12 @@
         return parrot.url.add({
           name: 'jsontest',
           path: 'key/value/one/two'
-        }).ajax(parrot.url.jsontest, function(err, result) {
-          return result.one.should.eql('two');
+        }).ajax(parrot.url.jsontest(), function(err, result) {
+          result.one.should.eql('two');
+          return done();
         });
       });
-      it('ajax using url object (alternative method)', function() {
+      it('ajax using url object (alternative method)', function(done) {
         parrot.endpoint.add({
           name: 'testing',
           url: 'http://echo.jsontest.com'
@@ -102,10 +105,11 @@
           name: 'jsontest',
           path: 'key/value/one/two'
         }).ajax('jsontest', function(err, result) {
-          return result.one.should.eql('two');
+          result.one.should.eql('two');
+          return done();
         });
       });
-      return xit('add with path and query and change values dynamically', function() {
+      return it('add with path and query and change values dynamically', function() {
         var _default;
         _default = {
           method: 'POST',
@@ -124,39 +128,37 @@
       });
     });
     return describe('storage ::', function() {
-      return describe('localStorage ::', function() {
-        before(function() {
-          return localStorage.clear();
-        });
-        it('set and get simple value', function() {
-          parrot.storage.local.set('one', 'two').one().should.eql('two');
-          localStorage.setItem('one', 'three');
-          return parrot.storage.local.one().should.eql('three');
-        });
-        it('set and get object', function() {
-          var _object;
-          _object = {
-            foo: 'bar'
-          };
-          return parrot.storage.local.set('myData', _object).myData().foo.should.eql('bar');
-        });
-        it('updated a item', function() {
-          return parrot.storage.local.set('one', 'three').one().should.eql('three');
-        });
-        it('get the size', function() {
-          return parrot.storage.local.size().should.eql(2);
-        });
-        it('check for a key', function() {
-          return parrot.storage.local.isAvailable('one').should.eql(true);
-        });
-        xit('remove one key', function() {
-          parrot.storage.local.clear('one');
-          return should.not.exist(parrot.storage.local.one());
-        });
-        return xit('remove all', function() {
-          parrot.storage.local.clearAll();
-          return should.not.exist(parrot.storage.local.myData());
-        });
+      before(function() {
+        return localStorage.clear();
+      });
+      it('set and get simple value', function() {
+        parrot.storage.local.set('one', 'two').one().should.eql('two');
+        localStorage.setItem('one', 'three');
+        return parrot.storage.local.one().should.eql('three');
+      });
+      it('set and get object', function() {
+        var _object;
+        _object = {
+          foo: 'bar'
+        };
+        return parrot.storage.local.set('myData', _object).myData().foo.should.eql('bar');
+      });
+      it('updated a item', function() {
+        return parrot.storage.local.set('one', 'three').one().should.eql('three');
+      });
+      it('get the size', function() {
+        return parrot.storage.local.size().should.eql(2);
+      });
+      it('check for a key', function() {
+        return parrot.storage.local.isAvailable('one').should.eql(true);
+      });
+      xit('remove one key', function() {
+        parrot.storage.local.clear('one');
+        return should.not.exist(parrot.storage.local.one());
+      });
+      return xit('remove all', function() {
+        parrot.storage.local.clearAll();
+        return should.not.exist(parrot.storage.local.myData());
       });
     });
   });
