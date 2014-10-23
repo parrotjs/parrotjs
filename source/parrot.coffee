@@ -11,4 +11,4 @@ parrot = @parrot =
   storage    : {}
 
   # DOM Handler Facade
-  $: (args...) -> if $$? then $$ args... else $ args...
+  $ : if $$? then $$ else $

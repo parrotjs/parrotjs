@@ -52,7 +52,7 @@
         });
         return parrot.url.tweets.should.eql(_default);
       });
-      return it('add with path and query', function() {
+      it('add with path and query', function() {
         var _default;
         _default = {
           method: 'GET',
@@ -66,6 +66,61 @@
           query: ['sort', 'id asc']
         });
         return parrot.url.tweets.should.eql(_default);
+      });
+      it('ajax', function() {
+        var _url;
+        _url = 'http://echo.jsontest.com/key/value/one/two';
+        return parrot.url.ajax({
+          url: _url
+        }, function(err, result) {
+          return result.one.should.eql('two');
+        });
+      });
+      it('ajax with default values', function() {
+        return parrot.url.ajax('http://echo.jsontest.com/key/value/one/two', function(err, result) {
+          return result.one.should.eql('two');
+        });
+      });
+      it('ajax using url object', function() {
+        parrot.endpoint.add({
+          name: 'testing',
+          url: 'http://echo.jsontest.com'
+        }).set('testing');
+        return parrot.url.add({
+          name: 'jsontest',
+          path: 'key/value/one/two'
+        }).ajax(parrot.url.jsontest, function(err, result) {
+          return result.one.should.eql('two');
+        });
+      });
+      it('ajax using url object (alternative method)', function() {
+        parrot.endpoint.add({
+          name: 'testing',
+          url: 'http://echo.jsontest.com'
+        }).set('testing');
+        return parrot.url.add({
+          name: 'jsontest',
+          path: 'key/value/one/two'
+        }).ajax('jsontest', function(err, result) {
+          return result.one.should.eql('two');
+        });
+      });
+      return xit('add with path and query and change values dynamically', function() {
+        var _default;
+        _default = {
+          method: 'POST',
+          protocol: 'http',
+          path: 'tweet',
+          query: 'sort=id%20asc'
+        };
+        parrot.url.add({
+          name: 'tweets',
+          path: 'tweet',
+          query: ['sort', 'id asc']
+        });
+        return parrot.url.tweets({
+          method: 'POST'
+        }).should.eql(_default);
       });
     });
   });

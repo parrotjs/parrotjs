@@ -7,8 +7,7 @@
  */
 (function() {
   'use strict';
-  var parrot,
-    __slice = [].slice;
+  var parrot;
 
   parrot = this.parrot = {
     version: '0.10.22',
@@ -17,15 +16,7 @@
     endpoint: {},
     url: {},
     storage: {},
-    $: function() {
-      var args;
-      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      if (typeof $$ !== "undefined" && $$ !== null) {
-        return $$.apply(null, args);
-      } else {
-        return $.apply(null, args);
-      }
-    }
+    $: typeof $$ !== "undefined" && $$ !== null ? $$ : $
   };
 
   'use strict';
@@ -71,6 +62,67 @@
         query = query.substring(1);
       }
       return query;
+    };
+    fn._createAjaxPromise = function(obj) {
+      var promise;
+      promise = new Hope.Promise();
+      parrot.$.ajax({
+        type: obj.method || 'GET',
+        url: obj.url,
+        data: obj.send || {},
+        dataType: 'json',
+        contentType: 'application/x-www-form-urlencoded',
+        success: (function(_this) {
+          return function(xhr) {
+            var error;
+            if (xhr.status === 0) {
+              error = {
+                code: 0,
+                message: 'Server Unavailable'
+              };
+              return promise.done(error, null);
+            } else {
+              return promise.done(null, xhr);
+            }
+          };
+        })(this),
+        error: (function(_this) {
+          return function(xhr, request) {
+            var error;
+            error = {
+              code: request.status,
+              message: request.response
+            };
+            return promise.done(error, null);
+          };
+        })(this)
+      });
+      return promise;
+    };
+    fn._bindAdd = function(name, update) {
+      var obj;
+      return obj = this._URLS[name];
+    };
+    fn.ajax = function(obj, cb) {
+      var promise;
+      if (typeof arguments[0] === 'string') {
+        obj = this._URLS[arguments[0]] || {
+          url: arguments[0]
+        };
+      }
+      if (!obj.url) {
+        obj.url = "" + parrot.endpoint[parrot.environment];
+      }
+      if (obj.path != null) {
+        obj.url = "" + obj.url + "/" + obj.path;
+      }
+      if (obj.query != null) {
+        obj.url = "" + obj.url + "?" + obj.query;
+      }
+      promise = this._createAjaxPromise(obj);
+      return promise.then(function(err, result) {
+        return cb(err, result);
+      });
     };
     fn.add = function(obj) {
       if (obj.method == null) {
