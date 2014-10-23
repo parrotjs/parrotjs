@@ -69,3 +69,36 @@ describe 'Parrot ::', ->
       _default = { method:'POST', protocol:'http', path: 'tweet', query:'sort=id%20asc' }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets(method: 'POST').should.eql _default
+
+  describe 'storage ::', ->
+
+    describe 'localStorage ::', ->
+
+      before  ->
+        localStorage.clear()
+
+      it 'set and get simple value', ->
+        parrot.storage.local
+        .set 'one','two'
+        .one().should.eql 'two'
+
+      xit 'set and get object', ->
+        _object = foo:'bar'
+        parrot.storage.local
+        .set('myData', _object)
+        .myData.foo.should.eql 'bar'
+
+      xit 'updated a item', ->
+        parrot.storage.local
+        .set 'one','three'
+        .one.should.eql 'three'
+
+      xit 'get the size', ->
+        parrot.storage.local.size().should.eql 2
+
+      xit 'check for a key', ->
+        parrot.storage.local.is('one').should.eql true
+
+      xit 'remove one key', ->
+        parrot.storage.local.clear('one')
+        (parrot.storage.local.one).should.equal('undefined')

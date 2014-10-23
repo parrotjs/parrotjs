@@ -15,7 +15,10 @@
     initialize: {},
     endpoint: {},
     url: {},
-    storage: {},
+    storage: {
+      local: {},
+      session: {}
+    },
     $: typeof $$ !== "undefined" && $$ !== null ? $$ : $
   };
 
@@ -147,6 +150,97 @@
 
   'use strict';
 
-  parrot.storage = (function() {})();
+  (function(fn) {
+    fn._partial = function(func) {
+      var args;
+      args = Array.prototype.slice.call(arguments, 1);
+      return (function(_this) {
+        return function() {
+          var allArguments;
+          allArguments = args.concat(Array.prototype.slice.call(arguments));
+          return func.apply(_this, allArguments);
+        };
+      })(this);
+    };
+    fn._storage = function(type) {
+      if (type === 'local') {
+        return localStorage;
+      } else {
+        return sessionStorage;
+      }
+    };
+    fn._get = function(type, key, object) {
+      if (object == null) {
+        object = false;
+      }
+      if (object) {
+        return JSON.parse(this._storage(type).getItem(key));
+      } else {
+        return this._storage(type).getItem(key);
+      }
+    };
+    fn._set = function(type, key, data) {
+      if (typeof data !== 'string') {
+        data = JSON.stringify(data);
+        this._storage(type).setItem(key, data);
+        return this[type][key] = this._partial(this._get, type, key, true);
+      } else {
+        this._storage(type).setItem(key, data);
+        return this[type][key] = this._partial(this._get, type, key, false);
+      }
+    };
+    fn._clear = function(type, key) {
+      return this._storage(type).removeItem(key);
+    };
+    fn._clearAll = function(type) {
+      return this._storage(type).clear();
+    };
+    fn._size = function(type) {
+      return this._storage(type).length;
+    };
+    fn._is = function(type, key) {
+      if (this._storage(type)[key] != null) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+    fn.local.set = function(key, data) {
+      parrot.storage._set('local', key, data);
+      return this;
+    };
+    fn.local.clear = function(key) {
+      parrot.storage._clear('local', key);
+      return this;
+    };
+    fn.local.clearAll = function() {
+      parrot.storage._clearAll('local');
+      return this;
+    };
+    fn.local.size = function() {
+      return parrot.storage._size('local');
+    };
+    fn.local.is = function(key) {
+      return parrot.storage._is('local', key);
+    };
+    fn.session.set = function(key, data) {
+      parrot.storage._set('session', key, data);
+      return this;
+    };
+    fn.session.clear = function(key) {
+      parrot.storage._clear('session', key);
+      return this;
+    };
+    fn.session.clearAll = function() {
+      parrot.storage._clearAll('session');
+      return this;
+    };
+    fn.session.size = function() {
+      return parrot.storage._size('session');
+    };
+    return fn.session.is = function(key) {
+      return parrot.storage._is('session', key);
+    };
+  })(parrot.storage);
 
 }).call(this);

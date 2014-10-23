@@ -8,7 +8,9 @@ parrot = @parrot =
   initialize : {}
   endpoint   : {}
   url        : {}
-  storage    : {}
+  storage    :
+    local    : {}
+    session  : {}
 
   # DOM Handler Facade
   $ : if $$? then $$ else $

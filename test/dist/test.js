@@ -24,7 +24,7 @@
         return parrot.environment.should.eql('production');
       });
     });
-    return describe('url ::', function() {
+    describe('url ::', function() {
       it('add with default values', function() {
         var _default;
         _default = {
@@ -121,6 +121,36 @@
         return parrot.url.tweets({
           method: 'POST'
         }).should.eql(_default);
+      });
+    });
+    return describe('storage ::', function() {
+      return describe('localStorage ::', function() {
+        before(function() {
+          return localStorage.clear();
+        });
+        it('set and get simple value', function() {
+          return parrot.storage.local.set('one', 'two').one().should.eql('two');
+        });
+        xit('set and get object', function() {
+          var _object;
+          _object = {
+            foo: 'bar'
+          };
+          return parrot.storage.local.set('myData', _object).myData.foo.should.eql('bar');
+        });
+        xit('updated a item', function() {
+          return parrot.storage.local.set('one', 'three').one.should.eql('three');
+        });
+        xit('get the size', function() {
+          return parrot.storage.local.size().should.eql(2);
+        });
+        xit('check for a key', function() {
+          return parrot.storage.local.is('one').should.eql(true);
+        });
+        return xit('remove one key', function() {
+          parrot.storage.local.clear('one');
+          return parrot.storage.local.one.should.equal('undefined');
+        });
       });
     });
   });
