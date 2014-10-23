@@ -85,6 +85,10 @@ gulp.task 'test', ->
   gulp.watch path.test.src, ['mocha']
   return
 
+gulp.task 'build', ->
+  gulp.start ['develop', 'production']
+  return
+
 gulp.task 'default', ->
-  gulp.start 'production'
+  gulp.start 'build'
   return

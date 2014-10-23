@@ -1,7 +1,7 @@
 {
   "name": "parrotjs",
-  "description": "Client library to connect your frontend application with whatever sails backend",
-  "version": "0.10.22",
+  "description": "Client library to connect your frontend application with whatever API backend",
+  "version": "0.10.24",
   "author": {
     "name": "Kiko Beats",
     "email": "josefrancisco.verdu@gmail.com",
@@ -35,16 +35,14 @@
       "iphone/6", "ipad/6"
     ]
   },
-  "engines": {
-    "node": "*"
-  },
   "homepage": "http://github.com/sailor/parrotjs",
   "keywords": [
     "sails",
     "client",
     "sailor",
     "connect",
-    "frontend"
+    "frontend",
+    "api"
   ],
   "license": "MIT",
   "repository": "sailorjs/parrotjs",

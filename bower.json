@@ -2,9 +2,9 @@
   "name": "parrotjs",
   "version": "0.10.22",
   "authors": ["Kiko Beats <josefrancisco.verdu@gmail.com>"],
-  "description": "Client library to connect your frontend application with whatever sails backend",
+  "description": "Client library to connect your frontend application with whatever API backend",
   "main": "dist/parrot.js",
-  "keywords": ["sails", "client", "sailor", "connect", "frontend"],
+  "keywords": ["sails", "client", "sailor", "connect", "frontend", "api"],
   "license": "MIT",
   "ignore": [
     "**/.*",

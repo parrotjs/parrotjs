@@ -1,6 +1,6 @@
 /**
- * parrotjs - Client library to connect your frontend application with whatever sails backend
- * @version v0.10.22
+ * parrotjs - Client library to connect your frontend application with whatever API backend
+ * @version v0.10.24
  * @link    http://github.com/sailor/parrotjs
  * @author  Kiko Beats (https://github.com/Kikobeats)
  * @license MIT
