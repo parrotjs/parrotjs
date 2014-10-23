@@ -23,15 +23,18 @@ do (fn = parrot.storage) ->
     unless typeof data is 'string'
       data = JSON.stringify(data)
       @_storage(type).setItem(key, data)
-      @[type][key] = @_partial(@_get,type, key, true)
+      @[type][key] = @_partial(@_get, type, key, true)
     else
       @_storage(type).setItem(key, data)
-      @[type][key] = @_partial(@_get,type, key, false)
+      @[type][key] = @_partial(@_get, type, key, false)
 
   fn._clear = (type, key) ->
+    delete @[type][key]
     @_storage(type).removeItem(key)
 
   fn._clearAll = (type) ->
+    keys = Object.keys(@_storage(type))
+    delete @[type][key] for key in keys
     @_storage(type).clear()
 
   fn._size = (type) ->
@@ -59,7 +62,7 @@ do (fn = parrot.storage) ->
   fn.local.size = ->
     parrot.storage._size 'local'
 
-  fn.local.is = (key) ->
+  fn.local.isAvailable = (key) ->
     parrot.storage._is 'local', key
 
   ## sessionStorage
@@ -79,5 +82,5 @@ do (fn = parrot.storage) ->
   fn.session.size = ->
     parrot.storage._size 'session'
 
-  fn.session.is = (key) ->
+  fn.session.isAvailable = (key) ->
     parrot.storage._is 'session', key

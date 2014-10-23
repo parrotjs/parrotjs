@@ -190,9 +190,16 @@
       }
     };
     fn._clear = function(type, key) {
+      delete this[type][key];
       return this._storage(type).removeItem(key);
     };
     fn._clearAll = function(type) {
+      var key, keys, _i, _len;
+      keys = Object.keys(this._storage(type));
+      for (_i = 0, _len = keys.length; _i < _len; _i++) {
+        key = keys[_i];
+        delete this[type][key];
+      }
       return this._storage(type).clear();
     };
     fn._size = function(type) {
@@ -220,7 +227,7 @@
     fn.local.size = function() {
       return parrot.storage._size('local');
     };
-    fn.local.is = function(key) {
+    fn.local.isAvailable = function(key) {
       return parrot.storage._is('local', key);
     };
     fn.session.set = function(key, data) {
@@ -238,7 +245,7 @@
     fn.session.size = function() {
       return parrot.storage._size('session');
     };
-    return fn.session.is = function(key) {
+    return fn.session.isAvailable = function(key) {
       return parrot.storage._is('session', key);
     };
   })(parrot.storage);
