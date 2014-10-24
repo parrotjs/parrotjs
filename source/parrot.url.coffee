@@ -10,12 +10,6 @@ do (fn = parrot.url)->
     method: 'GET'
     protocol: 'http'
 
-  fn._partial = (func) -> #, 0..n args
-    args = Array::slice.call(arguments, 1)
-    ->
-      allArguments = args.concat(Array::slice.call(arguments))
-      func.apply this, allArguments
-
   fn._getQuery = (queries) ->
     _url = new Url()
     _url.protocol = ''
@@ -80,7 +74,7 @@ do (fn = parrot.url)->
       path     : obj.path
       query    : if obj.query? then @_getQuery(obj.query) else undefined
 
-    @[obj.name] = @_partial(@_bindAdd, obj.name)
+    @[obj.name] = parrot._partial(@_bindAdd, obj.name).bind(fn)
     this
 
   fn.remove = (name) ->

@@ -65,15 +65,6 @@
       method: 'GET',
       protocol: 'http'
     };
-    fn._partial = function(func) {
-      var args;
-      args = Array.prototype.slice.call(arguments, 1);
-      return function() {
-        var allArguments;
-        allArguments = args.concat(Array.prototype.slice.call(arguments));
-        return func.apply(this, allArguments);
-      };
-    };
     fn._getQuery = function(queries) {
       var index, option, query, _i, _len, _url;
       _url = new Url();
@@ -176,7 +167,7 @@
         path: obj.path,
         query: obj.query != null ? this._getQuery(obj.query) : void 0
       };
-      this[obj.name] = this._partial(this._bindAdd, obj.name);
+      this[obj.name] = parrot._partial(this._bindAdd, obj.name).bind(fn);
       return this;
     };
     return fn.remove = function(name) {
