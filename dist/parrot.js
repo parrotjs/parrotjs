@@ -24,7 +24,17 @@
 
   'use strict';
 
-  (function() {})();
+  (function() {
+    return parrot._partial = function(func) {
+      var args;
+      args = Array.prototype.slice.call(arguments, 1);
+      return function() {
+        var allArguments;
+        allArguments = args.concat(Array.prototype.slice.call(arguments));
+        return func.apply(this, allArguments);
+      };
+    };
+  })();
 
   'use strict';
 
@@ -58,13 +68,11 @@
     fn._partial = function(func) {
       var args;
       args = Array.prototype.slice.call(arguments, 1);
-      return (function(_this) {
-        return function() {
-          var allArguments;
-          allArguments = args.concat(Array.prototype.slice.call(arguments));
-          return func.apply(_this, allArguments);
-        };
-      })(this);
+      return function() {
+        var allArguments;
+        allArguments = args.concat(Array.prototype.slice.call(arguments));
+        return func.apply(this, allArguments);
+      };
     };
     fn._getQuery = function(queries) {
       var index, option, query, _i, _len, _url;
@@ -180,17 +188,6 @@
   'use strict';
 
   (function(fn) {
-    fn._partial = function(func) {
-      var args;
-      args = Array.prototype.slice.call(arguments, 1);
-      return (function(_this) {
-        return function() {
-          var allArguments;
-          allArguments = args.concat(Array.prototype.slice.call(arguments));
-          return func.apply(_this, allArguments);
-        };
-      })(this);
-    };
     fn._storage = function(type) {
       if (type === 'local') {
         return localStorage;
@@ -212,10 +209,10 @@
       if (typeof data !== 'string') {
         data = JSON.stringify(data);
         this._storage(type).setItem(key, data);
-        return this[type][key] = this._partial(this._get, type, key, true);
+        return this[type][key] = parrot._partial(this._get, type, key, true).bind(fn);
       } else {
         this._storage(type).setItem(key, data);
-        return this[type][key] = this._partial(this._get, type, key, false);
+        return this[type][key] = parrot._partial(this._get, type, key, false).bind(fn);
       }
     };
     fn._clear = function(type, key) {

@@ -4,12 +4,6 @@ do (fn = parrot.storage) ->
 
   ## -- Private --------------------------------------------------------------
 
-  fn._partial = (func) -> #, 0..n args
-    args = Array::slice.call(arguments, 1)
-    =>
-      allArguments = args.concat(Array::slice.call(arguments))
-      func.apply this, allArguments
-
   fn._storage = (type) ->
     if type is 'local' then localStorage else sessionStorage
 
@@ -23,10 +17,10 @@ do (fn = parrot.storage) ->
     unless typeof data is 'string'
       data = JSON.stringify(data)
       @_storage(type).setItem(key, data)
-      @[type][key] = @_partial(@_get, type, key, true)
+      @[type][key] = parrot._partial(@_get, type, key, true).bind(fn)
     else
       @_storage(type).setItem(key, data)
-      @[type][key] = @_partial(@_get, type, key, false)
+      @[type][key] = parrot._partial(@_get, type, key, false).bind(fn)
 
   fn._clear = (type, key) ->
     delete @[type][key]
