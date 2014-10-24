@@ -1,5 +1,3 @@
-'use strict'
-
 do ->
   parrot._partial = (func) -> #, 0..n args
     args = Array::slice.call(arguments, 1)

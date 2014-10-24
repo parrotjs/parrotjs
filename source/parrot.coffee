@@ -3,7 +3,7 @@
 parrot = @parrot =
 
   version    : '0.10.22'
-  environment: 'development'
+  environment: -> 'development'
 
   initialize : {}
   endpoint   : {}

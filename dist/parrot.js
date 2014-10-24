@@ -11,7 +11,9 @@
 
   parrot = this.parrot = {
     version: '0.10.22',
-    environment: 'development',
+    environment: function() {
+      return 'development';
+    },
     initialize: {},
     endpoint: {},
     url: {},
@@ -21,8 +23,6 @@
     },
     $: typeof $$ !== "undefined" && $$ !== null ? $$ : $
   };
-
-  'use strict';
 
   (function() {
     return parrot._partial = function(func) {
@@ -35,8 +35,6 @@
       };
     };
   })();
-
-  'use strict';
 
   (function(fn) {
     fn.add = function(obj) {
@@ -56,8 +54,6 @@
       return this;
     };
   })(parrot.endpoint);
-
-  'use strict';
 
   (function(fn) {
     fn._URLS = {};
@@ -175,8 +171,6 @@
       return this;
     };
   })(parrot.url);
-
-  'use strict';
 
   (function(fn) {
     fn._storage = function(type) {
