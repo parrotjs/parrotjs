@@ -42,8 +42,8 @@ At this moment Parrot have two dependencies:
 
 So, exist two version of the library:
 
-- `standalone` only have to code without dependencies
-- `build` have all code with dependencies
+- `standard` version have all code with dependencies.
+- `standalone` version that only have to code without dependencies.
 
 This will be improved with ECMACSCript 6 because have native promises and the system for load external dependencies will be better. but it's ok.
 
