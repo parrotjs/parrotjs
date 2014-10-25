@@ -1,4 +1,4 @@
-<center>![](http://i.imgur.com/1JUrwUB.png)</center>
+<center>![](http://i.imgur.com/SmLtxEo.png)</center>
 
 # Parrot
 
