@@ -12,7 +12,7 @@
 
 Parrot helps you connect your frontend with you API backend. Only need to say to parrot what do, and parrot will do the hard work!
 
-At this moment Parrot Support:
+At this moment Parrot supports:
 
 - Register different environment (development, production, testing,...).
 - Register different URL with different protocols (http, sockets) and make easy AJAX requests.
@@ -86,7 +86,8 @@ register a new endpoint. object must have:
 ```json
 {
 	name:'development', 
-	url:'http://localhost:1337'}
+	url:'http://localhost:1337'
+}
 ```
 
 when you register a endpoint it is accesible in the `parrot.endpoint` namespace:
@@ -135,7 +136,8 @@ but you can be more specify:
 	protocol: 'http',
 	query: null,
 	method: 'POST',
-	send: null}
+	send: null
+}
 ```
 
 by default `method` is `GET`, protocol is http and other attributes that you don't provide are `undefined`.
