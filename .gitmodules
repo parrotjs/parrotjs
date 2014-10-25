@@ -7,3 +7,6 @@
 [submodule "bower_components/quojs"]
 	path = bower_components/quojs
 	url = https://github.com/soyjavi/bower-quojs
+[submodule "bower_components/sails.io"]
+	path = bower_components/sails.io
+	url = https://github.com/balderdashy/sails.io.js
