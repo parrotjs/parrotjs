@@ -1,9 +1,9 @@
-[submodule "bower_components/quojs"]
-	path = bower_components/quojs
-	url = https://github.com/soyjavi/quojs
 [submodule "bower_components/hope"]
 	path = bower_components/hope
 	url = https://github.com/soyjavi/hope
 [submodule "bower_components/jsurl"]
 	path = bower_components/jsurl
 	url = https://github.com/Mikhus/jsurl
+[submodule "bower_components/quojs"]
+	path = bower_components/quojs
+	url = https://github.com/soyjavi/bower-quojs
