@@ -7,6 +7,7 @@ do (fn = parrot.url)->
   fn._DEFAULT =
     method: 'GET'
     protocol: 'http'
+    send: {}
 
   fn._getQuery = (queries) ->
     _url = new Url()
@@ -22,9 +23,9 @@ do (fn = parrot.url)->
     promise = new Hope.Promise()
     # unless background then do @loadingOn
     parrot.$.ajax
-      type        : obj.method or 'GET'
+      type        : obj.method or @_DEFAULT.method
       url         : obj.url
-      data        : obj.send or {}
+      data        : obj.send or @_DEFAULT.send
       dataType    : 'json'
       contentType : 'application/x-www-form-urlencoded'
       success: (xhr) =>
@@ -50,30 +51,31 @@ do (fn = parrot.url)->
 
   ## -- Public --------------------------------------------------------------
 
-  fn.ajax = (obj, cb) ->
-    if typeof arguments[0] is 'string'
-      obj = @_URLS[arguments[0]] or url: arguments[0]
-
-    obj.url = "#{parrot.endpoint[parrot.environment()]()}" unless obj.url
-    obj.url = "#{obj.url}/#{obj.path}" if obj.path?
-    obj.url = "#{obj.url}?#{obj.query}" if obj.query?
-
-    promise = @_createAjaxPromise(obj)
-    promise.then (err, result) -> cb(err, result)
-
   # name, method, protocol, path, query
   fn.add = (obj) ->
-    obj.method = @_DEFAULT.method unless obj.method?
+    obj.method   = @_DEFAULT.method unless obj.method?
     obj.protocol = @_DEFAULT.protocol unless obj.protocol?
+    obj.query    = if obj.query? then @_getQuery(obj.query) else undefined
+    obj.send     = {} unless obj.send?
 
     @_URLS[obj.name] =
       method   : obj.method
       protocol : obj.protocol
       path     : obj.path
-      query    : if obj.query? then @_getQuery(obj.query) else undefined
+      query    : obj.query
+      send     : obj.send
 
     @[obj.name] = parrot._partial(@_bindAdd, obj.name).bind(fn)
     this
+
+  fn.ajax = (obj, cb) ->
+    obj = @_URLS[arguments[0]] or url: arguments[0] if typeof arguments[0] is 'string'
+    obj.url = "#{parrot.endpoint[parrot.environment]()}" unless obj.url
+    obj.url = "#{obj.url}/#{obj.path}" if obj.path?
+    obj.url = "#{obj.url}?#{obj.query}" if obj.query?
+
+    promise = @_createAjaxPromise(obj)
+    promise.then (err, result) -> cb(err, result)
 
   fn.remove = (name) ->
     delete @[name]

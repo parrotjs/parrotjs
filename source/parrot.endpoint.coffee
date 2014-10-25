@@ -8,8 +8,7 @@ do (fn = parrot.endpoint)->
     this
 
   fn.set = (environment) ->
-    # why function? for follow the API!
-    parrot.environment = -> environment
+    parrot.environment = environment
     this
 
   fn.remove = (name) ->

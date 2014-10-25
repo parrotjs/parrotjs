@@ -21,7 +21,7 @@
       });
       return it('set', function() {
         parrot.endpoint.set('production');
-        return parrot.environment().should.eql('production');
+        return parrot.environment.should.eql('production');
       });
     });
     describe('url ::', function() {
@@ -31,7 +31,8 @@
           method: 'GET',
           protocol: 'http',
           path: void 0,
-          query: void 0
+          query: void 0,
+          send: {}
         };
         parrot.url.add({
           name: 'login'
@@ -44,7 +45,8 @@
           method: 'GET',
           protocol: 'http',
           path: void 0,
-          query: 'sort=id%20asc'
+          query: 'sort=id%20asc',
+          send: {}
         };
         parrot.url.add({
           name: 'tweets',
@@ -58,7 +60,8 @@
           method: 'GET',
           protocol: 'http',
           path: 'tweet',
-          query: 'sort=id%20asc'
+          query: 'sort=id%20asc',
+          send: {}
         };
         parrot.url.add({
           name: 'tweets',
@@ -67,17 +70,30 @@
         });
         return parrot.url.tweets().should.eql(_default);
       });
-      it('ajax', function(done) {
-        var _url;
-        _url = 'http://echo.jsontest.com/key/value/one/two';
-        return parrot.url.ajax({
-          url: _url
-        }, function(err, result) {
+      it('ajax with the path in the url', function(done) {
+        var request;
+        request = {
+          url: 'http://echo.jsontest.com/key/value/one/two',
+          method: 'GET'
+        };
+        return parrot.url.ajax(request, function(err, result) {
           result.one.should.eql('two');
           return done();
         });
       });
-      it('ajax with default values', function(done) {
+      it('ajax with path and query', function(done) {
+        var request;
+        request = {
+          url: 'http://echo.jsontest.com',
+          path: 'key/value/one/two',
+          method: 'GET'
+        };
+        return parrot.url.ajax(request, function(err, result) {
+          result.one.should.eql('two');
+          return done();
+        });
+      });
+      it('ajax using short method for GET methods', function(done) {
         return parrot.url.ajax('http://echo.jsontest.com/key/value/one/two', function(err, result) {
           result.one.should.eql('two');
           return done();
@@ -115,7 +131,8 @@
           method: 'POST',
           protocol: 'http',
           path: 'tweet',
-          query: 'sort=id%20asc'
+          query: 'sort=id%20asc',
+          send: {}
         };
         parrot.url.add({
           name: 'tweets',
@@ -153,11 +170,11 @@
         return parrot.storage.local.isAvailable('one').should.eql(true);
       });
       xit('remove one key', function() {
-        parrot.storage.local.clear('one');
+        parrot.storage.local.remove('one');
         return should.not.exist(parrot.storage.local.one());
       });
       return xit('remove all', function() {
-        parrot.storage.local.clearAll();
+        parrot.storage.local.removeAll();
         return should.not.exist(parrot.storage.local.myData());
       });
     });

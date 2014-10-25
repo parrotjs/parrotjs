@@ -28,3 +28,4 @@ coverage
 # Other
 ############################
 .node_history
+dist/parrot.develop.js

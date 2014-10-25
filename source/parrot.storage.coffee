@@ -20,11 +20,11 @@ do (fn = parrot.storage) ->
       @_storage(type).setItem(key, data)
       @[type][key] = parrot._partial(@_get, type, key, false).bind(fn)
 
-  fn._clear = (type, key) ->
+  fn._remove = (type, key) ->
     delete @[type][key]
     @_storage(type).removeItem(key)
 
-  fn._clearAll = (type) ->
+  fn._removeAll = (type) ->
     keys = Object.keys(@_storage(type))
     delete @[type][key] for key in keys
     @_storage(type).clear()
@@ -43,12 +43,12 @@ do (fn = parrot.storage) ->
     parrot.storage._set 'local', key, data
     this
 
-  fn.local.clear = (key) ->
-    parrot.storage._clear 'local', key
+  fn.local.remove = (key) ->
+    parrot.storage._remove 'local', key
     this
 
-  fn.local.clearAll = ->
-    parrot.storage._clearAll 'local'
+  fn.local.removeAll = ->
+    parrot.storage._removeAll 'local'
     this
 
   fn.local.size = ->
@@ -63,12 +63,12 @@ do (fn = parrot.storage) ->
     parrot.storage._set 'session', key, data
     this
 
-  fn.session.clear = (key) ->
-    parrot.storage._clear 'session', key
+  fn.session.remove = (key) ->
+    parrot.storage._remove 'session', key
     this
 
-  fn.session.clearAll = ->
-    parrot.storage._clearAll 'session'
+  fn.session.removeAll = ->
+    parrot.storage._removeAll 'session'
     this
 
   fn.session.size = ->

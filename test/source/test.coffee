@@ -15,32 +15,38 @@ describe 'Parrot ::', ->
 
     it 'set', ->
       parrot.endpoint.set('production')
-      parrot.environment().should.eql 'production'
+      parrot.environment.should.eql 'production'
 
   describe 'url ::', ->
 
     it 'add with default values', ->
-      _default = { method: 'GET', protocol: 'http', path: undefined, query: undefined }
+      _default = { method: 'GET', protocol: 'http', path: undefined, query: undefined, send: {} }
       parrot.url.add name: 'login'
       parrot.url.login().should.eql _default
 
     it 'add with query',  ->
-      _default = { method: 'GET', protocol: 'http', path: undefined, query: 'sort=id%20asc' }
+      _default = { method: 'GET', protocol: 'http', path: undefined, query: 'sort=id%20asc', send: {} }
       parrot.url.add name:'tweets', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
     it 'add with path and query',  ->
-      _default = { method:'GET', protocol:'http', path: 'tweet', query:'sort=id%20asc' }
+      _default = { method:'GET', protocol:'http', path: 'tweet', query:'sort=id%20asc', send: {} }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
-    it 'ajax', (done) ->
-      _url = 'http://echo.jsontest.com/key/value/one/two'
-      parrot.url.ajax url:_url, (err, result) ->
+    it 'ajax with the path in the url', (done) ->
+      request = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
+      parrot.url.ajax request, (err, result) ->
         result.one.should.eql 'two'
         done()
 
-    it 'ajax with default values', (done) ->
+    it 'ajax with path and query', (done) ->
+      request = url: 'http://echo.jsontest.com', path:'key/value/one/two', method: 'GET'
+      parrot.url.ajax request, (err, result) ->
+        result.one.should.eql 'two'
+        done()
+
+    it 'ajax using short method for GET methods', (done) ->
       parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
         result.one.should.eql 'two'
         done()
@@ -68,7 +74,7 @@ describe 'Parrot ::', ->
         done()
 
     it 'add with path and query and change values dynamically',  ->
-      _default = { method:'POST', protocol:'http', path: 'tweet', query:'sort=id%20asc' }
+      _default = { method:'POST', protocol:'http', path: 'tweet', query:'sort=id%20asc', send: {} }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets(method: 'POST').should.eql _default
 
@@ -98,13 +104,12 @@ describe 'Parrot ::', ->
       parrot.storage.local.size().should.eql 2
 
     it 'check for a key', ->
-      # parrot.storage.local.isAvailable.one().should.eql true
       parrot.storage.local.isAvailable('one').should.eql true
 
     xit 'remove one key', ->
-      parrot.storage.local.clear('one')
+      parrot.storage.local.remove('one')
       should.not.exist(parrot.storage.local.one())
 
     xit 'remove all', ->
-      parrot.storage.local.clearAll()
+      parrot.storage.local.removeAll()
       should.not.exist(parrot.storage.local.myData())
