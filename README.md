@@ -14,8 +14,8 @@ Parrot helps you connect your frontend with you API backend. Only need to say to
 
 At this moment Parrot supports:
 
-- Register different environment (development, production, testing,...).
-- Register different URL with different protocols (http, sockets) and make easy AJAX requests.
+- Register different environments (development, production, testing,...).
+- Register different URLs with different protocols (http, sockets) and make easy AJAX requests.
 - Manage uniformly sessionStorage and localStorage.
 - Chainable methods.
 
@@ -28,36 +28,36 @@ bower install parrotjs
 
 ## Usage
 
-You need to link the library in your frontend. You can user Gulp/Grunt build to concatenate with other dependencies o simply link as html script tag:
+You need to link the library in your frontend. You can use Gulp/Grunt to build and concatenate it with other dependencies o simply link it as a html script tag:
 
 ```html
 <script src="bower_components/parrotjs/dist/parrot.js"></script>
 ```
 
-At this moment Parrot have two dependencies:
+At this moment, Parrot has two dependencies:
 
 - [jsurl](https://github.com/Mikhus/jsurl) for url query string parser.
 - [QuoJS](https://github.com/soyjavi/QuoJS/) for AJAX requests.
 - [Hope](https://github.com/soyjavi/hope) for Promises.
 
-So, exist two version of the library:
+So, there are two version of the library:
 
-- `standard` version have all code with dependencies.
-- `standalone` version that only have to code without dependencies.
+- `standard` version has all the code with dependencies.
+- `standalone` version has code without dependencies.
 
-This will be improved with ECMACSCript 6 because have native promises and the system for load external dependencies will be better. but it's ok.
+This will be improved with ECMACSCript 6 because it has native promises and the system for loading external dependencies will be better.
 
 ## API
 
-The library are divided in different namespaces
+The library is divided in different namespaces:
 
 ### Basic
 
-This method are available in `parrot` namespace. This are the basic method that you need yo set up the library and know the current version.
+This method is available in `parrot` namespace. This is the basic method that you need yo set up the library and know the current version.
 
 #### .version
 
-Return the version of the library.
+Returns the version of the library.
 
 ```coffee
 parrot.version
@@ -66,7 +66,7 @@ parrot.version
 
 #### .environment
 
-Return the environment that you are using at this moment.
+Returns the environment that you are using at this moment.
 
 ```coffee
 parrot.environment
@@ -77,11 +77,11 @@ Default environment is `development`.
 
 ### Endpoint
 
-This method are available in `parrot.endpoint` namespace:
+This method is available in `parrot.endpoint` namespace:
 
 #### .add(\<object>)
 
-register a new endpoint. object must have:
+registers a new endpoint. Object must have:
 	
 ```json
 {
@@ -90,7 +90,7 @@ register a new endpoint. object must have:
 }
 ```
 
-when you register a endpoint it is accesible in the `parrot.endpoint` namespace:
+When you register an endpoint it is accesible in the `parrot.endpoint` namespace:
 
 ```coffee
 parrot.endpoint.development()
@@ -99,7 +99,7 @@ parrot.endpoint.development()
 
 #### .set(\<value>)
 
-set the default environment of `parrot.environment`. It's important because the URL's depend of the URL path register in the environment.
+Sets the default environment of `parrot.environment`. It's important because the URL's depend on the URL path register in the environment.
 
 ```coffee
 parrot.environment.set('production')
@@ -107,7 +107,7 @@ parrot.environment.set('production')
 
 #### .remove(\<name>)
 
-delete a environment from the namespace
+Deletes a environment from the namespace
 
 ```coffee
 parrot.environment.remove('testing')
@@ -115,19 +115,19 @@ parrot.environment.remove('testing')
 
 ### URL Management
 
-URL Management make easy do ajax or sockets petitions with your backend. For do it, first you need to register the URL's. Each URL have a different schema as `protocol`, `path` and/or `query`.
+URL Management makes easy to do ajax or sockets requests with your backend. In order to do it, you need first to register the URL's. Each URL has a different schema as `protocol`, `path` and/or `query`.
 
-This method are available in `parrot.url` namespace:
+This method is available in `parrot.url` namespace:
 
 #### .add(\<object>)
 
-Register a new URL. The minimum information that you need to prove is:
+Registers a new URL. The minimum information you need to check is:
 
 ```json
 name: 'login'
 ```
 
-but you can be more specify:
+but you can be more specific:
 
 ```json
 {
@@ -140,16 +140,16 @@ but you can be more specify:
 }
 ```
 
-by default `method` is `GET`, protocol is http and other attributes that you don't provide are `undefined`.
+by default `method` is `GET`, protocol is HTTP and other attributes you don't provide are `undefined`.
 
-Now the URL are available in the `parrot.url` namespace:
+Now, the URL is available in the `parrot.url` namespace:
 
 ```coffee
 parrot.url.login()
 # => { method: 'GET', protocol: 'http', path: 'user/login', query: null }
 ```
 
-If you can update some value, you can provide as argument when you call the method. For Example, for make login you need to send the user information to the server:
+If you want update some value, you can provide an argument when you call the method. For example, for login you need to send the user information to the server:
 
 ```coffee
 user = username: 'kiko', password: 'nerd'
@@ -166,9 +166,9 @@ parrot.url.remove('logout')
 
 #### .ajax(\<Object>)
 
-Return the result of AJAX request.
+Returns the result of AJAX request.
 
-Exist different ways to provide the URL of the AJAX request, but the most common pattern is provide a `parrot.url` object:
+It exists different ways to provide the URL of the AJAX request, but the most common pattern is to give a `parrot.url` object:
 
 ```coffee
 parrot.url.ajax parrot.url.login(), (err, result) ->
@@ -180,21 +180,21 @@ If you want to write less code:
 parrot.url.ajax 'login', (err, result) ->
 ```
 
-Also you can provide a URL that you are not register but follow `parrot.url` similar interface (extra field for the `url` because is not calculated based on the `parrot.environment`). 
+Also you can provide a URL that you are not registerin but that follows a `parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `parrot.environment`). 
 
 ```coffee
 object = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
 parrot.url.ajax object, (err, result) ->
 ```
 
-default options are supported here also:
+Default options are supported here also:
 
 ```coffee
 object = url: 'http://echo.jsontest.com/key/value/one/two'
 parrot.url.ajax object, (err, result) ->
 ```
 
-and more simply, you can provide only the URL if is a `GET` method:
+and more simply, you can provide only the URL if it is a `GET` method:
 
 ```coffee
 parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
@@ -202,13 +202,13 @@ parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
 
 ### Storage
 
-This module is a little interface for use the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `parrot.storage.local` and `parrot.storage.session`. But the method are the same.
+This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `parrot.storage.local` and `parrot.storage.session`. But both methods are the same.
 
-Remember that the only different between `localStorage` and `sessionStorage` is the time of life of the information in the browser. `localStorage` is persisten and only is deleted if you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, disappear).
+Remember that the only difference between `localStorage` and `sessionStorage` is the time of life of the information in the browser. `localStorage` is persisten and only is deleted if you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, disappear).
 
 #### .set(\<key>, \<value>)
 
-Store something in `session` or `local` storage, depend of the namespace that you uses.
+Stores something in `session` or `local` storage, depending on the namespace that you uses.
 
 ```coffee
 parrot.store.local.set('foo', 'bar')
@@ -238,7 +238,7 @@ parrot.store.local.myObject()
 
 #### .remove(\<key>)
 	
-Delete a key and the value from the `local` or `session` storage:
+Deletes the key and the value from the `local` or `session` storage:
 
 ```coffee
 parrot.storage.local.clear('one')
@@ -248,7 +248,7 @@ parrot.store.local.one()
 
 #### .removeAll()
 
-Clear all elements from the `local` or `session` storage:
+Clears all the elements from the `local` or `session` storage:
 
 ```coffee
 parrot.storage.local.removeAll()
@@ -257,7 +257,7 @@ parrot.storage.session.removeAll()
 
 #### .size()
 
-Know the length of the `local` or `session` storage:
+Returns the length of the `local` or `session` storage:
 
 ```coffee
 parrot.storage.local.size()
@@ -268,7 +268,7 @@ parrot.storage.session.size()
 
 #### .isAvailable(\<key>)
 
-Know if a certain value if available in the `local` or `session` storage:
+Returns if a certain value if available in the `local` or `session` storage:
 
 ```coffee
 parrot.storage.local.isAvailable('foo')
