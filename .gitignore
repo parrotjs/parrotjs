@@ -29,3 +29,5 @@ coverage
 ############################
 .node_history
 dist/parrot.develop.js
+bower_components/mocha
+bower_components/should
