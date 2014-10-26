@@ -74,5 +74,6 @@ do (fn = parrot.store) ->
   fn.session.size = ->
     parrot.store._size 'session'
 
-  fn.session.isAvailable = (key) ->
+  fn.session.isAvailable = ->
+    key = if arguments.length is 0 then 'session' else arguments[0]
     parrot.store._is 'session', key
