@@ -105,9 +105,9 @@ describe 'Parrot ::', ->
       parrot.store.local.isAvailable('one').should.eql true
 
     xit 'remove one key', ->
-      parrot.store.local.remove('one')
+      parrot.store.local.clear('one')
       should.not.exist(parrot.store.local.one())
 
     xit 'remove all', ->
-      parrot.store.local.removeAll()
+      parrot.store.local.clearAll()
       should.not.exist(parrot.store.local.myData())

@@ -172,11 +172,11 @@
         return parrot.store.local.isAvailable('one').should.eql(true);
       });
       xit('remove one key', function() {
-        parrot.store.local.remove('one');
+        parrot.store.local.clear('one');
         return should.not.exist(parrot.store.local.one());
       });
       return xit('remove all', function() {
-        parrot.store.local.removeAll();
+        parrot.store.local.clearAll();
         return should.not.exist(parrot.store.local.myData());
       });
     });

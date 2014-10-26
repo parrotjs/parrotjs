@@ -20,11 +20,11 @@ do (fn = parrot.store) ->
       @_storage(type).setItem(key, data)
       @[type][key] = parrot._partial(@_get, type, key, false).bind(fn)
 
-  fn._remove = (type, key) ->
+  fn._clear = (type, key) ->
     delete @[type][key]
     @_storage(type).removeItem(key)
 
-  fn._removeAll = (type) ->
+  fn._clearAll = (type) ->
     keys = Object.keys(@_storage(type))
     delete @[type][key] for key in keys
     @_storage(type).clear()
@@ -43,32 +43,41 @@ do (fn = parrot.store) ->
     parrot.store._set 'local', key, data
     this
 
-  fn.local.remove = (key) ->
-    parrot.store._remove 'local', key
+  fn.local.clear = (key) ->
+    parrot.store._clear 'local', key
     this
 
-  fn.local.removeAll = ->
-    parrot.store._removeAll 'local'
+  fn.local.clearAll = ->
+    parrot.store._clearAll 'local'
     this
 
   fn.local.size = ->
     parrot.store._size 'local'
 
-  fn.local.isAvailable = (key) ->
-    parrot.store._is 'local', key
+  fn.local.isAvailable = ->
+    key = if arguments.length is 0 then 'session' else arguments[0]
+    parrot.store._is 'session', key
 
   ## sessionStorage
 
-  fn.session.set = (key, data) ->
+  fn.session.set = ->
+    if arguments.length is 1
+      key  = 'session'
+      data = arguments[0]
+    else
+      key  = arguments[0]
+      data = arguments[1]
+
     parrot.store._set 'session', key, data
     this
 
-  fn.session.remove = (key) ->
-    parrot.store._remove 'session', key
+  fn.session.clear = ->
+    key = if arguments.length is 0 then 'session' else arguments[0]
+    parrot.store._clear 'session', key
     this
 
-  fn.session.removeAll = ->
-    parrot.store._removeAll 'session'
+  fn.session.clearAll = ->
+    parrot.store._clearAll 'session'
     this
 
   fn.session.size = ->
