@@ -20,34 +20,34 @@ describe 'Parrot ::', ->
   describe 'url ::', ->
 
     it 'add with default values', ->
-      _default = { method: 'GET', protocol: 'http', path: undefined, query: undefined, send: {} }
+      _default = { method: 'GET', protocol: 'http', path: undefined, query: undefined, send: undefined }
       parrot.url.add name: 'login'
       parrot.url.login().should.eql _default
 
     it 'add with query',  ->
-      _default = { method: 'GET', protocol: 'http', path: undefined, query: 'sort=id%20asc', send: {} }
+      _default = { method: 'GET', protocol: 'http', path: undefined, query: 'sort=id%20asc', send: undefined }
       parrot.url.add name:'tweets', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
     it 'add with path and query',  ->
-      _default = { method:'GET', protocol:'http', path: 'tweet', query:'sort=id%20asc', send: {} }
+      _default = { method:'GET', protocol:'http', path: 'tweet', query:'sort=id%20asc', send: undefined }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
     it 'ajax with the path in the url', (done) ->
       request = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
-      parrot.url.ajax request, (err, result) ->
+      parrot.ajax request, (err, result) ->
         result.one.should.eql 'two'
         done()
 
     it 'ajax with path and query', (done) ->
       request = url: 'http://echo.jsontest.com', path:'key/value/one/two', method: 'GET'
-      parrot.url.ajax request, (err, result) ->
+      parrot.ajax request, (err, result) ->
         result.one.should.eql 'two'
         done()
 
     it 'ajax using short method for GET methods', (done) ->
-      parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
+      parrot.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
         result.one.should.eql 'two'
         done()
 
@@ -56,9 +56,8 @@ describe 'Parrot ::', ->
       .add(name: 'testing', url:'http://echo.jsontest.com')
       .set('testing')
 
-      parrot.url
-      .add name:'jsontest', path:'key/value/one/two'
-      .ajax parrot.url.jsontest(), (err, result) ->
+      parrot.url.add name:'jsontest', path:'key/value/one/two'
+      parrot.ajax parrot.url.jsontest(), (err, result) ->
         result.one.should.eql 'two'
         done()
 
@@ -67,14 +66,13 @@ describe 'Parrot ::', ->
       .add(name: 'testing', url:'http://echo.jsontest.com')
       .set('testing')
 
-      parrot.url
-      .add name:'jsontest', path:'key/value/one/two'
-      .ajax 'jsontest', (err, result) ->
+      parrot.url.add name:'jsontest', path:'key/value/one/two'
+      parrot.ajax 'jsontest', (err, result) ->
         result.one.should.eql 'two'
         done()
 
     it 'add with path and query and change values dynamically',  ->
-      _default = { method:'POST', protocol:'http', path: 'tweet', query:'sort=id%20asc', send: {} }
+      _default = { method:'POST', protocol:'http', path: 'tweet', query:'sort=id%20asc', send: undefined }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets(method: 'POST').should.eql _default
 

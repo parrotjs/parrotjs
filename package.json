@@ -1,7 +1,7 @@
 {
   "name": "parrotjs",
   "description": "Client library to connect your frontend application with whatever API backend",
-  "version": "0.10.24",
+  "version": "0.10.26",
   "author": {
     "name": "Kiko Beats",
     "email": "josefrancisco.verdu@gmail.com",

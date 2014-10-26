@@ -82,7 +82,7 @@ gulp.task 'mocha', ->
 
 gulp.task 'server', ->
   connect.server
-    port       : 8000
+    port       : 8001
     root       : 'test'
     livereload : true
   return
@@ -96,6 +96,11 @@ gulp.task 'test', ->
   gulp.start ['develop', 'mocha', 'server', 'browser']
   gulp.watch path.core.src, ['develop']
   gulp.watch path.test.src, ['mocha']
+  return
+
+gulp.task 'dev', ->
+  gulp.start ['develop']
+  gulp.watch path.core.src, ['develop']
   return
 
 gulp.task 'build', ->

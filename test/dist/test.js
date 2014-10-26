@@ -32,7 +32,7 @@
           protocol: 'http',
           path: void 0,
           query: void 0,
-          send: {}
+          send: void 0
         };
         parrot.url.add({
           name: 'login'
@@ -46,7 +46,7 @@
           protocol: 'http',
           path: void 0,
           query: 'sort=id%20asc',
-          send: {}
+          send: void 0
         };
         parrot.url.add({
           name: 'tweets',
@@ -61,7 +61,7 @@
           protocol: 'http',
           path: 'tweet',
           query: 'sort=id%20asc',
-          send: {}
+          send: void 0
         };
         parrot.url.add({
           name: 'tweets',
@@ -76,7 +76,7 @@
           url: 'http://echo.jsontest.com/key/value/one/two',
           method: 'GET'
         };
-        return parrot.url.ajax(request, function(err, result) {
+        return parrot.ajax(request, function(err, result) {
           result.one.should.eql('two');
           return done();
         });
@@ -88,13 +88,13 @@
           path: 'key/value/one/two',
           method: 'GET'
         };
-        return parrot.url.ajax(request, function(err, result) {
+        return parrot.ajax(request, function(err, result) {
           result.one.should.eql('two');
           return done();
         });
       });
       it('ajax using short method for GET methods', function(done) {
-        return parrot.url.ajax('http://echo.jsontest.com/key/value/one/two', function(err, result) {
+        return parrot.ajax('http://echo.jsontest.com/key/value/one/two', function(err, result) {
           result.one.should.eql('two');
           return done();
         });
@@ -104,10 +104,11 @@
           name: 'testing',
           url: 'http://echo.jsontest.com'
         }).set('testing');
-        return parrot.url.add({
+        parrot.url.add({
           name: 'jsontest',
           path: 'key/value/one/two'
-        }).ajax(parrot.url.jsontest(), function(err, result) {
+        });
+        return parrot.ajax(parrot.url.jsontest(), function(err, result) {
           result.one.should.eql('two');
           return done();
         });
@@ -117,10 +118,11 @@
           name: 'testing',
           url: 'http://echo.jsontest.com'
         }).set('testing');
-        return parrot.url.add({
+        parrot.url.add({
           name: 'jsontest',
           path: 'key/value/one/two'
-        }).ajax('jsontest', function(err, result) {
+        });
+        return parrot.ajax('jsontest', function(err, result) {
           result.one.should.eql('two');
           return done();
         });
@@ -132,7 +134,7 @@
           protocol: 'http',
           path: 'tweet',
           query: 'sort=id%20asc',
-          send: {}
+          send: void 0
         };
         parrot.url.add({
           name: 'tweets',
