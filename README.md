@@ -75,6 +75,43 @@ parrot.environment
 
 Default environment is `development`.
 
+#### .ajax(\<Object> or \<String>)
+
+Returns the result of AJAX request.
+
+It exists different ways to provide the URL of the AJAX request, but the most common pattern is to give a `parrot.url` object:
+
+```coffee
+parrot.url.ajax parrot.url.login(), (err, result) ->
+```
+
+If you want to write less code:
+
+```coffee
+parrot.url.ajax 'login', (err, result) ->
+```
+
+Also you can provide a URL that you are not registerin but that follows a `parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `parrot.environment`). 
+
+```coffee
+object = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
+parrot.url.ajax object, (err, result) ->
+```
+
+Default options are supported here also:
+
+```coffee
+object = url: 'http://echo.jsontest.com/key/value/one/two'
+parrot.url.ajax object, (err, result) ->
+```
+
+and more simply, you can provide only the URL if it is a `GET` method:
+
+```coffee
+parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
+```
+
+
 ### Endpoint
 
 This method is available in `parrot.endpoint` namespace:
@@ -83,7 +120,7 @@ This method is available in `parrot.endpoint` namespace:
 
 registers a new endpoint. Object must have:
 	
-```json
+```
 {
 	name:'development', 
 	url:'http://localhost:1337'
@@ -129,7 +166,7 @@ name: 'login'
 
 but you can be more specific:
 
-```json
+```
 {
 	name: 'login',
 	path: 'user/login',
@@ -164,45 +201,9 @@ Delete a URL from the namespace.
 parrot.url.remove('logout')
 ```
 
-#### .ajax(\<Object>)
-
-Returns the result of AJAX request.
-
-It exists different ways to provide the URL of the AJAX request, but the most common pattern is to give a `parrot.url` object:
-
-```coffee
-parrot.url.ajax parrot.url.login(), (err, result) ->
-```
-
-If you want to write less code:
-
-```coffee
-parrot.url.ajax 'login', (err, result) ->
-```
-
-Also you can provide a URL that you are not registerin but that follows a `parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `parrot.environment`). 
-
-```coffee
-object = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
-parrot.url.ajax object, (err, result) ->
-```
-
-Default options are supported here also:
-
-```coffee
-object = url: 'http://echo.jsontest.com/key/value/one/two'
-parrot.url.ajax object, (err, result) ->
-```
-
-and more simply, you can provide only the URL if it is a `GET` method:
-
-```coffee
-parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
-```
-
 ### Storage
 
-This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `parrot.storage.local` and `parrot.storage.session`. But both methods are the same.
+This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `parrot.store.local` and `parrot.store.session`. But both methods are the same.
 
 Remember that the only difference between `localStorage` and `sessionStorage` is the time of life of the information in the browser. `localStorage` is persisten and only is deleted if you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, disappear).
 
@@ -241,18 +242,18 @@ parrot.store.local.myObject()
 Deletes the key and the value from the `local` or `session` storage:
 
 ```coffee
-parrot.storage.local.clear('one')
+parrot.store.local.clear('one')
 parrot.store.local.one()
 # => undefined
 ```
 
 #### .removeAll()
 
-Clears all the elements from the `local` or `session` storage:
+Clears all the elements from tal` or `session` storage:
 
 ```coffee
-parrot.storage.local.removeAll()
-parrot.storage.session.removeAll()
+parrot.store.local.removeAll()
+parrot.store.session.removeAll()
 ```
 
 #### .size()
@@ -260,20 +261,27 @@ parrot.storage.session.removeAll()
 Returns the length of the `local` or `session` storage:
 
 ```coffee
-parrot.storage.local.size()
+parrot.store.local.size()
 # => 0
-parrot.storage.session.size()
+parrot.store.session.size()
 # => 8
 ```
 
-#### .isAvailable(\<key>)
+#### .isAvailable(\[key])
 
 Returns if a certain value if available in the `local` or `session` storage:
 
 ```coffee
-parrot.storage.local.isAvailable('foo')
+parrot.store.local.isAvailable('foo')
 # => false
-parrot.storage.local.isAvailable('bar')
+parrot.store.local.isAvailable('bar')
+# => true
+```
+
+It has a special behavior if you want to check the state of the session (`session` key in `parrot.store.session` namespace):
+
+```coffee
+parrot.store.session.isAvailable()
 # => true
 ```
 
