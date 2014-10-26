@@ -22,7 +22,7 @@ path =
               'source/parrot.initialize.coffee'
               'source/parrot.endpoint.coffee'
               'source/parrot.url.coffee'
-              'source/parrot.storage.coffee' ]
+              'source/parrot.store.coffee' ]
     dist  : 'dist'
 
   dependencies: [ 'bower_components/quojs/quo.js'

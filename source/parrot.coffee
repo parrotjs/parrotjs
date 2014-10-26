@@ -8,7 +8,7 @@ parrot = @parrot =
   initialize : {}
   endpoint   : {}
   url        : {}
-  storage    :
+  store      :
     local    : {}
     session  : {}
 

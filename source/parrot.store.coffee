@@ -1,4 +1,4 @@
-do (fn = parrot.storage) ->
+do (fn = parrot.store) ->
 
   ## -- Private --------------------------------------------------------------
 
@@ -40,39 +40,39 @@ do (fn = parrot.storage) ->
   ## LocalStorage
 
   fn.local.set = (key, data) ->
-    parrot.storage._set 'local', key, data
+    parrot.store._set 'local', key, data
     this
 
   fn.local.remove = (key) ->
-    parrot.storage._remove 'local', key
+    parrot.store._remove 'local', key
     this
 
   fn.local.removeAll = ->
-    parrot.storage._removeAll 'local'
+    parrot.store._removeAll 'local'
     this
 
   fn.local.size = ->
-    parrot.storage._size 'local'
+    parrot.store._size 'local'
 
   fn.local.isAvailable = (key) ->
-    parrot.storage._is 'local', key
+    parrot.store._is 'local', key
 
   ## sessionStorage
 
   fn.session.set = (key, data) ->
-    parrot.storage._set 'session', key, data
+    parrot.store._set 'session', key, data
     this
 
   fn.session.remove = (key) ->
-    parrot.storage._remove 'session', key
+    parrot.store._remove 'session', key
     this
 
   fn.session.removeAll = ->
-    parrot.storage._removeAll 'session'
+    parrot.store._removeAll 'session'
     this
 
   fn.session.size = ->
-    parrot.storage._size 'session'
+    parrot.store._size 'session'
 
   fn.session.isAvailable = (key) ->
-    parrot.storage._is 'session', key
+    parrot.store._is 'session', key

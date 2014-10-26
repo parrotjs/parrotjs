@@ -151,33 +151,33 @@
         return localStorage.clear();
       });
       it('set and get simple value', function() {
-        parrot.storage.local.set('one', 'two').one().should.eql('two');
+        parrot.store.local.set('one', 'two').one().should.eql('two');
         localStorage.setItem('one', 'three');
-        return parrot.storage.local.one().should.eql('three');
+        return parrot.store.local.one().should.eql('three');
       });
       it('set and get object', function() {
         var _object;
         _object = {
           foo: 'bar'
         };
-        return parrot.storage.local.set('myData', _object).myData().foo.should.eql('bar');
+        return parrot.store.local.set('myData', _object).myData().foo.should.eql('bar');
       });
       it('updated a item', function() {
-        return parrot.storage.local.set('one', 'three').one().should.eql('three');
+        return parrot.store.local.set('one', 'three').one().should.eql('three');
       });
       it('get the size', function() {
-        return parrot.storage.local.size().should.eql(2);
+        return parrot.store.local.size().should.eql(2);
       });
       it('check for a key', function() {
-        return parrot.storage.local.isAvailable('one').should.eql(true);
+        return parrot.store.local.isAvailable('one').should.eql(true);
       });
       xit('remove one key', function() {
-        parrot.storage.local.remove('one');
-        return should.not.exist(parrot.storage.local.one());
+        parrot.store.local.remove('one');
+        return should.not.exist(parrot.store.local.one());
       });
       return xit('remove all', function() {
-        parrot.storage.local.removeAll();
-        return should.not.exist(parrot.storage.local.myData());
+        parrot.store.local.removeAll();
+        return should.not.exist(parrot.store.local.myData());
       });
     });
   });

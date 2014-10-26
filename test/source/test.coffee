@@ -81,33 +81,33 @@ describe 'Parrot ::', ->
       localStorage.clear()
 
     it 'set and get simple value', ->
-      parrot.storage.local
+      parrot.store.local
       .set 'one','two'
       .one().should.eql 'two'
       localStorage.setItem('one', 'three')
-      parrot.storage.local.one().should.eql 'three'
+      parrot.store.local.one().should.eql 'three'
 
     it 'set and get object', ->
       _object = foo:'bar'
-      parrot.storage.local
+      parrot.store.local
       .set('myData', _object)
       .myData().foo.should.eql 'bar'
 
     it 'updated a item', ->
-      parrot.storage.local
+      parrot.store.local
       .set 'one','three'
       .one().should.eql 'three'
 
     it 'get the size', ->
-      parrot.storage.local.size().should.eql 2
+      parrot.store.local.size().should.eql 2
 
     it 'check for a key', ->
-      parrot.storage.local.isAvailable('one').should.eql true
+      parrot.store.local.isAvailable('one').should.eql true
 
     xit 'remove one key', ->
-      parrot.storage.local.remove('one')
-      should.not.exist(parrot.storage.local.one())
+      parrot.store.local.remove('one')
+      should.not.exist(parrot.store.local.one())
 
     xit 'remove all', ->
-      parrot.storage.local.removeAll()
-      should.not.exist(parrot.storage.local.myData())
+      parrot.store.local.removeAll()
+      should.not.exist(parrot.store.local.myData())
