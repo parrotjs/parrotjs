@@ -237,7 +237,14 @@ parrot.store.local.myObject()
 # => {foo: 'bar'}
 ```
 
-#### .remove(\<key>)
+It has a helper special if you want to store the session: (`session` key in `parrot.store.session` namespace):
+
+```coffee
+parrot.store.session.set(sessionObject)
+```
+
+
+#### .clear(\<key>)
 	
 Deletes the key and the value from the `local` or `session` storage:
 
@@ -247,7 +254,7 @@ parrot.store.local.one()
 # => undefined
 ```
 
-#### .removeAll()
+#### .clearAll()
 
 Clears all the elements from tal` or `session` storage:
 
