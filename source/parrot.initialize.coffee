@@ -46,5 +46,13 @@ do ->
       obj = parrot.url._URLS[arguments[0]] or url: arguments[0] if typeof arguments[0] is 'string'
       if (obj.query and obj.path)
         obj.url = "#{_url}/#{obj.path}?#{obj.query}"
+      else
+        obj.url = "#{_url}?#{obj.query}" if obj.query and not obj.path
+        obj.url = "#{_url}/#{obj.path}" if obj.path and not obj.query
+    else
+      if (obj.url isnt _url) and (obj.url isnt "#{_url}/#{obj.path}") and (obj.url isnt "#{_url}?#{obj.query}") and (obj.url isnt "#{_url}/#{obj.path}?#{obj.query}")
+        obj.url = "#{obj.url}/#{obj.path}" if obj.path?
+        obj.url = "#{obj.url}?#{obj.query}" if obj.query?
+
     promise = @_createAjaxPromise(obj)
     promise.then (err, result) -> cb(err, result)
