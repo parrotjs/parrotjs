@@ -15,7 +15,6 @@
     "gulp-connect": "*",
     "gulp-header": "*",
     "gulp-open": "*",
-    "gulp-rename": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
     "gulp-watch": "*"
