@@ -38,14 +38,11 @@ At this moment, Parrot has two dependencies:
 
 - [jsurl](https://github.com/Mikhus/jsurl) for url query string parser.
 - [QuoJS](https://github.com/soyjavi/QuoJS/) for AJAX requests.
-- [Hope](https://github.com/soyjavi/hope) for Promises.
 
 So, there are two version of the library:
 
 - `standard` version has all the code with dependencies.
 - `standalone` version has code without dependencies.
-
-This will be improved with ECMAScript 6 because it has native promises and the system for loading external dependencies will be better.
 
 ## API
 
