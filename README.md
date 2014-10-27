@@ -45,7 +45,7 @@ So, there are two version of the library:
 - `standard` version has all the code with dependencies.
 - `standalone` version has code without dependencies.
 
-This will be improved with ECMACSCript 6 because it has native promises and the system for loading external dependencies will be better.
+This will be improved with ECMAScript 6 because it has native promises and the system for loading external dependencies will be better.
 
 ## API
 
