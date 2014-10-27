@@ -17,7 +17,7 @@ describe 'Parrot ::', ->
       parrot.endpoint.set('production')
       parrot.environment.should.eql 'production'
 
-  describe 'url ::', ->
+  xdescribe 'url ::', ->
 
     it 'add with default values', ->
       _default = { method: 'GET', protocol: 'http', path: undefined, query: undefined, send: undefined }
@@ -111,3 +111,14 @@ describe 'Parrot ::', ->
     xit 'remove all', ->
       parrot.store.local.clearAll()
       should.not.exist(parrot.store.local.myData())
+
+    describe 'session ::', ->
+      it 'save a simple session and retrieve', ->
+        parrot.store.session.set('session')
+        sessionStorage.getItem('session').should.eql 'session'
+        parrot.store.session.get().should.eql 'session'
+
+      it 'save a object session and retrieve', ->
+        _session = foo: 'bar'
+        parrot.store.session.set(_session)
+        parrot.store.session.get().should.eql {foo: 'bar'}

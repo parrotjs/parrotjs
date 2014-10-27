@@ -59,6 +59,13 @@ do (fn = parrot.store) ->
 
   ## sessionStorage
 
+  fn.session.get = ->
+    session = sessionStorage.getItem('session')
+    try
+      session = JSON.parse(session)
+    catch e
+      session
+
   fn.session.set = ->
     if arguments.length is 1
       key  = 'session'

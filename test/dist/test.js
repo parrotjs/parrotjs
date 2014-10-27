@@ -24,7 +24,7 @@
         return parrot.environment.should.eql('production');
       });
     });
-    describe('url ::', function() {
+    xdescribe('url ::', function() {
       it('add with default values', function() {
         var _default;
         _default = {
@@ -175,9 +175,26 @@
         parrot.store.local.clear('one');
         return should.not.exist(parrot.store.local.one());
       });
-      return xit('remove all', function() {
+      xit('remove all', function() {
         parrot.store.local.clearAll();
         return should.not.exist(parrot.store.local.myData());
+      });
+      return describe('session ::', function() {
+        it('save a simple session and retrieve', function() {
+          parrot.store.session.set('session');
+          sessionStorage.getItem('session').should.eql('session');
+          return parrot.store.session.get().should.eql('session');
+        });
+        return it('save a object session and retrieve', function() {
+          var _session;
+          _session = {
+            foo: 'bar'
+          };
+          parrot.store.session.set(_session);
+          return parrot.store.session.get().should.eql({
+            foo: 'bar'
+          });
+        });
       });
     });
   });
