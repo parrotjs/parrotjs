@@ -2,7 +2,7 @@
 
 parrot = @parrot =
 
-  version    : '0.10.26'
+  version    : '0.10.27'
   environment: 'development'
 
   initialize : {}
