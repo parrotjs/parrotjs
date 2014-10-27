@@ -54,9 +54,8 @@ do (fn = parrot.store) ->
   fn.local.size = ->
     parrot.store._size 'local'
 
-  fn.local.isAvailable = ->
-    key = if arguments.length is 0 then 'session' else arguments[0]
-    parrot.store._is 'session', key
+  fn.local.isAvailable = (key) ->
+    parrot.store._is 'local', key
 
   ## sessionStorage
 

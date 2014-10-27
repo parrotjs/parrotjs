@@ -27,8 +27,7 @@ path =
 
   dependencies: [ 'bower_components/quojs/quo.js'
                   'bower_components/quojs/quo.ajax.js'
-                  'bower_components/jsurl/url.min.js'
-                  'bower_components/hope/hope.js' ]
+                  'bower_components/jsurl/url.min.js' ]
   test:
     src   : [ 'test/source/test.coffee' ]
     dist  : 'test/dist'
