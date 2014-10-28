@@ -246,13 +246,6 @@ parrot.store.local.myObject()
 # => {foo: 'bar'}
 ```
 
-It has a helper special if you want to store the session: (`session` key in `parrot.store.session` namespace):
-
-```coffee
-parrot.store.session.set(sessionObject)
-```
-
-
 #### .clear(\<key>)
 	
 Deletes the key and the value from the `local` or `session` storage:
@@ -294,11 +287,23 @@ parrot.store.local.isAvailable('bar')
 # => true
 ```
 
-It has a special behavior if you want to check the state of the session (`session` key in `parrot.store.session` namespace):
+### sessionStorage Helpers
+
+`parrot.store.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
+
+If you want to save a user session only write:
 
 ```coffee
+parrot.store.session.set(user)
+```
+
+Automatically is associated with the key `session`. If you need to `get`, `clear` or check if `isAvailable` write the command without parameter and is resolved with `session` key:
+
+```coffee
+parrot.store.session.get(user)
+parrot.store.session.clear()
 parrot.store.session.isAvailable()
-# => true
+# => false
 ```
 
 ## License
