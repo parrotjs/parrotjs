@@ -11,7 +11,7 @@
 > Client library to connect your frontend application with whatever sails backend.
 
 Parrot helps you connect your frontend with you API backend. Only need to say to parrot what do, and parrot will do the hard work!
-
+a
 At this moment Parrot supports:
 
 - Register different environments (development, production, testing,...).
@@ -169,7 +169,7 @@ This method is available in `parrot.url` namespace:
 
 Registers a new URL. The minimum information you need to check is:
 
-```json
+```
 name: 'login'
 ```
 
