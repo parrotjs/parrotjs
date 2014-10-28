@@ -13,7 +13,6 @@ do ->
       allArguments = args.concat(Array::slice.call(arguments))
       func.apply this, allArguments
 
-  # type, method, send = {}, background = false
   parrot._createAjaxPromise = (obj) ->
     new Promise((resolve, reject) =>
       parrot.$.ajax
