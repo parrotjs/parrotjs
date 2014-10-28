@@ -1,6 +1,6 @@
 (function() {
   describe('Parrot ::', function() {
-    describe('endpoint ::', function() {
+    describe('Endpoint ::', function() {
       it('add', function() {
         parrot.endpoint.add({
           name: 'development',
@@ -24,14 +24,14 @@
         return parrot.environment.should.eql('production');
       });
     });
-    xdescribe('url ::', function() {
+    describe('URL ::', function() {
       it('add with default values', function() {
         var _default;
         _default = {
           method: 'GET',
           protocol: 'http',
           path: void 0,
-          query: void 0,
+          query: "lang=" + parrot.language,
           send: void 0
         };
         parrot.url.add({
@@ -45,7 +45,7 @@
           method: 'GET',
           protocol: 'http',
           path: void 0,
-          query: 'sort=id%20asc',
+          query: "sort=id%20asc&lang=" + parrot.language,
           send: void 0
         };
         parrot.url.add({
@@ -60,7 +60,7 @@
           method: 'GET',
           protocol: 'http',
           path: 'tweet',
-          query: 'sort=id%20asc',
+          query: "sort=id%20asc&lang=" + parrot.language,
           send: void 0
         };
         parrot.url.add({
@@ -70,7 +70,28 @@
         });
         return parrot.url.tweets().should.eql(_default);
       });
-      it('ajax with the path in the url', function(done) {
+      return it('add with path and query and change values dynamically', function() {
+        var _default;
+        _default = {
+          method: 'POST',
+          protocol: 'http',
+          path: 'tweet',
+          query: "sort=id%20desc&lang=" + parrot.language,
+          send: void 0
+        };
+        parrot.url.add({
+          name: 'tweets',
+          path: 'tweet',
+          query: ['sort', 'id asc']
+        });
+        return parrot.url.tweets({
+          method: 'POST',
+          query: ['sort', 'id desc']
+        }).should.eql(_default);
+      });
+    });
+    describe('AJAX ::', function() {
+      it('only with url (iclude the path inside)', function(done) {
         var request;
         request = {
           url: 'http://echo.jsontest.com/key/value/one/two',
@@ -81,7 +102,7 @@
           return done();
         });
       });
-      it('ajax with path and query', function(done) {
+      it('with url and path', function(done) {
         var request;
         request = {
           url: 'http://echo.jsontest.com',
@@ -93,7 +114,7 @@
           return done();
         });
       });
-      it('ajax using short method for GET methods', function(done) {
+      it('using short method for GET requests', function(done) {
         return parrot.ajax('http://echo.jsontest.com/key/value/one/two', function(err, result) {
           result.one.should.eql('two');
           return done();
@@ -113,7 +134,7 @@
           return done();
         });
       });
-      it('ajax using url object (alternative method)', function(done) {
+      return it('ajax using url object (alternative method)', function(done) {
         parrot.endpoint.add({
           name: 'testing',
           url: 'http://echo.jsontest.com'
@@ -127,26 +148,13 @@
           return done();
         });
       });
-      return it('add with path and query and change values dynamically', function() {
-        var _default;
-        _default = {
-          method: 'POST',
-          protocol: 'http',
-          path: 'tweet',
-          query: 'sort=id%20asc',
-          send: void 0
-        };
-        parrot.url.add({
-          name: 'tweets',
-          path: 'tweet',
-          query: ['sort', 'id asc']
-        });
-        return parrot.url.tweets({
-          method: 'POST'
-        }).should.eql(_default);
+    });
+    describe('Language ::', function() {
+      return it('set default language', function() {
+        return parrot.language.should.eql('en');
       });
     });
-    return describe('storage ::', function() {
+    return describe('Storage ::', function() {
       before(function() {
         return localStorage.clear();
       });
@@ -179,7 +187,7 @@
         parrot.store.local.clearAll();
         return should.not.exist(parrot.store.local.myData());
       });
-      return describe('session ::', function() {
+      return describe('Session ::', function() {
         it('save a simple session and retrieve', function() {
           parrot.store.session.set('session');
           sessionStorage.getItem('session').should.eql('session');

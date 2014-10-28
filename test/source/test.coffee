@@ -1,6 +1,6 @@
 describe 'Parrot ::', ->
 
-  describe 'endpoint ::', ->
+  describe 'Endpoint ::', ->
 
     it 'add', ->
       parrot.endpoint.add(name: 'development', url:'http://localhost:1337')
@@ -17,36 +17,43 @@ describe 'Parrot ::', ->
       parrot.endpoint.set('production')
       parrot.environment.should.eql 'production'
 
-  xdescribe 'url ::', ->
+  describe 'URL ::', ->
 
     it 'add with default values', ->
-      _default = { method: 'GET', protocol: 'http', path: undefined, query: undefined, send: undefined }
+      _default = { method: 'GET', protocol: 'http', path: undefined, query: "lang=#{parrot.language}", send: undefined }
       parrot.url.add name: 'login'
       parrot.url.login().should.eql _default
 
     it 'add with query',  ->
-      _default = { method: 'GET', protocol: 'http', path: undefined, query: 'sort=id%20asc', send: undefined }
+      _default = { method: 'GET', protocol: 'http', path: undefined, query: "sort=id%20asc&lang=#{parrot.language}", send: undefined }
       parrot.url.add name:'tweets', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
     it 'add with path and query',  ->
-      _default = { method:'GET', protocol:'http', path: 'tweet', query:'sort=id%20asc', send: undefined }
+      _default = { method:'GET', protocol:'http', path: 'tweet', query: "sort=id%20asc&lang=#{parrot.language}", send: undefined }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
-    it 'ajax with the path in the url', (done) ->
+    it 'add with path and query and change values dynamically',  ->
+      _default = { method:'POST', protocol:'http', path: 'tweet', query: "sort=id%20desc&lang=#{parrot.language}", send: undefined }
+      parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
+      parrot.url.tweets(method: 'POST', query: ['sort', 'id desc']).should.eql _default
+
+  describe 'AJAX ::', ->
+
+    it 'only with url (iclude the path inside)', (done) ->
       request = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
       parrot.ajax request, (err, result) ->
         result.one.should.eql 'two'
         done()
 
-    it 'ajax with path and query', (done) ->
+    it 'with url and path', (done) ->
       request = url: 'http://echo.jsontest.com', path:'key/value/one/two', method: 'GET'
       parrot.ajax request, (err, result) ->
         result.one.should.eql 'two'
         done()
 
-    it 'ajax using short method for GET methods', (done) ->
+    it 'using short method for GET requests', (done) ->
       parrot.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
         result.one.should.eql 'two'
         done()
@@ -71,12 +78,11 @@ describe 'Parrot ::', ->
         result.one.should.eql 'two'
         done()
 
-    it 'add with path and query and change values dynamically',  ->
-      _default = { method:'POST', protocol:'http', path: 'tweet', query:'sort=id%20asc', send: undefined }
-      parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
-      parrot.url.tweets(method: 'POST').should.eql _default
+  describe 'Language ::', ->
+    it 'set default language', ->
+      parrot.language.should.eql 'en'
 
-  describe 'storage ::', ->
+  describe 'Storage ::', ->
     before  ->
       localStorage.clear()
 
@@ -112,7 +118,7 @@ describe 'Parrot ::', ->
       parrot.store.local.clearAll()
       should.not.exist(parrot.store.local.myData())
 
-    describe 'session ::', ->
+    describe 'Session ::', ->
       it 'save a simple session and retrieve', ->
         parrot.store.session.set('session')
         sessionStorage.getItem('session').should.eql 'session'

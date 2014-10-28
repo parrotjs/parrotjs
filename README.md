@@ -17,6 +17,7 @@ At this moment Parrot supports:
 - Register different environments (development, production, testing,...).
 - Register different URLs with different protocols (http, sockets) and make easy AJAX requests.
 - Manage uniformly sessionStorage and localStorage.
+- Multilanguage support.
 - Chainable methods.
 
 ## Install
@@ -71,6 +72,17 @@ parrot.environment
 ```
 
 Default environment is `development`.
+
+#### .language
+
+Returns the language that you want to use in the requests with your API's endpoints.
+
+```coffee
+parrot.language
+# => 'en'
+```
+
+Default language is obtained from `navigator.language`, that is the language of the browser of the user.
 
 #### .ajax(\<Object> or \<String>)
 
