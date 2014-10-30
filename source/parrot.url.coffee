@@ -6,8 +6,7 @@ do (fn = parrot.url)->
 
   fn._getQuery = (queries) ->
     _url               = new Url()
-    _url.protocol      = ''
-    _url.path          = ''
+    _url[key]          = ''for key in ['protocol', 'path', 'host', 'port', 'hash', ]
     _url.query[option] = queries[index+1] for option, index in queries by 2
     query              = _url.toString()
     query              = query.substring(1) if query.charAt(0) is '?'
@@ -35,7 +34,6 @@ do (fn = parrot.url)->
       query    : @_getQuery(obj.query)
       path     : obj.path
       send     : obj.send
-
     @[obj.name] = parrot._partial(@_bindAdd, obj.name).bind(fn)
     this
 
