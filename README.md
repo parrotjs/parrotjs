@@ -45,7 +45,7 @@ So, there are two version of the library:
 - `standard` version has all the code with dependencies.
 - `standalone` version has code without dependencies.
 
-We are working to offer a library without dependencies, writing our own query params parser and ajax handler.
+We are working to offer a library without dependencies, writing our own query params parser and ajax handler. For more information check [Roadmap](https://github.com/sailorjs/parrotjs/blob/master/ROADMAP.md) section.
 
 ## API
 
