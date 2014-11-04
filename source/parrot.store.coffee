@@ -2,23 +2,24 @@ do (fn = parrot.store) ->
 
   ## -- Private --------------------------------------------------------------
 
+  fn._init = ->
+    @['local'][key] = parrot._partial(@_get, 'local', key).bind(fn) for key in Object.keys(localStorage)
+    @['session'][key] = parrot._partial(@_get, 'session', key).bind(fn) for key in Object.keys(sessionStorage)
+
   fn._storage = (type) ->
     if type is 'local' then localStorage else sessionStorage
 
-  fn._get = (type, key, object=false) ->
-    if object
-      JSON.parse(@_storage(type).getItem(key))
-    else
-      @_storage(type).getItem(key)
+  fn._get = (type, key) ->
+    data = @_storage(type).getItem(key)
+    try
+      data = JSON.parse(data)
+    catch e
+      data
 
   fn._set = (type, key, data) ->
-    unless typeof data is 'string'
-      data = JSON.stringify(data)
-      @_storage(type).setItem(key, data)
-      @[type][key] = parrot._partial(@_get, type, key, true).bind(fn)
-    else
-      @_storage(type).setItem(key, data)
-      @[type][key] = parrot._partial(@_get, type, key, false).bind(fn)
+    data = JSON.stringify(data) unless typeof data is 'string'
+    @_storage(type).setItem(key, data)
+    @[type][key] = parrot._partial(@_get, type, key).bind(fn)
 
   fn._clear = (type, key) ->
     delete @[type][key]
@@ -60,11 +61,7 @@ do (fn = parrot.store) ->
   ## sessionStorage
 
   fn.session.get = ->
-    session = sessionStorage.getItem('session')
-    try
-      session = JSON.parse(session)
-    catch e
-      session
+    parrot.store._get 'session', 'session'
 
   fn.session.set = ->
     if arguments.length is 1
@@ -92,3 +89,7 @@ do (fn = parrot.store) ->
   fn.session.isAvailable = ->
     key = if arguments.length is 0 then 'session' else arguments[0]
     parrot.store._is 'session', key
+
+  ## -- Initialize --------------------------------------------------------------
+
+  parrot.store._init()
