@@ -38,12 +38,14 @@ You need to link the library in your frontend. You can use Gulp/Grunt to build a
 At this moment, Parrot has two dependencies:
 
 - [jsurl](https://github.com/Mikhus/jsurl) for url query string parser.
-- [QuoJS](https://github.com/soyjavi/QuoJS/) for AJAX requests.
+- [jQuery](https://github.com/jquery/jquery) for AJAX requests.
 
 So, there are two version of the library:
 
 - `standard` version has all the code with dependencies.
 - `standalone` version has code without dependencies.
+
+We are working to offer a library without dependencies, writing our own query params parser and ajax handler.
 
 ## API
 
@@ -100,7 +102,7 @@ If you want to write less code:
 parrot.url.ajax 'login', (err, result) ->
 ```
 
-Also you can provide a URL that you are not registerin but that follows a `parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `parrot.environment`). 
+Also you can provide a URL that you are not registerin but that follows a `parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `parrot.environment`).
 
 ```coffee
 object = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
@@ -128,10 +130,10 @@ This method is available in `parrot.endpoint` namespace:
 #### .add(\<object>)
 
 registers a new endpoint. Object must have:
-	
+
 ```
 {
-	name:'development', 
+	name:'development',
 	url:'http://localhost:1337'
 }
 ```
@@ -173,17 +175,17 @@ Registers a new URL. The minimum information you need to check is:
 name: 'login'
 ```
 
-but you can be more specific:
+but you can be more specific. All options available are:
 
-```
-{
-	name: 'login',
-	path: 'user/login',
-	protocol: 'http',
-	query: null,
-	method: 'POST',
-	send: null
-}
+```coffee
+options =
+  name     : 'login'
+  headers  : Authorization: 'Bearer 1234'
+  method   : 'post'
+  protocol : 'http'
+  path     : 'user/login'
+  query    : ['sort','id asc']
+  send     : userObject
 ```
 
 by default `method` is `GET`, protocol is HTTP and other attributes you don't provide are `undefined`.
@@ -247,7 +249,7 @@ parrot.store.local.myObject()
 ```
 
 #### .clear(\<key>)
-	
+
 Deletes the key and the value from the `local` or `session` storage:
 
 ```coffee

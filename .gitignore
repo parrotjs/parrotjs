@@ -31,3 +31,4 @@ coverage
 dist/parrot.develop.js
 bower_components/mocha
 bower_components/should
+bower_components/jquery

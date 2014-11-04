@@ -14,24 +14,22 @@ do (fn = parrot.url)->
 
   fn._bindAdd = (name, update) ->
     if update?
+      @_URLS[name].headers  = update.headers if update.headers?
       @_URLS[name].method   = update.method if update.method?
       @_URLS[name].protocol = update.protocol if update.protocol?
       @_URLS[name].path     = update.path if update.path?
-      if update.query?
-        update.query.push('lang', parrot.language)
-        @_URLS[name].query    = @_getQuery(update.query)
+      @_URLS[name].query    = @_getQuery(update.query) if update.query?
       @_URLS[name].send     = update.send if update.send?
     @_URLS[name]
 
   ## -- Public --------------------------------------------------------------
 
   fn.add = (obj) ->
-    obj.query = [] unless obj.query?
-    obj.query.push('lang', parrot.language)
     @_URLS[obj.name] =
+      headers  : unless obj.headers? then parrot._DEFAULT.HEADERS else obj.headers
       method   : unless obj.method? then parrot._DEFAULT.METHOD else obj.method
       protocol : unless obj.protocol? then parrot._DEFAULT.PROTOCOL else obj.protocol
-      query    : @_getQuery(obj.query)
+      query    : if obj.query? then @_getQuery(obj.query) else undefined
       path     : obj.path
       send     : obj.send
     @[obj.name] = parrot._partial(@_bindAdd, obj.name).bind(fn)

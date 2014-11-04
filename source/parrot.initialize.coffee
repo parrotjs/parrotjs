@@ -6,6 +6,7 @@ do ->
     METHOD   : 'GET'
     PROTOCOL : 'http'
     SEND     : {}
+    HEADERS  : undefined
 
   parrot._partial = (func) -> #, 0..n args
     args = Array::slice.call(arguments, 1)
@@ -21,6 +22,11 @@ do ->
         data        : obj.send or @_DEFAULT.SEND
         dataType    : 'json'
         contentType : 'application/x-www-form-urlencoded'
+        beforeSend:  (xhr) ->
+          if obj.headers?
+            headers = Object.keys(obj.headers)
+            for header in headers
+              xhr.setRequestHeader(header, obj.headers[header])
         success: (xhr) ->
           if xhr.status is 0
             error = code: 0, message: 'Server Unavailable'
@@ -50,4 +56,8 @@ do ->
         obj.url = "#{obj.url}/#{obj.path}" if obj.path?
         obj.url = "#{obj.url}?#{obj.query}" if obj.query?
 
-    @_createAjaxPromise(obj).then ((response) -> cb(null, response)), (error) -> cb(error, null)
+    @_createAjaxPromise(obj).then ((response) ->
+      cb null, response
+    ), (error) ->
+      error.message = JSON.parse(error.message) if error.message?
+      cb error, null

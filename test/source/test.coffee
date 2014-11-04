@@ -20,26 +20,32 @@ describe 'Parrot ::', ->
   describe 'URL ::', ->
 
     it 'add with default values', ->
-      _default = { method: 'GET', protocol: 'http', path: undefined, query: "lang=#{parrot.language}", send: undefined }
+      _default = { headers: undefined, method: 'GET', protocol: 'http', path: undefined, query: undefined, send: undefined }
       parrot.url.add name: 'login'
       parrot.url.login().should.eql _default
 
     it 'add with query',  ->
-      _default = { method: 'GET', protocol: 'http', path: undefined, query: "sort=id%20asc&lang=#{parrot.language}", send: undefined }
+      _default = { headers: undefined, method: 'GET', protocol: 'http', path: undefined, query: "sort=id%20asc", send: undefined }
       parrot.url.add name:'tweets', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
     it 'add with path and query',  ->
-      _default = { method:'GET', protocol:'http', path: 'tweet', query: "sort=id%20asc&lang=#{parrot.language}", send: undefined }
+      _default = { headers: undefined, method:'GET', protocol:'http', path: 'tweet', query: "sort=id%20asc", send: undefined }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
     it 'add with path and query and change values dynamically',  ->
-      _default = { method:'POST', protocol:'http', path: 'tweet', query: "sort=id%20desc&lang=#{parrot.language}", send: undefined }
+      _default = { headers: undefined, method:'POST', protocol:'http', path: 'tweet', query: "sort=id%20desc", send: undefined }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets(method: 'POST', query: ['sort', 'id desc']).should.eql _default
 
-  describe 'AJAX ::', ->
+    it 'added headers dynamically', ->
+      _headers = Autorization: 'Bearer token'
+      _default = { headers: _headers, method:'POST', protocol:'http', path: 'tweet', query: "sort=id%20desc", send: undefined }
+      parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
+      parrot.url.tweets(headers: _headers, method: 'POST', query: ['sort', 'id desc']).should.eql _default
+
+  xdescribe 'AJAX ::', ->
 
     it 'only with url (iclude the path inside)', (done) ->
       request = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
@@ -68,7 +74,7 @@ describe 'Parrot ::', ->
         result.one.should.eql 'two'
         done()
 
-    it 'ajax using url object (alternative method)', (done) ->
+    xit 'ajax using url object (alternative method)', (done) ->
       parrot.endpoint
       .add(name: 'testing', url:'http://echo.jsontest.com')
       .set('testing')

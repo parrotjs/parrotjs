@@ -28,10 +28,11 @@
       it('add with default values', function() {
         var _default;
         _default = {
+          headers: void 0,
           method: 'GET',
           protocol: 'http',
           path: void 0,
-          query: "lang=" + parrot.language,
+          query: void 0,
           send: void 0
         };
         parrot.url.add({
@@ -42,10 +43,11 @@
       it('add with query', function() {
         var _default;
         _default = {
+          headers: void 0,
           method: 'GET',
           protocol: 'http',
           path: void 0,
-          query: "sort=id%20asc&lang=" + parrot.language,
+          query: "sort=id%20asc",
           send: void 0
         };
         parrot.url.add({
@@ -57,10 +59,11 @@
       it('add with path and query', function() {
         var _default;
         _default = {
+          headers: void 0,
           method: 'GET',
           protocol: 'http',
           path: 'tweet',
-          query: "sort=id%20asc&lang=" + parrot.language,
+          query: "sort=id%20asc",
           send: void 0
         };
         parrot.url.add({
@@ -70,13 +73,14 @@
         });
         return parrot.url.tweets().should.eql(_default);
       });
-      return it('add with path and query and change values dynamically', function() {
+      it('add with path and query and change values dynamically', function() {
         var _default;
         _default = {
+          headers: void 0,
           method: 'POST',
           protocol: 'http',
           path: 'tweet',
-          query: "sort=id%20desc&lang=" + parrot.language,
+          query: "sort=id%20desc",
           send: void 0
         };
         parrot.url.add({
@@ -89,8 +93,32 @@
           query: ['sort', 'id desc']
         }).should.eql(_default);
       });
+      return it('added headers dynamically', function() {
+        var _default, _headers;
+        _headers = {
+          Autorization: 'Bearer token'
+        };
+        _default = {
+          headers: _headers,
+          method: 'POST',
+          protocol: 'http',
+          path: 'tweet',
+          query: "sort=id%20desc",
+          send: void 0
+        };
+        parrot.url.add({
+          name: 'tweets',
+          path: 'tweet',
+          query: ['sort', 'id asc']
+        });
+        return parrot.url.tweets({
+          headers: _headers,
+          method: 'POST',
+          query: ['sort', 'id desc']
+        }).should.eql(_default);
+      });
     });
-    describe('AJAX ::', function() {
+    xdescribe('AJAX ::', function() {
       it('only with url (iclude the path inside)', function(done) {
         var request;
         request = {
@@ -134,7 +162,7 @@
           return done();
         });
       });
-      return it('ajax using url object (alternative method)', function(done) {
+      return xit('ajax using url object (alternative method)', function(done) {
         parrot.endpoint.add({
           name: 'testing',
           url: 'http://echo.jsontest.com'
