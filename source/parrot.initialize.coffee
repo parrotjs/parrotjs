@@ -28,14 +28,10 @@ do ->
             for header in headers
               xhr.setRequestHeader(header, obj.headers[header])
         success: (xhr) ->
-          if xhr.status is 0
-            error = code: 0, message: 'Server Unavailable'
-            reject(error)
-          else
-            resolve(xhr)
+          return reject(code: 0, message: 'Server Unavailable') if xhr.status is 0
+          resolve(xhr)
         error: (xhr, request) ->
-          error = code: request.status, message: request.response
-          reject(error)
+          reject(code: xhr.status, message: xhr.responseJSON)
     )
 
   ## -- Public --------------------------------------------------------------
@@ -59,5 +55,4 @@ do ->
     @_createAjaxPromise(obj).then ((response) ->
       cb null, response
     ), (error) ->
-      error.message = JSON.parse(error.message) if error.message?
       cb error, null
