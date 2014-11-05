@@ -38,7 +38,7 @@ You need to link the library in your frontend. You can use Gulp/Grunt to build a
 At this moment, Parrot has two dependencies:
 
 - [jsurl](https://github.com/Mikhus/jsurl) for url query string parser.
-- [jQuery](https://github.com/jquery/jquery) for AJAX requests.
+- [QuoJS](https://github.com/soyjavi/QuoJS/) for AJAX requests.
 
 So, there are two version of the library:
 
@@ -46,6 +46,8 @@ So, there are two version of the library:
 - `standalone` version has code without dependencies.
 
 We are working to offer a library without dependencies, writing our own query params parser and ajax handler. For more information check [Roadmap](https://github.com/sailorjs/parrotjs/blob/master/ROADMAP.md) section.
+
+Remember that you can use `standalone` and use [jQuery](https://github.com/jquery/jquery) or [Zepto](https://github.com/madrobby/zepto) if you prefer it!
 
 ## API
 
