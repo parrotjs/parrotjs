@@ -90,6 +90,6 @@ do (fn = parrot.store) ->
     key = if arguments.length is 0 then 'session' else arguments[0]
     parrot.store._is 'session', key
 
-  ## -- Initialize --------------------------------------------------------------
+  ## -- Initialize -----------------------------------------------------------
 
   parrot.store._init()
