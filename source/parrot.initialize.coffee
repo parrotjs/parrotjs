@@ -6,7 +6,7 @@ do ->
     METHOD   : 'GET'
     PROTOCOL : 'http'
     SEND     : {}
-    HEADERS  : undefined
+    HEADERS  : {}
 
   parrot._partial = (func) -> #, 0..n args
     args = Array::slice.call(arguments, 1)
@@ -20,18 +20,23 @@ do ->
         type        : obj.method or @_DEFAULT.METHOD
         url         : obj.url
         data        : obj.send or @_DEFAULT.SEND
-        dataType    : 'json'
-        contentType : 'application/x-www-form-urlencoded'
-        beforeSend:  (xhr) ->
-          if obj.headers?
-            headers = Object.keys(obj.headers)
-            for header in headers
-              xhr.setRequestHeader(header, obj.headers[header])
+        dataType    : "json"
+        contentType : "application/x-www-form-urlencoded"
+        headers     : obj.headers or @_DEFAULT.HEADERS
         success: (xhr) ->
-          return reject(code: 0, message: 'Server Unavailable') if xhr.status is 0
+          return reject(code: 0, message: {'errors': [{'param': 'url','msg': 'Server Unavailable.'}]}) if xhr.status is 0
           resolve(xhr)
-        error: (xhr, request) ->
-          reject(code: xhr.status, message: xhr.responseJSON)
+        error: (type, xhr) ->
+          xhr = if typeof type is 'object' then type else xhr
+
+          if xhr.responseJSON?
+            message = xhr.responseJSON
+          else
+            try
+              message = JSON.parse(xhr.response)
+            catch
+              message = xhr.response
+          reject(code: xhr.status, message: message)
     )
 
   ## -- Public --------------------------------------------------------------

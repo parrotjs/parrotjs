@@ -28,7 +28,7 @@
       it('add with default values', function() {
         var _default;
         _default = {
-          headers: void 0,
+          headers: {},
           method: 'GET',
           protocol: 'http',
           path: void 0,
@@ -43,7 +43,7 @@
       it('add with query', function() {
         var _default;
         _default = {
-          headers: void 0,
+          headers: {},
           method: 'GET',
           protocol: 'http',
           path: void 0,
@@ -59,7 +59,7 @@
       it('add with path and query', function() {
         var _default;
         _default = {
-          headers: void 0,
+          headers: {},
           method: 'GET',
           protocol: 'http',
           path: 'tweet',
@@ -76,7 +76,7 @@
       it('add with path and query and change values dynamically', function() {
         var _default;
         _default = {
-          headers: void 0,
+          headers: {},
           method: 'POST',
           protocol: 'http',
           path: 'tweet',
@@ -118,7 +118,7 @@
         }).should.eql(_default);
       });
     });
-    xdescribe('AJAX ::', function() {
+    describe('AJAX ::', function() {
       it('only with url (iclude the path inside)', function(done) {
         var request;
         request = {
@@ -162,7 +162,7 @@
           return done();
         });
       });
-      return xit('ajax using url object (alternative method)', function(done) {
+      return it('ajax using url object (alternative method)', function(done) {
         parrot.endpoint.add({
           name: 'testing',
           url: 'http://echo.jsontest.com'
