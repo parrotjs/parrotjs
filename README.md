@@ -95,13 +95,12 @@ Returns the result of AJAX request.
 The defaults options for whatever ajax request are:
 
 ```coffee
-  method       : 'get'
-  protocol     : 'http'
-  send         : {}
-  headers      : {}
-  async        : true
-  datatype     : 'json'
-  content_type : 'application/x-www-form-urlencoded'
+method       : 'get'
+send         : {}
+headers      : {}
+async        : true
+datatype     : 'json'
+content_type : 'application/x-www-form-urlencoded'
 ```
 
 ##### Using URL Objects
@@ -159,11 +158,9 @@ This method is available in `parrot.endpoint` namespace:
 
 registers a new endpoint. Object must have:
 
-```
-{
-	name:'development',
-	url:'http://localhost:1337'
-}
+```coffee
+name : 'development'
+url  : 'http://localhost:1337'
 ```
 
 When you register an endpoint it is accesible in the `parrot.endpoint` namespace:
@@ -199,22 +196,15 @@ This method is available in `parrot.url` namespace:
 
 Registers a new URL. The minimum information you need to check is:
 
-```
+```coffee
 name: 'login'
 ```
 
-You can specify the same options that ajax options and otehr options specific of the URL:
+You can specify the same options that ajax options and other options specific of the URL:
 
 ```coffee
-options =
-	name     : 'login'
-  	protocol : Authorization: 'Bearer 1234'
-  	path     : 'post'
-  	query    : 'http'
-  	send     : 'user/login'
-  	query    : ['sort','id asc']
-  	send     : userObject
-  	async    : false
+path  : 'user/find'
+query : ['sort','id asc']
 ```
 
 Remember that in a URL Object the `url` is equal to:
@@ -236,6 +226,8 @@ If you want update some value, you can provide an argument when you call the met
 user = username: 'kiko', password: 'nerd'
 parrot.url.login(send: user)
 ```
+
+Check AJAX section for know how to update values in the moment of the request and know the short version of each URL Object.
 
 #### .remove(\<name>)
 

@@ -3,8 +3,7 @@ do ->
   ## -- Private -------------------------------------------------------------
 
   parrot._DEFAULT =
-    METHOD       : 'GET'
-    PROTOCOL     : 'http'
+    METHOD       : 'get'
     SEND         : {}
     HEADERS      : {}
     ASYNC        : true
@@ -20,8 +19,8 @@ do ->
   parrot._createAjaxPromise = (obj) ->
     new Promise((resolve, reject) =>
       parrot.$.ajax
-        type        : obj.method or @_DEFAULT.METHOD
         url         : obj.url
+        type        : obj.method or @_DEFAULT.METHOD
         data        : obj.send or @_DEFAULT.SEND
         dataType    : obj.datatype or @_DEFAULT.DATATYPE
         contentType : obj.contenttype or @_DEFAULT.CONTENT_TYPE
@@ -50,7 +49,6 @@ do ->
     _url = "#{parrot.endpoint[parrot.environment]()}"
     _promise = (data, cb) =>
       @_createAjaxPromise(data).then ((response) ->
-        console.log response
         cb null, response
       ), (error) ->
         cb error, null

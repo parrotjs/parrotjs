@@ -20,28 +20,28 @@ describe 'Parrot ::', ->
   describe 'URL ::', ->
 
     it 'add with default values', ->
-      _default = { headers: {}, method: 'GET', protocol: 'http', path: undefined, query: undefined, send: undefined }
+      _default = {}
       parrot.url.add name: 'login'
       parrot.url.login().should.eql _default
 
     it 'add with query',  ->
-      _default = { headers: {}, method: 'GET', protocol: 'http', path: undefined, query: "sort=id%20asc", send: undefined }
+      _default = { query: "sort=id%20asc" }
       parrot.url.add name:'tweets', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
     it 'add with path and query',  ->
-      _default = { headers: {}, method:'GET', protocol:'http', path: 'tweet', query: "sort=id%20asc", send: undefined }
+      _default = { path: 'tweet', query: 'sort=id%20asc' }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets().should.eql _default
 
     it 'add with path and query and change values dynamically',  ->
-      _default = { headers: {}, method:'POST', protocol:'http', path: 'tweet', query: "sort=id%20desc", send: undefined }
+      _default = { path: 'tweet', query: 'sort=id%20desc', method: 'POST' }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets(method: 'POST', query: ['sort', 'id desc']).should.eql _default
 
     it 'added headers dynamically', ->
       _headers = Autorization: 'Bearer token'
-      _default = { headers: _headers, method:'POST', protocol:'http', path: 'tweet', query: "sort=id%20desc", send: undefined }
+      _default =  { path: 'tweet', query: 'sort=id%20desc', headers: _headers, method: 'POST' }
       parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
       parrot.url.tweets(headers: _headers, method: 'POST', query: ['sort', 'id desc']).should.eql _default
 

@@ -27,14 +27,7 @@
     describe('URL ::', function() {
       it('add with default values', function() {
         var _default;
-        _default = {
-          headers: {},
-          method: 'GET',
-          protocol: 'http',
-          path: void 0,
-          query: void 0,
-          send: void 0
-        };
+        _default = {};
         parrot.url.add({
           name: 'login'
         });
@@ -43,12 +36,7 @@
       it('add with query', function() {
         var _default;
         _default = {
-          headers: {},
-          method: 'GET',
-          protocol: 'http',
-          path: void 0,
-          query: "sort=id%20asc",
-          send: void 0
+          query: "sort=id%20asc"
         };
         parrot.url.add({
           name: 'tweets',
@@ -59,12 +47,8 @@
       it('add with path and query', function() {
         var _default;
         _default = {
-          headers: {},
-          method: 'GET',
-          protocol: 'http',
           path: 'tweet',
-          query: "sort=id%20asc",
-          send: void 0
+          query: 'sort=id%20asc'
         };
         parrot.url.add({
           name: 'tweets',
@@ -76,12 +60,9 @@
       it('add with path and query and change values dynamically', function() {
         var _default;
         _default = {
-          headers: {},
-          method: 'POST',
-          protocol: 'http',
           path: 'tweet',
-          query: "sort=id%20desc",
-          send: void 0
+          query: 'sort=id%20desc',
+          method: 'POST'
         };
         parrot.url.add({
           name: 'tweets',
@@ -99,12 +80,10 @@
           Autorization: 'Bearer token'
         };
         _default = {
-          headers: _headers,
-          method: 'POST',
-          protocol: 'http',
           path: 'tweet',
-          query: "sort=id%20desc",
-          send: void 0
+          query: 'sort=id%20desc',
+          headers: _headers,
+          method: 'POST'
         };
         parrot.url.add({
           name: 'tweets',

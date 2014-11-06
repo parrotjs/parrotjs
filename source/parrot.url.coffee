@@ -14,38 +14,19 @@ do (fn = parrot.url)->
 
   fn._bindAdd = (name, update=undefined) ->
     if update?
-      datatype = update.datatype or update.dataType
-      contenttype = update.contenttype or update.contentType
-
-      # TODO: do a forEach
-      # update query manually
-      @_URLS[name].headers     = update.headers if update.headers?
-      @_URLS[name].method      = update.method if update.method?
-      @_URLS[name].protocol    = update.protocol if update.protocol?
-      @_URLS[name].path        = update.path if update.path?
-      @_URLS[name].query       = @_getQuery(update.query) if update.query?
-      @_URLS[name].send        = update.send if update.send?
-      @_URLS[name].async       = update.async if update.async?
-      @_URLS[name].datatype    = update.datatype if datatype?
-      @_URLS[name].contenttype = update.contenttype if update.contenttype?
+      for option in ['headers', 'method', 'protocol', 'path', 'query', 'send', 'async', 'datatype', 'contenttype']
+        @_URLS[name][option] = update[option] if update[option]?
+      @_URLS[name].query = @_getQuery(update.query) if update.query?
     @_URLS[name]
 
   ## -- Public --------------------------------------------------------------
 
   fn.add = (obj) ->
-    @_URLS[obj.name] =
-      # TODO: Asssign to obj and update manually
-      # only the query
-      headers     : unless obj.headers? then parrot._DEFAULT.HEADERS else obj.headers
-      method      : unless obj.method? then parrot._DEFAULT.METHOD else obj.method
-      protocol    : unless obj.protocol? then parrot._DEFAULT.PROTOCOL else obj.protocol
-      path        : obj.path
-      query       : unless obj.query? then undefined else @_getQuery(obj.query)
-      send        : obj.send
-      async       : obj.send
-      datatype    : obj.send
-      contenttype : obj.send
-    @[obj.name] = parrot._partial(@_bindAdd, obj.name).bind(fn)
+    _name = obj.name
+    delete obj.name
+    obj.query = @_getQuery(obj.query) if obj.query?
+    @_URLS[_name] = obj
+    @[_name] = parrot._partial(@_bindAdd, _name).bind(fn)
     this
 
   fn.remove = (name) ->
