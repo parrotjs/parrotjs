@@ -92,6 +92,20 @@ Default language is obtained from `navigator.language`, that is the language of 
 
 Returns the result of AJAX request.
 
+The defaults options for whatever ajax request are:
+
+```coffee
+  method       : 'get'
+  protocol     : 'http'
+  send         : {}
+  headers      : {}
+  async        : true
+  datatype     : 'json'
+  content_type : 'application/x-www-form-urlencoded'
+```
+
+##### Using URL Objects
+
 It exists different ways to provide the URL of the AJAX request, but the most common pattern is to give a `parrot.url` object:
 
 ```coffee
@@ -104,26 +118,38 @@ If you want to write less code:
 parrot.url.ajax 'login', (err, result) ->
 ```
 
-Also you can provide a URL that you are not registerin but that follows a `parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `parrot.environment`).
+Maybe you need to modify setting of the URL Object before the ajax request:
+
+```coffee
+parrot.url.ajax parrot.url.login(send:user), (err, result) ->
+```
+
+in short version could be:
+
+```coffee
+parrot.url.ajax 'login', send:user, (err, result) ->
+```
+
+#### Using simple URL's
+
+Also you can provide a URL that you are not registered but that follows a `parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `parrot.environment`).
 
 ```coffee
 object = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
 parrot.url.ajax object, (err, result) ->
 ```
 
-Default options are supported here also:
-
-```coffee
-object = url: 'http://echo.jsontest.com/key/value/one/two'
-parrot.url.ajax object, (err, result) ->
-```
-
-and more simply, you can provide only the URL if it is a `GET` method:
+Is it possible a short version of this piece of code? of course!
 
 ```coffee
 parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
 ```
 
+Not problem if you need to specify another options of the AJAX or as URL Object:
+
+```coffee
+parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', async:false, send:user (err, result) ->
+```
 
 ### Endpoint
 
@@ -177,21 +203,26 @@ Registers a new URL. The minimum information you need to check is:
 name: 'login'
 ```
 
-but you can be more specific. All options available are:
+You can specify the same options that ajax options and otehr options specific of the URL:
 
 ```coffee
 options =
-  name     : 'login'
-  headers  : Authorization: 'Bearer 1234'
-  method   : 'post'
-  protocol : 'http'
-  path     : 'user/login'
-  query    : ['sort','id asc']
-  send     : userObject
+	name     : 'login'
+  	protocol : Authorization: 'Bearer 1234'
+  	path     : 'post'
+  	query    : 'http'
+  	send     : 'user/login'
+  	query    : ['sort','id asc']
+  	send     : userObject
+  	async    : false
 ```
 
-by default `method` is `GET`, protocol is HTTP and other attributes you don't provide are `undefined`.
+Remember that in a URL Object the `url` is equal to:
 
+```
+<endpoint URL>/[url.path]/[url.query]
+```
+ 
 Now, the URL is available in the `parrot.url` namespace:
 
 ```coffee

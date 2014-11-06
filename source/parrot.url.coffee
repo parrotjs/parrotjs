@@ -12,26 +12,39 @@ do (fn = parrot.url)->
     query              = query.substring(1) if query.charAt(0) is '?'
     query
 
-  fn._bindAdd = (name, update) ->
+  fn._bindAdd = (name, update=undefined) ->
     if update?
-      @_URLS[name].headers  = update.headers if update.headers?
-      @_URLS[name].method   = update.method if update.method?
-      @_URLS[name].protocol = update.protocol if update.protocol?
-      @_URLS[name].path     = update.path if update.path?
-      @_URLS[name].query    = @_getQuery(update.query) if update.query?
-      @_URLS[name].send     = update.send if update.send?
+      datatype = update.datatype or update.dataType
+      contenttype = update.contenttype or update.contentType
+
+      # TODO: do a forEach
+      # update query manually
+      @_URLS[name].headers     = update.headers if update.headers?
+      @_URLS[name].method      = update.method if update.method?
+      @_URLS[name].protocol    = update.protocol if update.protocol?
+      @_URLS[name].path        = update.path if update.path?
+      @_URLS[name].query       = @_getQuery(update.query) if update.query?
+      @_URLS[name].send        = update.send if update.send?
+      @_URLS[name].async       = update.async if update.async?
+      @_URLS[name].datatype    = update.datatype if datatype?
+      @_URLS[name].contenttype = update.contenttype if update.contenttype?
     @_URLS[name]
 
   ## -- Public --------------------------------------------------------------
 
   fn.add = (obj) ->
     @_URLS[obj.name] =
-      headers  : unless obj.headers? then parrot._DEFAULT.HEADERS else obj.headers
-      method   : unless obj.method? then parrot._DEFAULT.METHOD else obj.method
-      protocol : unless obj.protocol? then parrot._DEFAULT.PROTOCOL else obj.protocol
-      query    : if obj.query? then @_getQuery(obj.query) else undefined
-      path     : obj.path
-      send     : obj.send
+      # TODO: Asssign to obj and update manually
+      # only the query
+      headers     : unless obj.headers? then parrot._DEFAULT.HEADERS else obj.headers
+      method      : unless obj.method? then parrot._DEFAULT.METHOD else obj.method
+      protocol    : unless obj.protocol? then parrot._DEFAULT.PROTOCOL else obj.protocol
+      path        : obj.path
+      query       : unless obj.query? then undefined else @_getQuery(obj.query)
+      send        : obj.send
+      async       : obj.send
+      datatype    : obj.send
+      contenttype : obj.send
     @[obj.name] = parrot._partial(@_bindAdd, obj.name).bind(fn)
     this
 

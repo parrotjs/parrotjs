@@ -3,10 +3,13 @@ do ->
   ## -- Private -------------------------------------------------------------
 
   parrot._DEFAULT =
-    METHOD   : 'GET'
-    PROTOCOL : 'http'
-    SEND     : {}
-    HEADERS  : {}
+    METHOD       : 'GET'
+    PROTOCOL     : 'http'
+    SEND         : {}
+    HEADERS      : {}
+    ASYNC        : true
+    DATATYPE     : 'json'
+    CONTENT_TYPE : 'application/x-www-form-urlencoded'
 
   parrot._partial = (func) -> #, 0..n args
     args = Array::slice.call(arguments, 1)
@@ -20,8 +23,9 @@ do ->
         type        : obj.method or @_DEFAULT.METHOD
         url         : obj.url
         data        : obj.send or @_DEFAULT.SEND
-        dataType    : "json"
-        contentType : "application/x-www-form-urlencoded"
+        dataType    : obj.datatype or @_DEFAULT.DATATYPE
+        contentType : obj.contenttype or @_DEFAULT.CONTENT_TYPE
+        async       : obj.async or @_DEFAULT.ASYNC
         headers     : obj.headers or @_DEFAULT.HEADERS
         success: (xhr) ->
           return reject(code: 0, message: {'errors': [{'param': 'url','msg': 'Server Unavailable.'}]}) if xhr.status is 0
@@ -44,9 +48,24 @@ do ->
   parrot.ajax = (obj, cb) ->
 
     _url = "#{parrot.endpoint[parrot.environment]()}"
+    _promise = (data, cb) =>
+      @_createAjaxPromise(data).then ((response) ->
+        console.log response
+        cb null, response
+      ), (error) ->
+        cb error, null
 
     unless obj.url
-      obj = parrot.url._URLS[arguments[0]] or url: arguments[0] if typeof arguments[0] is 'string'
+      if typeof arguments[0] is 'string'
+        if parrot.url._URLS[arguments[0]]?
+          obj = parrot.url._bindAdd arguments[0], arguments[1]
+        else
+          if typeof arguments[1] is 'object'
+            obj = arguments[1]
+            obj.url = arguments[0]
+          else
+            obj = url: arguments[0]
+        cb = arguments[2] if typeof arguments[1] is 'object'
       if (obj.query and obj.path)
         obj.url = "#{_url}/#{obj.path}?#{obj.query}"
       else
@@ -57,7 +76,4 @@ do ->
         obj.url = "#{obj.url}/#{obj.path}" if obj.path?
         obj.url = "#{obj.url}?#{obj.query}" if obj.query?
 
-    @_createAjaxPromise(obj).then ((response) ->
-      cb null, response
-    ), (error) ->
-      cb error, null
+    _promise(obj, cb)
