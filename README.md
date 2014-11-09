@@ -63,7 +63,7 @@ Returns the version of the library.
 
 ```coffee
 parrot.version
-# => '0.10.25'
+# => '0.11.09'
 ```
 
 #### .environment
@@ -239,7 +239,7 @@ parrot.url.remove('logout')
 
 ### Storage
 
-This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `parrot.store.local` and `parrot.store.session`. But both methods are the same.
+This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `parrot.local` and `parrot.session`. But both methods are the same.
 
 Remember that the only difference between `localStorage` and `sessionStorage` is the time of life of the information in the browser. `localStorage` is persisten and only is deleted if you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, disappear).
 
@@ -248,13 +248,13 @@ Remember that the only difference between `localStorage` and `sessionStorage` is
 Stores something in `session` or `local` storage, depending on the namespace that you uses.
 
 ```coffee
-parrot.store.local.set('foo', 'bar')
+parrot.local.set('foo', 'bar')
 ```
 
 and the key is available in the namespace:
 
 ```coffee
-parrot.store.local.foo()
+parrot.local.foo()
 # => 'bar'
 ```
 
@@ -262,14 +262,14 @@ You can also store objects:
 
 ```coffee
 object = foo:'bar'
-parrot.store.local.set('myObject', object)
+parrot.local.set('myObject', object)
 # => 'bar'
 ```
 
 And the object is directly available in the namespace:
 
 ```coffee
-parrot.store.local.myObject()
+parrot.local.myObject()
 # => {foo: 'bar'}
 ```
 
@@ -278,8 +278,8 @@ parrot.store.local.myObject()
 Deletes the key and the value from the `local` or `session` storage:
 
 ```coffee
-parrot.store.local.clear('one')
-parrot.store.local.one()
+parrot.local.clear('one')
+parrot.local.one()
 # => undefined
 ```
 
@@ -288,8 +288,8 @@ parrot.store.local.one()
 Clears all the elements from tal` or `session` storage:
 
 ```coffee
-parrot.store.local.removeAll()
-parrot.store.session.removeAll()
+parrot.local.removeAll()
+parrot.session.removeAll()
 ```
 
 #### .size()
@@ -297,9 +297,9 @@ parrot.store.session.removeAll()
 Returns the length of the `local` or `session` storage:
 
 ```coffee
-parrot.store.local.size()
+parrot.local.size()
 # => 0
-parrot.store.session.size()
+parrot.session.size()
 # => 8
 ```
 
@@ -308,28 +308,28 @@ parrot.store.session.size()
 Returns if a certain value if available in the `local` or `session` storage:
 
 ```coffee
-parrot.store.local.isAvailable('foo')
+parrot.local.isAvailable('foo')
 # => false
-parrot.store.local.isAvailable('bar')
+parrot.local.isAvailable('bar')
 # => true
 ```
 
 ### sessionStorage Helpers
 
-`parrot.store.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
+`parrot.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
 
 If you want to save a user session only write:
 
 ```coffee
-parrot.store.session.set(user)
+parrot.session.set(user)
 ```
 
 Automatically is associated with the key `session`. If you need to `get`, `clear` or check if `isAvailable` write the command without parameter and is resolved with `session` key:
 
 ```coffee
-parrot.store.session.get(user)
-parrot.store.session.clear()
-parrot.store.session.isAvailable()
+parrot.session.get(user)
+parrot.session.clear()
+parrot.session.isAvailable()
 # => false
 ```
 

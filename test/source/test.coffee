@@ -124,44 +124,44 @@ describe 'Parrot ::', ->
       localStorage.clear()
 
     it 'set and get simple value', ->
-      parrot.store.local
+      parrot.local
       .set 'one','two'
       .one().should.eql 'two'
       localStorage.setItem('one', 'three')
-      parrot.store.local.one().should.eql 'three'
+      parrot.local.one().should.eql 'three'
 
     it 'set and get object', ->
       _object = foo:'bar'
-      parrot.store.local
+      parrot.local
       .set('myData', _object)
       .myData().foo.should.eql 'bar'
 
     it 'updated a item', ->
-      parrot.store.local
+      parrot.local
       .set 'one','three'
       .one().should.eql 'three'
 
     it 'get the size', ->
-      parrot.store.local.size().should.eql 2
+      parrot.local.size().should.eql 2
 
     it 'check for a key', ->
-      parrot.store.local.isAvailable('one').should.eql true
+      parrot.local.isAvailable('one').should.eql true
 
     xit 'remove one key', ->
-      parrot.store.local.clear('one')
-      should.not.exist(parrot.store.local.one())
+      parrot.local.clear('one')
+      should.not.exist(parrot.local.one())
 
     xit 'remove all', ->
-      parrot.store.local.clearAll()
-      should.not.exist(parrot.store.local.myData())
+      parrot.local.clearAll()
+      should.not.exist(parrot.local.myData())
 
     describe 'Session ::', ->
       it 'save a simple session and retrieve', ->
-        parrot.store.session.set('session')
+        parrot.session.set('session')
         sessionStorage.getItem('session').should.eql 'session'
-        parrot.store.session.get().should.eql 'session'
+        parrot.session.get().should.eql 'session'
 
       it 'save a object session and retrieve', ->
         _session = foo: 'bar'
-        parrot.store.session.set(_session)
-        parrot.store.session.get().should.eql {foo: 'bar'}
+        parrot.session.set(_session)
+        parrot.session.get().should.eql {foo: 'bar'}

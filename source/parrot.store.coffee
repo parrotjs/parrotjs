@@ -1,4 +1,4 @@
-do (fn = parrot.store) ->
+do (fn = parrot) ->
 
   ## -- Private --------------------------------------------------------------
 
@@ -41,27 +41,27 @@ do (fn = parrot.store) ->
   ## LocalStorage
 
   fn.local.set = (key, data) ->
-    parrot.store._set 'local', key, data
+    parrot._set 'local', key, data
     this
 
   fn.local.clear = (key) ->
-    parrot.store._clear 'local', key
+    parrot._clear 'local', key
     this
 
   fn.local.clearAll = ->
-    parrot.store._clearAll 'local'
+    parrot._clearAll 'local'
     this
 
   fn.local.size = ->
-    parrot.store._size 'local'
+    parrot._size 'local'
 
   fn.local.isAvailable = (key) ->
-    parrot.store._is 'local', key
+    parrot._is 'local', key
 
   ## sessionStorage
 
   fn.session.get = ->
-    parrot.store._get 'session', 'session'
+    parrot._get 'session', 'session'
 
   fn.session.set = ->
     if arguments.length is 1
@@ -71,25 +71,25 @@ do (fn = parrot.store) ->
       key  = arguments[0]
       data = arguments[1]
 
-    parrot.store._set 'session', key, data
+    parrot._set 'session', key, data
     this
 
   fn.session.clear = ->
     key = if arguments.length is 0 then 'session' else arguments[0]
-    parrot.store._clear 'session', key
+    parrot._clear 'session', key
     this
 
   fn.session.clearAll = ->
-    parrot.store._clearAll 'session'
+    parrot._clearAll 'session'
     this
 
   fn.session.size = ->
-    parrot.store._size 'session'
+    parrot._size 'session'
 
   fn.session.isAvailable = ->
     key = if arguments.length is 0 then 'session' else arguments[0]
-    parrot.store._is 'session', key
+    parrot._is 'session', key
 
   ## -- Initialize -----------------------------------------------------------
 
-  parrot.store._init()
+  parrot._init()

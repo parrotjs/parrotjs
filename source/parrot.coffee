@@ -2,15 +2,14 @@
 
 parrot = @parrot =
 
-  version    : '0.11.06'
+  version    : '0.11.09'
   environment: 'development'
   language   : window.navigator.language.slice(0,2)
   initialize : {}
   endpoint   : {}
   url        : {}
-  store      :
-    local    : {}
-    session  : {}
+  local      : {}
+  session    : {}
 
   # DOM Handler Facade
   $ : if $$? then $$ else $

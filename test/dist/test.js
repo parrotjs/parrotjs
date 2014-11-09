@@ -214,47 +214,47 @@
         return localStorage.clear();
       });
       it('set and get simple value', function() {
-        parrot.store.local.set('one', 'two').one().should.eql('two');
+        parrot.local.set('one', 'two').one().should.eql('two');
         localStorage.setItem('one', 'three');
-        return parrot.store.local.one().should.eql('three');
+        return parrot.local.one().should.eql('three');
       });
       it('set and get object', function() {
         var _object;
         _object = {
           foo: 'bar'
         };
-        return parrot.store.local.set('myData', _object).myData().foo.should.eql('bar');
+        return parrot.local.set('myData', _object).myData().foo.should.eql('bar');
       });
       it('updated a item', function() {
-        return parrot.store.local.set('one', 'three').one().should.eql('three');
+        return parrot.local.set('one', 'three').one().should.eql('three');
       });
       it('get the size', function() {
-        return parrot.store.local.size().should.eql(2);
+        return parrot.local.size().should.eql(2);
       });
       it('check for a key', function() {
-        return parrot.store.local.isAvailable('one').should.eql(true);
+        return parrot.local.isAvailable('one').should.eql(true);
       });
       xit('remove one key', function() {
-        parrot.store.local.clear('one');
-        return should.not.exist(parrot.store.local.one());
+        parrot.local.clear('one');
+        return should.not.exist(parrot.local.one());
       });
       xit('remove all', function() {
-        parrot.store.local.clearAll();
-        return should.not.exist(parrot.store.local.myData());
+        parrot.local.clearAll();
+        return should.not.exist(parrot.local.myData());
       });
       return describe('Session ::', function() {
         it('save a simple session and retrieve', function() {
-          parrot.store.session.set('session');
+          parrot.session.set('session');
           sessionStorage.getItem('session').should.eql('session');
-          return parrot.store.session.get().should.eql('session');
+          return parrot.session.get().should.eql('session');
         });
         return it('save a object session and retrieve', function() {
           var _session;
           _session = {
             foo: 'bar'
           };
-          parrot.store.session.set(_session);
-          return parrot.store.session.get().should.eql({
+          parrot.session.set(_session);
+          return parrot.session.get().should.eql({
             foo: 'bar'
           });
         });
