@@ -1,6 +1,7 @@
 <center>![](http://i.imgur.com/SmLtxEo.png)</center>
 
 # Parrot
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/sailorjs/parrotjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Build Status](http://img.shields.io/travis/sailorjs/parrotjs/master.svg?style=flat)](https://travis-ci.org/sailorjs/parrotjs)
 [![Dependency status](http://img.shields.io/david/sailorjs/parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/parrotjs)
