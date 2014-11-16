@@ -45,7 +45,7 @@ do (fn = parrot) ->
     this
 
   fn.local.clear = (key) ->
-    parrot._clear 'local', key
+    parrot._clear 'local', key for key in arguments
     this
 
   fn.local.clearAll = ->
@@ -75,8 +75,10 @@ do (fn = parrot) ->
     this
 
   fn.session.clear = ->
-    key = if arguments.length is 0 then 'session' else arguments[0]
-    parrot._clear 'session', key
+    if arguments.length is 0
+      parrot._clear 'session', 'session'
+    else
+      parrot._clear 'session', key for key in arguments
     this
 
   fn.session.clearAll = ->

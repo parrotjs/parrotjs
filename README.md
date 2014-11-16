@@ -273,7 +273,7 @@ parrot.local.myObject()
 # => {foo: 'bar'}
 ```
 
-#### .clear(\<key>)
+#### .clear(\<keys...>)
 
 Deletes the key and the value from the `local` or `session` storage:
 
@@ -281,6 +281,12 @@ Deletes the key and the value from the `local` or `session` storage:
 parrot.local.clear('one')
 parrot.local.one()
 # => undefined
+```
+
+Also you can delete different keys in one sentence:
+
+```coffee
+parrot.local.clear 'one', 'foo'
 ```
 
 #### .clearAll()
