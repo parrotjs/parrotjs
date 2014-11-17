@@ -126,6 +126,8 @@ describe 'Parrot ::', ->
     it 'set and get simple value', ->
       parrot.local
       .set 'one','two'
+      .set 'three','four'
+      .set 'five','six'
       .one().should.eql 'two'
       localStorage.setItem('one', 'three')
       parrot.local.one().should.eql 'three'
@@ -142,18 +144,36 @@ describe 'Parrot ::', ->
       .one().should.eql 'three'
 
     it 'get the size', ->
-      parrot.local.size().should.eql 2
+      parrot.local.size().should.eql 4
 
     it 'check for a key', ->
       parrot.local.isAvailable('one').should.eql true
 
-    xit 'remove one key', ->
-      parrot.local.clear('one')
-      should.not.exist(parrot.local.one())
+    it 'remove one key', ->
+      parrot.local.clear 'one'
+      (->
+        parrot.local.one()
+      ).should.throw("undefined is not a function")
+      value = localStorage['one'] or 'undefined'
+      value.should.eql 'undefined'
 
-    xit 'remove all', ->
+    it 'remove different keys',->
+      parrot.local.clear 'three', 'four'
+      (->
+        parrot.local.three()
+      ).should.throw("undefined is not a function")
+      value = localStorage['three'] or 'undefined'
+      value.should.eql 'undefined'
+      (->
+        parrot.local.four()
+      ).should.throw("undefined is not a function")
+      value = localStorage['four'] or 'undefined'
+      value.should.eql 'undefined'
+
+    it 'remove all', ->
       parrot.local.clearAll()
-      should.not.exist(parrot.local.myData())
+      localStorage.length.should.eql 0
+      parrot.local.size().should.eql 0
 
     describe 'Session ::', ->
       it 'save a simple session and retrieve', ->
@@ -165,3 +185,10 @@ describe 'Parrot ::', ->
         _session = foo: 'bar'
         parrot.session.set(_session)
         parrot.session.get().should.eql {foo: 'bar'}
+
+      it 'delete the session',->
+        parrot.session.clear()
+        value = parrot.session.get() or 'null'
+        value.should.eql 'null'
+        value = sessionStorage['session'] or 'undefined'
+        value.should.eql 'undefined'

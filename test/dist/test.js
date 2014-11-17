@@ -214,7 +214,7 @@
         return localStorage.clear();
       });
       it('set and get simple value', function() {
-        parrot.local.set('one', 'two').one().should.eql('two');
+        parrot.local.set('one', 'two').set('three', 'four').set('five', 'six').one().should.eql('two');
         localStorage.setItem('one', 'three');
         return parrot.local.one().should.eql('three');
       });
@@ -229,18 +229,38 @@
         return parrot.local.set('one', 'three').one().should.eql('three');
       });
       it('get the size', function() {
-        return parrot.local.size().should.eql(2);
+        return parrot.local.size().should.eql(4);
       });
       it('check for a key', function() {
         return parrot.local.isAvailable('one').should.eql(true);
       });
-      xit('remove one key', function() {
+      it('remove one key', function() {
+        var value;
         parrot.local.clear('one');
-        return should.not.exist(parrot.local.one());
+        (function() {
+          return parrot.local.one();
+        }).should["throw"]("undefined is not a function");
+        value = localStorage['one'] || 'undefined';
+        return value.should.eql('undefined');
       });
-      xit('remove all', function() {
+      it('remove different keys', function() {
+        var value;
+        parrot.local.clear('three', 'four');
+        (function() {
+          return parrot.local.three();
+        }).should["throw"]("undefined is not a function");
+        value = localStorage['three'] || 'undefined';
+        value.should.eql('undefined');
+        (function() {
+          return parrot.local.four();
+        }).should["throw"]("undefined is not a function");
+        value = localStorage['four'] || 'undefined';
+        return value.should.eql('undefined');
+      });
+      it('remove all', function() {
         parrot.local.clearAll();
-        return should.not.exist(parrot.local.myData());
+        localStorage.length.should.eql(0);
+        return parrot.local.size().should.eql(0);
       });
       return describe('Session ::', function() {
         it('save a simple session and retrieve', function() {
@@ -248,7 +268,7 @@
           sessionStorage.getItem('session').should.eql('session');
           return parrot.session.get().should.eql('session');
         });
-        return it('save a object session and retrieve', function() {
+        it('save a object session and retrieve', function() {
           var _session;
           _session = {
             foo: 'bar'
@@ -257,6 +277,14 @@
           return parrot.session.get().should.eql({
             foo: 'bar'
           });
+        });
+        return it('delete the session', function() {
+          var value;
+          parrot.session.clear();
+          value = parrot.session.get() || 'null';
+          value.should.eql('null');
+          value = sessionStorage['session'] || 'undefined';
+          return value.should.eql('undefined');
         });
       });
     });

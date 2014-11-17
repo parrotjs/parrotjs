@@ -29,9 +29,8 @@ path =
                   'bower_components/jsurl/url.min.js'
                   'dist/parrot.standalone.js' ]
   test:
-    src   : [ 'test/source/test.coffee'
-              'test/source/test.sailor.coffee'
-            ]
+    src   : ['test/source/test.coffee'
+             'test/source/test.sailor.coffee']
     dist  : 'test/dist'
     index : 'test/index.html'
 

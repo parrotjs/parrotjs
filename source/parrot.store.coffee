@@ -3,8 +3,10 @@ do (fn = parrot) ->
   ## -- Private --------------------------------------------------------------
 
   fn._init = ->
-    @['local'][key] = parrot._partial(@_get, 'local', key).bind(fn) for key in Object.keys(localStorage)
-    @['session'][key] = parrot._partial(@_get, 'session', key).bind(fn) for key in Object.keys(sessionStorage)
+    for key in Object.keys(localStorage)
+      @['local'][key] = parrot._partial(@_get, 'local', key).bind(fn)
+    for key in Object.keys(sessionStorage)
+      @['session'][key] = parrot._partial(@_get, 'session', key).bind(fn)
 
   fn._storage = (type) ->
     if type is 'local' then localStorage else sessionStorage
@@ -34,7 +36,7 @@ do (fn = parrot) ->
     @_storage(type).length
 
   fn._is = (type, key) ->
-    if @_storage(type)[key]? then true else false
+    @_storage(type)[key]?
 
   ## -- Public ---------------------------------------------------------------
 
@@ -44,7 +46,7 @@ do (fn = parrot) ->
     parrot._set 'local', key, data
     this
 
-  fn.local.clear = (key) ->
+  fn.local.clear = ->
     parrot._clear 'local', key for key in arguments
     this
 
