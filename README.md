@@ -333,7 +333,7 @@ parrot.session.set(user)
 Automatically is associated with the key `session`. If you need to `get`, `clear` or check if `isAvailable` write the command without parameter and is resolved with `session` key:
 
 ```coffee
-parrot.session.get(user)
+parrot.session.get()
 parrot.session.clear()
 parrot.session.isAvailable()
 # => false
