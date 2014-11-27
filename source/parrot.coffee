@@ -2,7 +2,7 @@
 
 parrot = @parrot =
 
-  version    : '0.11.17'
+  version    : '0.11.27'
   environment: 'development'
   language   : window.navigator.language.slice(0,2)
   initialize : {}

@@ -1,12 +1,12 @@
 <center>![](http://i.imgur.com/SmLtxEo.png)</center>
 
-# Parrot
+# Parrot <a href="http://bower.io/search/?q=parrotjs"><img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30"></a>
+
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/sailorjs/parrotjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](http://img.shields.io/travis/sailorjs/parrotjs/master.svg?style=flat)](https://travis-ci.org/sailorjs/parrotjs)
 [![Dependency status](http://img.shields.io/david/sailorjs/parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/parrotjs)
 [![Dev Dependencies Status](http://img.shields.io/david/dev/sailorjs/parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/parrotjs#info=devDependencies)
-[![NPM Status](http://img.shields.io/npm/dm/parrotjs.svg?style=flat)](https://www.npmjs.org/package/parrotjs)
 [![Gittip](http://img.shields.io/gittip/Kikobeats.svg?style=flat)](https://www.gittip.com/Kikobeats/)
+
 
 > Client library to connect your frontend application with whatever sails backend.
 
@@ -38,7 +38,7 @@ You need to link the library in your frontend. You can use Gulp/Grunt to build a
 At this moment, Parrot has two dependencies:
 
 - [jsurl](https://github.com/Mikhus/jsurl) for url query string parser.
-- [QuoJS](https://github.com/soyjavi/QuoJS/) for AJAX requests.
+- [QuoJS](https://github.com/soyjavi/QuoJS/), [jQuery](https://github.com/jquery/jquery) or [Zepto](https://github.com/madrobby/zepto) for AJAX requests.
 
 So, there are two version of the library:
 
@@ -46,8 +46,6 @@ So, there are two version of the library:
 - `standalone` version has code without dependencies.
 
 We are working to offer a library without dependencies, writing our own query params parser and ajax handler. For more information check [Roadmap](https://github.com/sailorjs/parrotjs/blob/master/ROADMAP.md) section.
-
-Remember that you can use `standalone` and use [jQuery](https://github.com/jquery/jquery) or [Zepto](https://github.com/madrobby/zepto) if you prefer it!
 
 ## API
 
@@ -63,7 +61,7 @@ Returns the version of the library.
 
 ```coffee
 parrot.version
-# => '0.11.09'
+# => '0.11.27'
 ```
 
 #### .environment
