@@ -86,7 +86,7 @@ parrot.language
 
 Default language is obtained from `navigator.language`, that is the language of the browser of the user.
 
-#### .ajax(\<Object> or \<String>)
+#### .ajax(&lt;Object&gt; or &lt;String&gt;)
 
 Returns the result of AJAX request.
 
@@ -152,7 +152,7 @@ parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', async:false, send:
 
 This method is available in `parrot.endpoint` namespace:
 
-#### .add(\<object>)
+#### .add(&lt;Object&gt;)
 
 registers a new endpoint. Object must have:
 
@@ -168,7 +168,7 @@ parrot.endpoint.development()
 # => http://localhost:1337
 ```
 
-#### .set(\<value>)
+#### .set(&lt;String&gt;)
 
 Sets the default environment of `parrot.environment`. It's important because the URL's depend on the URL path register in the environment.
 
@@ -176,7 +176,7 @@ Sets the default environment of `parrot.environment`. It's important because the
 parrot.environment.set('production')
 ```
 
-#### .remove(\<name>)
+#### .remove(&lt;String&gt;)
 
 Deletes a environment from the namespace
 
@@ -190,7 +190,7 @@ URL Management makes easy to do ajax or sockets requests with your backend. In o
 
 This method is available in `parrot.url` namespace:
 
-#### .add(\<object>)
+#### .add(&lt;Object&gt;)
 
 Registers a new URL. The minimum information you need to check is:
 
@@ -227,7 +227,7 @@ parrot.url.login(send: user)
 
 Check AJAX section for know how to update values in the moment of the request and know the short version of each URL Object.
 
-#### .remove(\<name>)
+#### .remove(&lt;String&gt;)
 
 Delete a URL from the namespace.
 
@@ -241,7 +241,7 @@ This module is a little interface for using the same pattern in `localStorage` a
 
 Remember that the only difference between `localStorage` and `sessionStorage` is the time of life of the information in the browser. `localStorage` is persisten and only is deleted if you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, disappear).
 
-#### .set(\<key>, \<value>)
+#### .set(&lt;key&gt;, &lt;value&gt;)
 
 Stores something in `session` or `local` storage, depending on the namespace that you uses.
 
@@ -271,7 +271,7 @@ parrot.local.myObject()
 # => {foo: 'bar'}
 ```
 
-#### .clear(\<keys...>)
+#### .clear(&lt;keys...&gt;)
 
 Deletes the key and the value from the `local` or `session` storage:
 
@@ -281,7 +281,7 @@ parrot.local.one()
 # => undefined
 ```
 
-Also you can delete different keys in one sentence:
+Note that you can delete different keys in one sentence:
 
 ```coffee
 parrot.local.clear 'one', 'foo'
@@ -307,7 +307,7 @@ parrot.session.size()
 # => 8
 ```
 
-#### .isAvailable(\[key])
+#### .isAvailable(&lt;key&gt;)
 
 Returns if a certain value if available in the `local` or `session` storage:
 
@@ -318,11 +318,11 @@ parrot.local.isAvailable('bar')
 # => true
 ```
 
-### sessionStorage Helpers
+#### Session Helpers
 
 `parrot.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
 
-If you want to save a user session only write:
+If you don't provide a key in `parrot.session`, the default key is `session`. For example, if you want to store in session a object only write:
 
 ```coffee
 parrot.session.set(user)
