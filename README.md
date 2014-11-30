@@ -318,7 +318,7 @@ parrot.local.isAvailable('bar')
 # => true
 ```
 
-#### Session Helpers
+### Storage Session Helpers
 
 `parrot.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
 
