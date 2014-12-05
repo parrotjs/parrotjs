@@ -1,11 +1,8 @@
-'use strict'
-
 do (fn = parrot.endpoint)->
 
   ## -- Public -----------------------------------------------------------------
 
   fn.add = (obj) ->
-    # why function? for follow the API!
     @[obj.name] = -> obj.url
     this
 
