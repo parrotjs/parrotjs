@@ -45,7 +45,6 @@ do ->
   ## -- Public -----------------------------------------------------------------
 
   parrot.ajax = (obj, cb) ->
-
     _url = "#{parrot.endpoint[parrot.environment]()}"
     _promise = (data, cb) =>
       @_createAjaxPromise(data).then ((response) ->
