@@ -17,7 +17,8 @@
     "gulp-open": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
-    "gulp-watch": "*"
+    "gulp-watch": "*",
+    "mocha": "*"
   },
   "homepage": "http://github.com/sailor/parrotjs",
   "keywords": [
@@ -29,5 +30,20 @@
   ],
   "license": "MIT",
   "main": "dist/parrot.js",
-  "repository": "sailorjs/parrotjs"
+  "repository": "sailorjs/parrotjs",
+  "testling": {
+    "harness": "mocha-bdd",
+    "scripts": ["dist/parrot.quo.js", "components/should/should.js"],
+    "files": ["test/dist/test.js"],
+    "browsers": [
+      "ie/6..latest",
+      "chrome/22..latest",
+      "firefox/16..latest",
+      "safari/latest",
+      "opera/11.0..latest",
+      "iphone/6",
+      "ipad/6",
+      "android-browser/latest"
+    ]
+  }
 }

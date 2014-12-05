@@ -1,9 +1,4 @@
 (function() {
-  describe('Parrot ::', function() {});
-
-}).call(this);
-
-(function() {
   describe('Language ::', function() {
     return it('set default language', function() {
       return parrot.language.should.eql('en');
