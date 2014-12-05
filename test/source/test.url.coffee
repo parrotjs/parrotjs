@@ -38,7 +38,7 @@ describe 'URL ::', ->
 
   it 'add with path and query and change values dynamically',  ->
     _default = { path: 'tweet', query: 'sort=id%20desc', method: 'POST' }
-    parrot.url.add name:'tweets', path:'tweet', query: ['sort','id asc']
+    parrot.url.add name: 'tweets', path: 'tweet', query: ['sort','id asc']
     parrot.url.tweets(method: 'POST', query: ['sort', 'id desc']).should.eql _default
 
   it 'added headers dynamically', ->

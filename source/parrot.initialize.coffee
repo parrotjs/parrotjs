@@ -22,8 +22,8 @@ do ->
         url         : obj.url
         type        : obj.method or @_DEFAULT.METHOD
         data        : obj.send or @_DEFAULT.SEND
-        dataType    : obj.datatype or @_DEFAULT.DATATYPE
-        contentType : obj.contenttype or @_DEFAULT.CONTENT_TYPE
+        dataType    : obj.dataType or @_DEFAULT.DATATYPE
+        contentType : obj.contentType or @_DEFAULT.CONTENT_TYPE
         async       : obj.async or @_DEFAULT.ASYNC
         headers     : obj.headers or @_DEFAULT.HEADERS
         success: (xhr) ->

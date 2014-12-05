@@ -20,7 +20,8 @@ path =
               'source/parrot.initialize.coffee'
               'source/parrot.endpoint.coffee'
               'source/parrot.url.coffee'
-              'source/parrot.store.coffee' ]
+              'source/parrot.store.coffee'
+              'source/parrot.notification.coffee' ]
     dist  : 'dist'
     build : 'dist/parrot.standalone.js'
 
@@ -33,7 +34,8 @@ path =
   test:
     src   : ['test/source/test.url.coffee'
              'test/source/test.ajax.coffee'
-             'test/source/test.storage.coffee']
+             'test/source/test.store.coffee'
+             'test/source/test.notification.coffee']
     dist  : 'test/dist'
     index : 'test/index.html'
 

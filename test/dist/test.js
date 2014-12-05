@@ -299,3 +299,19 @@
   });
 
 }).call(this);
+
+(function() {
+  describe('Notification ::', function() {
+    return it('add new notification', function() {
+      var notification;
+      notification = {
+        name: 'sample',
+        title: 'Test',
+        body: 'This is a sample notification'
+      };
+      parrot.notification.add(notification);
+      return parrot.notification.sample().title.should.eql('Test');
+    });
+  });
+
+}).call(this);

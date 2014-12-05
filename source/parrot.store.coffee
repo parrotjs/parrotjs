@@ -94,6 +94,6 @@ do (fn = parrot) ->
     key = if arguments.length is 0 then 'session' else arguments[0]
     parrot._is 'session', key
 
-  ## -- Initialize -----------------------------------------------------------
+  ## -- Initialize -------------------------------------------------------------
 
   parrot._init()
