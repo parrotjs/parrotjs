@@ -1,0 +1,9 @@
+framework: mocha
+
+launch_in_dev:
+- Chrome
+
+src_files:
+- dist/parrot.js
+- test/dist/*.js
+- components/should/should.js

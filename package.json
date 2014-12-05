@@ -19,29 +19,15 @@
     "gulp-util": "*",
     "gulp-watch": "*"
   },
-  "testling": {
-    "html" : "test/index.html",
-    "browsers" : [
-      "ie/6.0..latest",
-      "chrome/20..latest",
-      "firefox/ 3.0..latest",
-      "safari/latest",
-      "opera/10.0.0..latest",
-      "iphone/6", "ipad/6"
-    ]
-  },
   "homepage": "http://github.com/sailor/parrotjs",
   "keywords": [
-    "sails",
+    "api",
     "client",
-    "sailor",
+    "html5",
     "connect",
-    "frontend",
-    "api"
+    "frontend"
   ],
   "license": "MIT",
-  "repository": "sailorjs/parrotjs",
-  "scripts": {
-    "test": "testling"
-  }
+  "main": "dist/parrot.js",
+  "repository": "sailorjs/parrotjs"
 }

@@ -1,6 +1,6 @@
 /**
  * parrotjs - Client library to connect your frontend application with whatever API backend
- * @version v0.11.27
+ * @version v0.11.27a
  * @link    http://github.com/sailor/parrotjs
  * @author  Kiko Beats (https://github.com/Kikobeats)
  * @license MIT

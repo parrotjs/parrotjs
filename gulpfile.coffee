@@ -23,10 +23,10 @@ path =
               'source/parrot.store.coffee' ]
     dist  : 'dist'
 
-  dependencies: [ #'bower_components/jquery/dist/jquery.min.js'
-                  'bower_components/quojs/quo.js'
-                  'bower_components/quojs/quo.ajax.js'
-                  'bower_components/jsurl/url.min.js'
+  dependencies: [ #'components/jquery/dist/jquery.min.js'
+                  'components/quojs/quo.js'
+                  'components/quojs/quo.ajax.js'
+                  'components/jsurl/url.min.js'
                   'dist/parrot.standalone.js' ]
   test:
     src   : ['test/source/test.coffee'
