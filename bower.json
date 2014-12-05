@@ -24,8 +24,10 @@
   ],
   "devDependencies": {
     "jquery": "1.x",
-    "should": "*",
-    "mocha": "*"
+    "jsurl": "*",
+    "quojs": "*",
+    "zeptojs": "*",
+    "should": "*"
   },
   "homepage": "https://github.com/sailorjs/parrotjs"
 }
