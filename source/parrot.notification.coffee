@@ -3,8 +3,8 @@ do (fn = parrot.notification) ->
   ## -- Private ----------------------------------------------------------------
 
   fn._Notifications = {}
-  fn._notification = -> window['Notification']
-  fn._requestPermissions = -> @_notification().requestPermission()
+  fn._Notification = -> window['Notification']
+  fn._requestPermissions = -> @_Notification().requestPermission()
   fn._get = (name) -> @_Notifications[name]
 
   fn._create = (options) ->
@@ -20,7 +20,7 @@ do (fn = parrot.notification) ->
 
   ## -- Public -----------------------------------------------------------------
 
-  fn.isAvailable = -> @_notification?
+  fn.isAvailable = -> @_Notification?
 
   fn.add = (opts) ->
     name = opts.name
@@ -33,19 +33,19 @@ do (fn = parrot.notification) ->
     delete @[name]
     this
 
-  fn.show = (name, options) ->
+  fn.show = (name, opts) ->
     if arguments.length is 1 and typeof name is 'object'
       name = undefined
-      options = arguments[0]
+      opts = arguments[0]
 
-    _createNotification = (options) =>
+    _createNotification = (opts) =>
       try
         @_requestPermissions()
-        @_create(options)
+        @_create(opts)
       catch e
         console.log e
         throw new Error "Notification API is not available."
 
-    return _createNotification options unless name?
-    notification =  @_bindAdd name, options
+    return _createNotification opts unless name?
+    notification =  @_bindAdd name, opts
     _createNotification notification
