@@ -67,6 +67,18 @@ gulp.task 'standalone', ->
   .pipe connect.reload()
   return
 
+gulp.task 'standard', ->
+  origin = []
+  origin.push path.dependencies.jsurl
+  origin.push path.core.build
+  gulp.src origin
+  .pipe concat 'parrot.js'
+  .pipe uglify()
+  .pipe header banner, pkg: pkg
+  .pipe gulp.dest path.core.dist
+  .pipe connect.reload()
+  return
+
 gulp.task 'quo', ->
   origin = path.dependencies.quo
   origin.push path.dependencies.jsurl
@@ -137,7 +149,7 @@ gulp.task 'dev', ->
   return
 
 gulp.task 'build', ->
-  gulp.start ['develop', 'standalone', 'quo', 'jquery', 'zepto']
+  gulp.start ['develop', 'standalone', 'standard', 'quo', 'jquery', 'zepto']
   return
 
 gulp.task 'default', ->

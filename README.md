@@ -1,24 +1,25 @@
 <center>![](http://i.imgur.com/SmLtxEo.png)</center>
 
-# Parrot <a href="http://bower.io/search/?q=parrotjs"><img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30"></a>
+# Parrot <a href="http://bower.io/search/?q=Parrotjs"><img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30"></a>
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/sailorjs/parrotjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Dependency status](http://img.shields.io/david/sailorjs/parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/parrotjs)
-[![Dev Dependencies Status](http://img.shields.io/david/dev/sailorjs/parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/parrotjs#info=devDependencies)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/sailorjs/Parrotjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Dependency status](http://img.shields.io/david/sailorjs/Parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/Parrotjs)
+[![Dev Dependencies Status](http://img.shields.io/david/dev/sailorjs/Parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/Parrotjs#info=devDependencies)
 [![Gittip](http://img.shields.io/gittip/Kikobeats.svg?style=flat)](https://www.gittip.com/Kikobeats/)
 
 
 > Client library to connect your frontend application with whatever sails backend.
 
-Parrot helps you connect your frontend with you API backend. Only need to say to parrot what do, and parrot will do the hard work!
-a
+Parrot helps you connect your frontend with you API backend. Only need to say to Parrot what do, and Parrot will do the hard work!
+
 At this moment Parrot supports:
 
 - Register different environments (development, production, testing,...).
 - Register different URLs with different protocols (http, sockets) and make easy AJAX requests.
 - Manage uniformly sessionStorage and localStorage.
-- Multilanguage support.
-- Chainable methods.
+- Chainable methods for make easy concatenate different actions.
+
+For the future features check [Roadmap](https://github.com/sailorjs/Parrotjs/blob/master/ROADMAP.md) section.
 
 ## Install
 
@@ -27,25 +28,47 @@ At this moment Parrot supports:
 bower install parrotjs
 ```
 
+## Browsers Compatibility
+
+[![browser support](https://ci.testling.com/sailorjs/Parrotjs.png)
+](https://ci.testling.com/sailorjs/Parrotjs)
+
 ## Usage
 
-You need to link the library in your frontend. You can use Gulp/Grunt to build and concatenate it with other dependencies o simply link it as a html script tag:
+At this moment, Parrot has two dependencies:
+
+- [jsurl](https://github.com/Mikhus/jsurl), a Polyfill of [URL Objects](http://www.w3.org/TR/url/)
+- [QuoJS](https://github.com/soyjavi/QuoJS/), [jQuery](https://github.com/jquery/jquery) or [Zepto](https://github.com/madrobby/zepto) for AJAX handler.
+
+We offers different builds depending on what you need
+
+### Standalone
+
+Just Parrot code, without dependencies. Use it when you have a custom build with your other frontend dependencies:
+
+```html
+<script src="bower_components/parrotjs/dist/parrot.standalone.js"></script>
+```
+
+Notes that if you don't provide `jsurl` and AJAX handler parrot will not work!
+
+### Standard
+
+Parrot code with the minimum dependencies (only `jsurl`). Use it build when you provide your own ajax handler in yours frontend dependencies:
 
 ```html
 <script src="bower_components/parrotjs/dist/parrot.js"></script>
 ```
 
-At this moment, Parrot has two dependencies:
+### QuoJS, jQuery or ZeptoJS
 
-- [jsurl](https://github.com/Mikhus/jsurl) for url query string parser.
-- [QuoJS](https://github.com/soyjavi/QuoJS/), [jQuery](https://github.com/jquery/jquery) or [Zepto](https://github.com/madrobby/zepto) for AJAX requests.
+Parrot code with all dependencies that he needs. Use it when you want to provide AJAX handler and not complicate yourself:
 
-So, there are two version of the library:
-
-- `standard` version has all the code with dependencies.
-- `standalone` version has code without dependencies.
-
-We are working to offer a library without dependencies, writing our own query params parser and ajax handler. For more information check [Roadmap](https://github.com/sailorjs/parrotjs/blob/master/ROADMAP.md) section.
+```html
+<script src="bower_components/parrotjs/dist/parrot.quo.js"></script>
+<script src="bower_components/parrotjs/dist/parrot.jquery.js"></script>
+<script src="bower_components/parrotjs/dist/parrot.zepto.js"></script>
+```
 
 ## API
 
@@ -53,14 +76,14 @@ The library is divided in different namespaces:
 
 ### Basic
 
-This method is available in `parrot` namespace. This is the basic method that you need yo set up the library and know the current version.
+This method is available in `Parrot` namespace. This is the basic method that you need yo set up the library and know the current version.
 
 #### .version
 
 Returns the version of the library.
 
 ```coffee
-parrot.version
+Parrot.version
 # => '0.11.27'
 ```
 
@@ -69,7 +92,7 @@ parrot.version
 Returns the environment that you are using at this moment.
 
 ```coffee
-parrot.environment
+Parrot.environment
 # => 'development'
 ```
 
@@ -80,7 +103,7 @@ Default environment is `development`.
 Returns the language that you want to use in the requests with your API's endpoints.
 
 ```coffee
-parrot.language
+Parrot.language
 # => 'en'
 ```
 
@@ -103,54 +126,54 @@ content_type : 'application/x-www-form-urlencoded'
 
 ##### Using URL Objects
 
-It exists different ways to provide the URL of the AJAX request, but the most common pattern is to give a `parrot.url` object:
+It exists different ways to provide the URL of the AJAX request, but the most common pattern is to give a `Parrot.url` object:
 
 ```coffee
-parrot.url.ajax parrot.url.login(), (err, result) ->
+Parrot.url.ajax Parrot.url.login(), (err, result) ->
 ```
 
 If you want to write less code:
 
 ```coffee
-parrot.url.ajax 'login', (err, result) ->
+Parrot.url.ajax 'login', (err, result) ->
 ```
 
 Maybe you need to modify setting of the URL Object before the ajax request:
 
 ```coffee
-parrot.url.ajax parrot.url.login(send:user), (err, result) ->
+Parrot.url.ajax Parrot.url.login(send:user), (err, result) ->
 ```
 
 in short version could be:
 
 ```coffee
-parrot.url.ajax 'login', send:user, (err, result) ->
+Parrot.url.ajax 'login', send:user, (err, result) ->
 ```
 
 #### Using simple URL's
 
-Also you can provide a URL that you are not registered but that follows a `parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `parrot.environment`).
+Also you can provide a URL that you are not registered but that follows a `Parrot.url` similar interface (extra field for the `url` because it is not calculated based on the `Parrot.environment`).
 
 ```coffee
 object = url: 'http://echo.jsontest.com/key/value/one/two', method: 'GET'
-parrot.url.ajax object, (err, result) ->
+Parrot.url.ajax object, (err, result) ->
 ```
 
 Is it possible a short version of this piece of code? of course!
 
 ```coffee
-parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
+Parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', (err, result) ->
 ```
 
 Not problem if you need to specify another options of the AJAX or as URL Object:
 
 ```coffee
-parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', async:false, send:user (err, result) ->
+Parrot.url.ajax 'http://echo.jsontest.com/key/value/one/two', async:false, send:user (err, result) ->
 ```
 
 ### Endpoint
 
-This method is available in `parrot.endpoint` namespace:
+This method is available in `Parrot.endpoint` namespace:
 
 #### .add(&lt;Object&gt;)
 
@@ -161,19 +184,19 @@ name : 'development'
 url  : 'http://localhost:1337'
 ```
 
-When you register an endpoint it is accesible in the `parrot.endpoint` namespace:
+When you register an endpoint it is accesible in the `Parrot.endpoint` namespace:
 
 ```coffee
-parrot.endpoint.development()
+Parrot.endpoint.development()
 # => http://localhost:1337
 ```
 
 #### .set(&lt;String&gt;)
 
-Sets the default environment of `parrot.environment`. It's important because the URL's depend on the URL path register in the environment.
+Sets the default environment of `Parrot.environment`. It's important because the URL's depend on the URL path register in the environment.
 
 ```coffee
-parrot.environment.set('production')
+Parrot.environment.set('production')
 ```
 
 #### .remove(&lt;String&gt;)
@@ -181,14 +204,14 @@ parrot.environment.set('production')
 Deletes a environment from the namespace
 
 ```coffee
-parrot.environment.remove('testing')
+Parrot.environment.remove('testing')
 ```
 
 ### URL Management
 
 URL Management makes easy to do ajax or sockets requests with your backend. In order to do it, you need first to register the URL's. Each URL has a different schema as `protocol`, `path` and/or `query`.
 
-This method is available in `parrot.url` namespace:
+This method is available in `Parrot.url` namespace:
 
 #### .add(&lt;Object&gt;)
 
@@ -211,10 +234,10 @@ Remember that in a URL Object the `url` is equal to:
 <endpoint URL>/[url.path]/[url.query]
 ```
  
-Now, the URL is available in the `parrot.url` namespace:
+Now, the URL is available in the `Parrot.url` namespace:
 
 ```coffee
-parrot.url.login()
+Parrot.url.login()
 # => { method: 'GET', protocol: 'http', path: 'user/login', query: null }
 ```
 
@@ -222,7 +245,7 @@ If you want update some value, you can provide an argument when you call the met
 
 ```coffee
 user = username: 'kiko', password: 'nerd'
-parrot.url.login(send: user)
+Parrot.url.login(send: user)
 ```
 
 Check AJAX section for know how to update values in the moment of the request and know the short version of each URL Object.
@@ -232,12 +255,12 @@ Check AJAX section for know how to update values in the moment of the request an
 Delete a URL from the namespace.
 
 ```coffee
-parrot.url.remove('logout')
+Parrot.url.remove('logout')
 ```
 
 ### Storage
 
-This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `parrot.local` and `parrot.session`. But both methods are the same.
+This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `Parrot.local` and `Parrot.session`. But both methods are the same.
 
 Remember that the only difference between `localStorage` and `sessionStorage` is the time of life of the information in the browser. `localStorage` is persisten and only is deleted if you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, disappear).
 
@@ -246,13 +269,13 @@ Remember that the only difference between `localStorage` and `sessionStorage` is
 Stores something in `session` or `local` storage, depending on the namespace that you uses.
 
 ```coffee
-parrot.local.set('foo', 'bar')
+Parrot.local.set('foo', 'bar')
 ```
 
 and the key is available in the namespace:
 
 ```coffee
-parrot.local.foo()
+Parrot.local.foo()
 # => 'bar'
 ```
 
@@ -260,14 +283,14 @@ You can also store objects:
 
 ```coffee
 object = foo:'bar'
-parrot.local.set('myObject', object)
+Parrot.local.set('myObject', object)
 # => 'bar'
 ```
 
 And the object is directly available in the namespace:
 
 ```coffee
-parrot.local.myObject()
+Parrot.local.myObject()
 # => {foo: 'bar'}
 ```
 
@@ -276,15 +299,15 @@ parrot.local.myObject()
 Deletes the key and the value from the `local` or `session` storage:
 
 ```coffee
-parrot.local.clear('one')
-parrot.local.one()
+Parrot.local.clear('one')
+Parrot.local.one()
 # => undefined
 ```
 
 Note that you can delete different keys in one sentence:
 
 ```coffee
-parrot.local.clear 'one', 'foo'
+Parrot.local.clear 'one', 'foo'
 ```
 
 #### .clearAll()
@@ -292,8 +315,8 @@ parrot.local.clear 'one', 'foo'
 Clears all the elements from tal` or `session` storage:
 
 ```coffee
-parrot.local.removeAll()
-parrot.session.removeAll()
+Parrot.local.removeAll()
+Parrot.session.removeAll()
 ```
 
 #### .size()
@@ -301,9 +324,9 @@ parrot.session.removeAll()
 Returns the length of the `local` or `session` storage:
 
 ```coffee
-parrot.local.size()
+Parrot.local.size()
 # => 0
-parrot.session.size()
+Parrot.session.size()
 # => 8
 ```
 
@@ -312,28 +335,28 @@ parrot.session.size()
 Returns if a certain value if available in the `local` or `session` storage:
 
 ```coffee
-parrot.local.isAvailable('foo')
+Parrot.local.isAvailable('foo')
 # => false
-parrot.local.isAvailable('bar')
+Parrot.local.isAvailable('bar')
 # => true
 ```
 
 ### Storage Session Helpers
 
-`parrot.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
+`Parrot.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
 
-If you don't provide a key in `parrot.session`, the default key is `session`. For example, if you want to store in session a object only write:
+If you don't provide a key in `Parrot.session`, the default key is `session`. For example, if you want to store in session a object only write:
 
 ```coffee
-parrot.session.set(user)
+Parrot.session.set(user)
 ```
 
 Automatically is associated with the key `session`. If you need to `get`, `clear` or check if `isAvailable` write the command without parameter and is resolved with `session` key:
 
 ```coffee
-parrot.session.get()
-parrot.session.clear()
-parrot.session.isAvailable()
+Parrot.session.get()
+Parrot.session.clear()
+Parrot.session.isAvailable()
 # => false
 ```
 
