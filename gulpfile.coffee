@@ -22,15 +22,18 @@ path =
               'source/parrot.url.coffee'
               'source/parrot.store.coffee' ]
     dist  : 'dist'
+    build : 'dist/parrot.standalone.js'
 
-  dependencies: [ #'components/jquery/dist/jquery.min.js'
-                  'components/quojs/quo.js'
-                  'components/quojs/quo.ajax.js'
-                  'components/jsurl/url.min.js'
-                  'dist/parrot.standalone.js' ]
+  dependencies:
+    jquery: 'components/jquery/dist/jquery.min.js'
+    quojs: ['components/quojs/quo.js', 'components/quojs/quo.ajax.js']
+    jsurl: 'components/jsurl/url.min.js'
+
   test:
     src   : ['test/source/test.coffee'
-             'test/source/test.sailor.coffee']
+             'test/source/test.url.coffee'
+             'test/source/test.ajax.coffee'
+             'test/source/test.storage.coffee']
     dist  : 'test/dist'
     index : 'test/index.html'
 
@@ -64,18 +67,47 @@ gulp.task 'standalone', ->
   .pipe connect.reload()
   return
 
-gulp.task 'production', ->
-  gulp.src path.dependencies
+gulp.task 'quo', ->
+  origin = path.dependencies.quojs
+  origin.push path.dependencies.jsurl
+  origin.push path.core.build
+  console.log origin
+  gulp.src origin
   .pipe uglify()
-  .pipe concat 'parrot.js'
+  .pipe concat 'parrot.quo.js'
   .pipe header banner, pkg: pkg
   .pipe gulp.dest path.core.dist
   .pipe connect.reload()
   return
 
+# gulp.task 'jquery', ->
+#   origin = path.dependencies.quojs
+#   origin.push path.dependencies.jsurl
+#   origin.push path.core.build
+#   gulp.src origin
+#   .pipe uglify()
+#   .pipe concat 'parrot.quo.js'
+#   .pipe header banner, pkg: pkg
+#   .pipe gulp.dest path.core.dist
+#   .pipe connect.reload()
+#   return
+
+# gulp.task 'zepto', ->
+#   origin = path.dependencies.quojs
+#   origin.push path.dependencies.jsurl
+#   origin.push path.core.build
+#   gulp.src origin
+#   .pipe uglify()
+#   .pipe concat 'parrot.quo.js'
+#   .pipe header banner, pkg: pkg
+#   .pipe gulp.dest path.core.dist
+#   .pipe connect.reload()
+#   return
+
 gulp.task 'mocha', ->
   gulp.src path.test.src
   .pipe coffee().on 'error', gutil.log
+  .pipe concat 'test.js'
   .pipe gulp.dest path.test.dist
   .pipe connect.reload()
   return
@@ -104,7 +136,7 @@ gulp.task 'dev', ->
   return
 
 gulp.task 'build', ->
-  gulp.start ['develop', 'standalone', 'production']
+  gulp.start ['develop', 'standalone', 'quo']
   return
 
 gulp.task 'default', ->
