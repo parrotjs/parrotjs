@@ -18,7 +18,8 @@
     "gulp-uglify": "*",
     "gulp-util": "*",
     "gulp-watch": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "should": "*"
   },
   "homepage": "http://github.com/sailor/parrotjs",
   "keywords": [
@@ -33,7 +34,7 @@
   "repository": "sailorjs/parrotjs",
   "testling": {
     "harness": "mocha-bdd",
-    "scripts": ["dist/parrot.quo.js", "components/should/should.js"],
+    "scripts": ["dist/parrot.quo.js", "node_modules/should/should.min.js"],
     "files": ["test/dist/test.js"],
     "browsers": [
       "ie/6..latest",
