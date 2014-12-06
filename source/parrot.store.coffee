@@ -18,16 +18,16 @@ do (fn = parrot) ->
     catch e
       data
 
-  fn._set = (type, key, data) ->
+  fn._add = (type, key, data) ->
     data = JSON.stringify(data) unless typeof data is 'string'
     @_storage(type).setItem(key, data)
     @[type][key] = parrot._partial(@_get, type, key).bind(fn)
 
-  fn._clear = (type, key) ->
+  fn._remove = (type, key) ->
     delete @[type][key]
     @_storage(type).removeItem(key)
 
-  fn._clearAll = (type) ->
+  fn._removeAll = (type) ->
     keys = Object.keys(@_storage(type))
     delete @[type][key] for key in keys
     @_storage(type).clear()
@@ -42,16 +42,16 @@ do (fn = parrot) ->
 
   ## LocalStorage
 
-  fn.local.set = (key, data) ->
-    parrot._set 'local', key, data
+  fn.local.add = (key, data) ->
+    parrot._add 'local', key, data
     this
 
-  fn.local.clear = ->
-    parrot._clear 'local', key for key in arguments
+  fn.local.remove = ->
+    parrot._remove 'local', key for key in arguments
     this
 
-  fn.local.clearAll = ->
-    parrot._clearAll 'local'
+  fn.local.removeAll = ->
+    parrot._removeAll 'local'
     this
 
   fn.local.size = ->
@@ -65,7 +65,7 @@ do (fn = parrot) ->
   fn.session.get = ->
     parrot._get 'session', 'session'
 
-  fn.session.set = ->
+  fn.session.add = ->
     if arguments.length is 1
       key  = 'session'
       data = arguments[0]
@@ -73,18 +73,18 @@ do (fn = parrot) ->
       key  = arguments[0]
       data = arguments[1]
 
-    parrot._set 'session', key, data
+    parrot._add 'session', key, data
     this
 
-  fn.session.clear = ->
+  fn.session.remove = ->
     if arguments.length is 0
-      parrot._clear 'session', 'session'
+      parrot._remove 'session', 'session'
     else
-      parrot._clear 'session', key for key in arguments
+      parrot._remove 'session', key for key in arguments
     this
 
-  fn.session.clearAll = ->
-    parrot._clearAll 'session'
+  fn.session.removeAll = ->
+    parrot._removeAll 'session'
     this
 
   fn.session.size = ->

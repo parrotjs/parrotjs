@@ -10,6 +10,6 @@ do (fn = parrot.endpoint)->
     parrot.environment = environment
     this
 
-  fn.remove = (name) ->
-    delete @[name]
+  fn.remove = ->
+    delete @[name] for name in arguments
     this

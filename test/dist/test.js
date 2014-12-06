@@ -223,7 +223,7 @@
       return localStorage.clear();
     });
     it('set and get simple value', function() {
-      parrot.local.set('one', 'two').set('three', 'four').set('five', 'six').one().should.eql('two');
+      parrot.local.add('one', 'two').add('three', 'four').add('five', 'six').one().should.eql('two');
       localStorage.setItem('one', 'three');
       return parrot.local.one().should.eql('three');
     });
@@ -232,10 +232,10 @@
       _object = {
         foo: 'bar'
       };
-      return parrot.local.set('myData', _object).myData().foo.should.eql('bar');
+      return parrot.local.add('myData', _object).myData().foo.should.eql('bar');
     });
     it('updated a item', function() {
-      return parrot.local.set('one', 'three').one().should.eql('three');
+      return parrot.local.add('one', 'three').one().should.eql('three');
     });
     it('get the size', function() {
       return parrot.local.size().should.eql(4);
@@ -245,7 +245,7 @@
     });
     it('remove one key', function() {
       var value;
-      parrot.local.clear('one');
+      parrot.local.remove('one');
       (function() {
         return parrot.local.one();
       }).should["throw"]("undefined is not a function");
@@ -254,7 +254,7 @@
     });
     it('remove different keys', function() {
       var value;
-      parrot.local.clear('three', 'four');
+      parrot.local.remove('three', 'four');
       (function() {
         return parrot.local.three();
       }).should["throw"]("undefined is not a function");
@@ -267,13 +267,13 @@
       return value.should.eql('undefined');
     });
     it('remove all', function() {
-      parrot.local.clearAll();
+      parrot.local.removeAll();
       localStorage.length.should.eql(0);
       return parrot.local.size().should.eql(0);
     });
     return describe('Session ::', function() {
       it('save a simple session and retrieve', function() {
-        parrot.session.set('session');
+        parrot.session.add('session');
         sessionStorage.getItem('session').should.eql('session');
         return parrot.session.get().should.eql('session');
       });
@@ -282,14 +282,14 @@
         _session = {
           foo: 'bar'
         };
-        parrot.session.set(_session);
+        parrot.session.add(_session);
         return parrot.session.get().should.eql({
           foo: 'bar'
         });
       });
       return it('delete the session', function() {
         var value;
-        parrot.session.clear();
+        parrot.session.remove();
         value = parrot.session.get() || 'null';
         value.should.eql('null');
         value = sessionStorage['session'] || 'undefined';

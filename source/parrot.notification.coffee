@@ -29,8 +29,8 @@ do (fn = parrot.notification) ->
     @[name] = parrot._partial(@_bindAdd, name).bind(fn)
     this
 
-  fn.remove = (name) ->
-    delete @[name]
+  fn.remove = ->
+    delete @[name] for name in arguments
     this
 
   fn.show = (name, opts) ->
