@@ -348,15 +348,6 @@ Parrot.session.isAvailable()
 
 `Parrot.notification` represents the namespace for use HTML5 Notifications.
 
-#### .isAvailable()
-
-Check if your browser supports [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/notification).
-
-```coffee
-Parrot.nofitication.isAvailable()
-# => true
-```
-
 #### .add(&lt;Object&gt;)
 
 Registers a new `Notification`. This is useful when you need use a notification repeatedly or use a notification structure that you can edit before show it.

@@ -20,8 +20,6 @@ do (fn = parrot.notification) ->
 
   ## -- Public -----------------------------------------------------------------
 
-  fn.isAvailable = -> @_Notification?
-
   fn.add = (opts) ->
     name = opts.name
     delete opts.name
@@ -42,8 +40,7 @@ do (fn = parrot.notification) ->
       try
         @_requestPermissions()
         @_create(opts)
-      catch e
-        console.log e
+      catch
         throw new Error "Notification API is not available."
 
     return _createNotification opts unless name?
