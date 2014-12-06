@@ -199,14 +199,6 @@ Sets the default environment of `Parrot.environment`. It's important because the
 Parrot.environment.set('production')
 ```
 
-#### .remove(&lt;String...&gt;)
-
-Deletes a environment from the namespace
-
-```coffee
-Parrot.environment.remove 'testing'
-```
-
 ### URL Management
 
 URL Management makes easy to do ajax or sockets requests with your backend. In order to do it, you need first to register the URL's. Each URL has a different schema as `protocol`, `path` and/or `query`.
@@ -249,14 +241,6 @@ Parrot.url.login(send: user)
 ```
 
 Check AJAX section for know how to update values in the moment of the request and know the short version of each URL Object.
-
-#### .remove(&lt;String...&gt;)
-
-Delete a URL from the namespace.
-
-```coffee
-Parrot.url.remove('logout')
-```
 
 ### Storage
 
@@ -372,6 +356,7 @@ Check if your browser supports [Notifications API](https://developer.mozilla.org
 Parrot.nofitication.isAvailable()
 # => true
 ```
+
 #### .add(&lt;Object&gt;)
 
 Registers a new `Notification`. This is useful when you need use a notification repeatedly or use a notification structure that you can edit before show it.
@@ -393,7 +378,8 @@ Remove a `Notification` that exists in the namespace.
 
 ```coffee
 Parrot.nofitication.remove 'sample'
-# =>
+# => true
+```
 
 #### .show(&lt;String&gt;, [Object])
 
@@ -417,7 +403,7 @@ If you prefer show a notification that is not registered you can do it providing
 Parrot.notification.show
   title : 'new notification'
   body  : 'another notification for you!'
-  icon  :'icon.gif'
+  icon  : 'icon.gif'
 ```
 
 ## License

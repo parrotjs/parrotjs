@@ -26,7 +26,3 @@ do (fn = parrot.url)->
     @_URLS[name]  = opts
     @[name]       = parrot._partial(@_bindAdd, name).bind(fn)
     this
-
-  fn.remove = ->
-    delete @[name] for name in arguments
-    this
