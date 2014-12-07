@@ -2,47 +2,37 @@ do (fn = parrot.notification) ->
 
   ## -- Private ----------------------------------------------------------------
 
-  fn._Notifications = {}
-  fn._Notification = -> window['Notification']
-  fn._requestPermissions = -> @_Notification().requestPermission()
-  fn._get = (name) -> @_Notifications[name]
-
-  fn._create = (options) ->
-    title = options.title
-    delete options.title
-    new Notification title, options
-
-  fn._bindAdd = (name, updateOptions=undefined) ->
-    if updateOptions?
-      for option of updateOptions
-        @_Notifications[name][option] = updateOptions[option]
-    @_Notifications[name]
+  _Notification = {}
 
   ## -- Public -----------------------------------------------------------------
+
+  fn.getOrUpdate = (name, updateOptions=undefined) ->
+    if updateOptions?
+      for option of updateOptions
+        _Notification[name][option] = updateOptions[option]
+    _Notification[name]
 
   fn.add = (opts) ->
     name = opts.name
     delete opts.name
-    @_Notifications[name] = opts
-    @[name] = parrot._partial(@_bindAdd, name).bind(fn)
+    _Notification[name] = opts
+    @[name] = parrot._partial(@getOrUpdate, name).bind(fn)
     this
 
-  fn.remove = ->
-    delete @[name] for name in arguments
-    this
-
-  fn.show = (name, opts) ->
+  fn.show = (name, options) ->
     if arguments.length is 1 and typeof name is 'object'
       name = undefined
-      opts = arguments[0]
+      options = arguments[0]
 
     _createNotification = (opts) =>
       try
-        @_requestPermissions()
-        @_create(opts)
-      catch
+        window['Notification'].requestPermission()
+        title = opts.title
+        delete opts.title
+        new Notification title, opts
+      catch e
         throw new Error "Notification API is not available."
 
-    return _createNotification opts unless name?
-    notification =  @_bindAdd name, opts
+    return _createNotification options unless name?
+    notification =  @getOrUpdate name, options
     _createNotification notification

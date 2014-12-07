@@ -19,7 +19,7 @@ describe 'Endpoint ::', ->
     parrot.endpoint.set('production')
     parrot.environment.should.eql 'production'
 
-xdescribe 'URL ::', ->
+describe 'URL ::', ->
 
   it 'add with default values', ->
     _default = {}
