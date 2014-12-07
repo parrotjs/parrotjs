@@ -11,7 +11,7 @@ do ->
   ## -- Public -----------------------------------------------------------------
 
   parrot.ajax = (obj, cb) ->
-    _createAjaxPromise = (obj) ->
+    ajaxPromise = (obj) ->
       DEFAULT =
         METHOD       : 'get'
         SEND         : {}
@@ -45,12 +45,13 @@ do ->
             reject(code: xhr.status, message: message)
       )
 
-    _url = "#{parrot.endpoint[parrot.environment]()}"
-    _promise = (data, cb) =>
-      _createAjaxPromise(data).then ((response) ->
+    promise = (data, cb) =>
+      ajaxPromise(data).then ((response) ->
         cb null, response
       ), (error) ->
         cb error, null
+
+    url = "#{parrot.endpoint[parrot.environment]()}"
 
     unless obj.url
       if typeof arguments[0] is 'string'
@@ -64,13 +65,13 @@ do ->
             obj = url: arguments[0]
         cb = arguments[2] if typeof arguments[1] is 'object'
       if (obj.query and obj.path)
-        obj.url = "#{_url}/#{obj.path}?#{obj.query}"
+        obj.url = "#{url}/#{obj.path}?#{obj.query}"
       else
-        obj.url = "#{_url}?#{obj.query}" if obj.query and not obj.path
-        obj.url = "#{_url}/#{obj.path}" if obj.path and not obj.query
+        obj.url = "#{url}?#{obj.query}" if obj.query and not obj.path
+        obj.url = "#{url}/#{obj.path}" if obj.path and not obj.query
     else
-      if (obj.url isnt _url) and (obj.url isnt "#{_url}/#{obj.path}") and (obj.url isnt "#{_url}?#{obj.query}") and (obj.url isnt "#{_url}/#{obj.path}?#{obj.query}")
+      if (obj.url isnt url) and (obj.url isnt "#{url}/#{obj.path}") and (obj.url isnt "#{url}?#{obj.query}") and (obj.url isnt "#{url}/#{obj.path}?#{obj.query}")
         obj.url = "#{obj.url}/#{obj.path}" if obj.path?
         obj.url = "#{obj.url}?#{obj.query}" if obj.query?
 
-    _promise(obj, cb)
+    promise(obj, cb)
