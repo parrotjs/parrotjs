@@ -23,5 +23,5 @@ parrot.device.detection = ->
   parrot.$(document.body).attr "data-screen", parrot.device.screen.size
 
 parrot.device.noDetection = ->
-  for detection in ['os', 'device', 'orientation', 'screen']
+  for detection in ['lang', 'os', 'device', 'orientation', 'screen']
     parrot.$(document.body).removeAttr "data-#{detection}"
