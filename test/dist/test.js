@@ -11,7 +11,6 @@
         name: 'development',
         url: 'http://localhost:1337'
       });
-      console.log(parrot.endpoint.development);
       return parrot.endpoint.development().should.eql('http://localhost:1337');
     });
     it('add concatenate', function() {
@@ -31,7 +30,7 @@
     });
   });
 
-  describe('URL ::', function() {
+  xdescribe('URL ::', function() {
     it('add with default values', function() {
       var _default;
       _default = {};

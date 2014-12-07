@@ -2,7 +2,7 @@ do (fn = parrot.url)->
 
   ## -- Private ----------------------------------------------------------------
 
-  URL = {}
+  _URL = {}
   _getQuery = (queries) ->
     url               = new Url()
     url[key]          = ''for key in ['protocol', 'path', 'host', 'port', 'hash']
@@ -11,18 +11,18 @@ do (fn = parrot.url)->
     query             = query.substring(1) if query.charAt(0) is '?'
     query
 
-  _bindAdd = (name, updateOptions=undefined) ->
-    if updateOptions?
-      URL[name][option] = updateOptions[option] for option of updateOptions
-      URL[name].query = _getQuery(updateOptions.query) if updateOptions.query?
-    URL[name]
-
   ## -- Public -----------------------------------------------------------------
+
+  fn.getOrUpdate = (name, update=undefined) ->
+    if update?
+      _URL[name][option] = update[option] for option of update
+      _URL[name].query = _getQuery(update.query) if update.query?
+    _URL[name]
 
   fn.add = (opts) ->
     name = opts.name
     delete opts.name
     opts.query = _getQuery(opts.query) if opts.query?
-    URL[name]  = opts
-    @[name]    = parrot._partial(_bindAdd, name).bind(fn)
+    _URL[name] = opts
+    @[name]    = parrot._partial(@getOrUpdate, name).bind(fn)
     this

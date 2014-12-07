@@ -17,9 +17,9 @@ pkg     = require './package.json'
 path =
   core:
     src   : [ 'source/parrot.coffee'
-              'source/parrot.ajax.coffee'
               'source/parrot.endpoint.coffee'
               'source/parrot.url.coffee'
+              'source/parrot.ajax.coffee'
               'source/parrot.store.coffee'
               'source/parrot.notification.coffee'
               'source/parrot.device.coffee' ]

@@ -6,7 +6,6 @@ describe 'Endpoint ::', ->
 
   it 'add', ->
     parrot.endpoint.add(name: 'development', url:'http://localhost:1337')
-    console.log parrot.endpoint.development
     parrot.endpoint.development().should.eql 'http://localhost:1337'
 
   it 'add concatenate', ->
@@ -20,7 +19,7 @@ describe 'Endpoint ::', ->
     parrot.endpoint.set('production')
     parrot.environment.should.eql 'production'
 
-describe 'URL ::', ->
+xdescribe 'URL ::', ->
 
   it 'add with default values', ->
     _default = {}

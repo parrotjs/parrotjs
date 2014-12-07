@@ -47,8 +47,8 @@ do ->
 
     unless obj.url
       if typeof arguments[0] is 'string'
-        if parrot.url._URLS[arguments[0]]?
-          obj = parrot.url._bindAdd arguments[0], arguments[1]
+        if parrot.url[arguments[0]]?()?
+          obj = parrot.url.getOrUpdate arguments[0], arguments[1]
         else
           if typeof arguments[1] is 'object'
             obj = arguments[1]
