@@ -2,52 +2,52 @@ do ->
 
   ## -- Private ----------------------------------------------------------------
 
-  parrot._DEFAULT =
-    METHOD       : 'get'
-    SEND         : {}
-    HEADERS      : {}
-    ASYNC        : true
-    DATATYPE     : 'json'
-    CONTENT_TYPE : 'application/x-www-form-urlencoded'
-
   parrot._partial = (func) -> #, 0..n args
     args = Array::slice.call(arguments, 1)
     ->
       allArguments = args.concat(Array::slice.call(arguments))
       func.apply this, allArguments
 
-  parrot._createAjaxPromise = (obj) ->
-    new Promise((resolve, reject) =>
-      parrot.$.ajax
-        url         : obj.url
-        type        : obj.method or @_DEFAULT.METHOD
-        data        : obj.send or @_DEFAULT.SEND
-        dataType    : obj.dataType or @_DEFAULT.DATATYPE
-        contentType : obj.contentType or @_DEFAULT.CONTENT_TYPE
-        async       : obj.async or @_DEFAULT.ASYNC
-        headers     : obj.headers or @_DEFAULT.HEADERS
-        success: (xhr) ->
-          return reject(code: 0, message: {'errors': [{'param': 'url','msg': 'Server Unavailable.'}]}) if xhr.status is 0
-          resolve(xhr)
-        error: (type, xhr) ->
-          xhr = if typeof type is 'object' then type else xhr
-
-          if xhr.responseJSON?
-            message = xhr.responseJSON
-          else
-            try
-              message = JSON.parse(xhr.response)
-            catch
-              message = xhr.response
-          reject(code: xhr.status, message: message)
-    )
-
   ## -- Public -----------------------------------------------------------------
 
   parrot.ajax = (obj, cb) ->
+    _createAjaxPromise = (obj) ->
+      DEFAULT =
+        METHOD       : 'get'
+        SEND         : {}
+        HEADERS      : {}
+        ASYNC        : true
+        DATATYPE     : 'json'
+        CONTENT_TYPE : 'application/x-www-form-urlencoded'
+
+      new Promise((resolve, reject) =>
+        parrot.$.ajax
+          url         : obj.url
+          type        : obj.method or DEFAULT.METHOD
+          data        : obj.send or DEFAULT.SEND
+          dataType    : obj.dataType or DEFAULT.DATATYPE
+          contentType : obj.contentType or DEFAULT.CONTENT_TYPE
+          async       : obj.async or DEFAULT.ASYNC
+          headers     : obj.headers or DEFAULT.HEADERS
+          success: (xhr) ->
+            return reject(code: 0, message: {'errors': [{'param': 'url','msg': 'Server Unavailable.'}]}) if xhr.status is 0
+            resolve(xhr)
+          error: (type, xhr) ->
+            xhr = if typeof type is 'object' then type else xhr
+
+            if xhr.responseJSON?
+              message = xhr.responseJSON
+            else
+              try
+                message = JSON.parse(xhr.response)
+              catch
+                message = xhr.response
+            reject(code: xhr.status, message: message)
+      )
+
     _url = "#{parrot.endpoint[parrot.environment]()}"
     _promise = (data, cb) =>
-      @_createAjaxPromise(data).then ((response) ->
+      _createAjaxPromise(data).then ((response) ->
         cb null, response
       ), (error) ->
         cb error, null
