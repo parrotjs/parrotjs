@@ -2,7 +2,7 @@ do (fn = parrot) ->
 
   ## -- Private ----------------------------------------------------------------
 
-  fn._init = ->
+  fn._initStorage = do ->
     for key in Object.keys(localStorage)
       @['local'][key] = parrot._partial(@_get, 'local', key).bind(fn)
     for key in Object.keys(sessionStorage)
@@ -93,7 +93,3 @@ do (fn = parrot) ->
   fn.session.isAvailable = ->
     key = if arguments.length is 0 then 'session' else arguments[0]
     parrot._is 'session', key
-
-  ## -- Initialize -------------------------------------------------------------
-
-  parrot._init()

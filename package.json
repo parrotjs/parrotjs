@@ -34,8 +34,13 @@
   "repository": "sailorjs/parrotjs",
   "testling": {
     "harness": "mocha-bdd",
-    "scripts": ["dist/parrot.quo.js", "node_modules/should/should.min.js"],
-    "files": ["test/dist/test.js"],
+    "scripts": [
+      "dist/parrot.quo.js",
+      "node_modules/should/should.min.js"
+    ],
+    "files": [
+      "test/dist/test.js"
+    ],
     "browsers": [
       "ie/6..latest",
       "chrome/22..latest",

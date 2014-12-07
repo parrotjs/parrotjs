@@ -302,7 +302,7 @@
 
 (function() {
   describe('Notification ::', function() {
-    it('add new notification', function() {
+    xit('add new notification', function() {
       var notification;
       notification = {
         name: 'sample',
@@ -312,13 +312,13 @@
       parrot.notification.add(notification);
       return parrot.notification.sample().body.should.eql('This is a sample notification');
     });
-    it('show the notification that is already added', function() {
+    xit('show the notification that is already added', function() {
       parrot.notification.show('sample', {
         body: 'yarl!'
       });
       return parrot.notification.sample().body.should.eql('yarl!');
     });
-    return it('show a notification that is not stored', function() {
+    return xit('show a notification that is not stored', function() {
       var notification;
       notification = {
         title: 'Test',
