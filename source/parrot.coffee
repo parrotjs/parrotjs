@@ -14,3 +14,13 @@ parrot = @parrot =
 
   # DOM Handler Facade
   $ : if $$? then $$ else $
+
+parrot.device.detection = ->
+  parrot.$(document.body).attr "data-os", parrot.device.os.name
+  parrot.$(document.body).attr "data-device", parrot.device.type
+  parrot.$(document.body).attr "data-orientation", parrot.device.screen.orientation
+  parrot.$(document.body).attr "data-screen", parrot.device.screen.size
+
+parrot.device.noDetection = ->
+  for detection in ['os', 'device', 'orientation', 'screen']
+    parrot.$(document.body).removeAttr "data-#{detection}"
