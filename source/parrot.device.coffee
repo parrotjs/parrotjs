@@ -27,6 +27,17 @@ parrot.$ ->
       size        : size
       orientation : orientation
 
+    # detection
+    parrot.$(document.body).attr "data-os", parrot.device.os.name
+    parrot.$(document.body).attr "data-device", parrot.device.type
+    parrot.$(document.body).attr "data-orientation", parrot.device.screen.orientation
+    parrot.$(document.body).attr "data-screen", parrot.device.screen.size
+
+    parrot.device.noDetection = ->
+      detections = ['os', 'device', 'orientation', 'screen']
+      for detection in detections
+        parrot.$(document.body).removeAttr "data-#{detection}"
+
   do initialize
   parrot.$(window).on 'resize', initialize
   parrot.$(window).on 'orientationchange', initialize
