@@ -1,8 +1,17 @@
-### Endpoint
+### URL
 
-This methods are available in `Parrot` namespace:
+The module `Parrot.URL` provide all you need for URL management.
 
-#### .environment
+This module add two namespace:
+
+* `Parrot.endpoint` that is used to select and switch between different API endpoints (production, testing, development,...)
+* `Parrot.URL` that is used to save URL's that you need in your frontend.
+
+#### Parrot
+
+In the `Parrot` namespace add the following methods:
+
+##### .environment
 
 Returns the environment that you are using at this moment.
 
@@ -13,7 +22,7 @@ Parrot.environment
 
 Default environment is `development`.
 
-#### .language
+##### .language
 
 Returns the language that you want to use in the requests with your API's endpoints.
 
@@ -22,9 +31,13 @@ Parrot.language
 # => 'en'
 ```
 
-This methods are available in `Parrot.endpoint` namespace:
+Default language is obtained from `navigator.language`, that is the language of the browser of the user.
 
-#### .add(&lt;Object&gt;)
+#### Parrot.endpoint
+
+The methods that are available in `Parrot.endpoint` namespace are:
+
+##### .add(&lt;Object&gt;)
 
 registers a new endpoint. Object must have:
 
@@ -40,7 +53,7 @@ Parrot.endpoint.development()
 # => http://localhost:1337
 ```
 
-#### .set(&lt;String&gt;)
+##### .set(&lt;String&gt;)
 
 Sets the default environment of `Parrot.environment`. It's important because the URL's depend on the URL path register in the environment.
 
@@ -48,13 +61,13 @@ Sets the default environment of `Parrot.environment`. It's important because the
 Parrot.environment.set('production')
 ```
 
-### URL Management
+The methods that are available in `Parrot.URL` namespace are:
 
 URL Management makes easy to do ajax or sockets requests with your backend. In order to do it, you need first to register the URL's. Each URL has a different schema as `protocol`, `path` and/or `query`.
 
-This method is available in `Parrot.url` namespace:
+#### Parrot.URL
 
-#### .add(&lt;Object&gt;)
+##### .add(&lt;Object&gt;)
 
 Registers a new URL. The minimum information you need to check is:
 

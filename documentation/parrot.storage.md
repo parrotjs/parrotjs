@@ -4,7 +4,9 @@ This module is a little interface for using the same pattern in `localStorage` a
 
 Remember that the only difference between `localStorage` and `sessionStorage` is the time of life of the information in the browser. `localStorage` is persisten and only is deleted if you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, disappear).
 
-#### .add(&lt;key&gt;, &lt;value&gt;)
+#### Parrot.local
+
+##### .add(&lt;key&gt;, &lt;value&gt;)
 
 Stores something in `session` or `local` storage, depending on the namespace that you uses.
 
@@ -34,7 +36,7 @@ Parrot.local.myObject()
 # => {foo: 'bar'}
 ```
 
-#### .remove(&lt;String...&gt;)
+##### .remove(&lt;String...&gt;)
 
 Removes the key and the value from the `local` or `session` storage:
 
@@ -50,7 +52,7 @@ Note that you can delete different keys in one sentence:
 Parrot.local.remove 'one', 'foo'
 ```
 
-#### .removeAll()
+##### .removeAll()
 
 Removes all the elements from tal` or `session` storage:
 
@@ -59,7 +61,7 @@ Parrot.local.removeAll()
 Parrot.session.removeAll()
 ```
 
-#### .size()
+##### .size()
 
 Returns the length of the `local` or `session` storage:
 
@@ -70,7 +72,7 @@ Parrot.session.size()
 # => 8
 ```
 
-#### .isAvailable(&lt;key&gt;)
+##### .isAvailable(&lt;key&gt;)
 
 Returns if a certain value if available in the `local` or `session` storage:
 
@@ -81,7 +83,7 @@ Parrot.local.isAvailable 'bar'
 # => true
 ```
 
-### Storage Session Helpers
+#### Parrot.session
 
 `Parrot.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
 

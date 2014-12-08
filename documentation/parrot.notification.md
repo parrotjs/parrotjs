@@ -2,7 +2,9 @@
 
 `Parrot.notification` represents the namespace for use HTML5 Notifications.
 
-#### .add(&lt;Object&gt;)
+#### Parrot.notification
+
+##### .add(&lt;Object&gt;)
 
 Registers a new `Notification`. This is useful when you need use a notification repeatedly or use a notification structure that you can edit before show it.
 
@@ -17,7 +19,7 @@ Parrot.notification.add
 
 The properties of the `Notification` are defined in the [Standard Notification Properties](https://developer.mozilla.org/en-US/docs/Web/API/notification#Properties).
 
-#### .remove(&lt;String...&gt;)
+##### .remove(&lt;String...&gt;)
 
 Remove a `Notification` that exists in the namespace.
 
@@ -26,7 +28,7 @@ Parrot.nofitication.remove 'sample'
 # => true
 ```
 
-#### .show(&lt;String&gt;, [Object])
+##### .show(&lt;String&gt;, [Object])
 
 Show the notification.
 
