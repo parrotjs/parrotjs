@@ -7,7 +7,7 @@
 [![Dev Dependencies Status](http://img.shields.io/david/dev/sailorjs/Parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/Parrotjs#info=devDependencies)
 [![Gittip](http://img.shields.io/gittip/Kikobeats.svg?style=flat)](https://www.gittip.com/Kikobeats/)
 
-> Client library to connect your frontend application with whatever sails backend.
+> Use browser features (Notification, Storage, Vibration, Battery...) and make easy the communication with your API.
 
 Parrot helps you connect your frontend with you API backend. Only need to say to Parrot what do, and Parrot will do the hard work!
 

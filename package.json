@@ -1,6 +1,6 @@
 {
   "name": "parrotjs",
-  "description": "Client library to connect your frontend application with whatever API backend",
+  "description": "Use browser features (Notification, Storage, Vibration, Battery...) and make easy the communication with your API.",
   "version": "0.11.27a",
   "author": {
     "name": "Kiko Beats",
