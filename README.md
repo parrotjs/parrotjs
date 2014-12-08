@@ -11,11 +11,12 @@
 
 Parrot helps you connect your frontend with you API backend. Only need to say to Parrot what do, and Parrot will do the hard work!
 
-The most important Parrot features are:
+At this moment Parrot supports:
 
-- Modular Design with chainable methods for make easy concatenate different actions.
-- Divided in modules that provide a uniform API for handler HTML5 API's: Notification, Vibration, Battery, LocalStorage, SessionStorage,...
-- AJAX Handler and URL Management.
+- Register different environments (development, production, testing,...).
+- Register different URLs with different protocols (http, sockets) and make easy AJAX requests.
+- Manage uniformly sessionStorage and localStorage.
+- Chainable methods for make easy concatenate different actions.
 
 For the future features check [Roadmap](https://github.com/sailorjs/Parrotjs/blob/master/ROADMAP.md) section.
 
@@ -36,6 +37,7 @@ bower install parrotjs
 At this moment, Parrot has two dependencies:
 
 - [jsurl](https://github.com/Mikhus/jsurl), a Polyfill of [URL Objects](http://www.w3.org/TR/url/).
+- [UAParser](https://github.com/faisalman/ua-parser-js).
 - [QuoJS](https://github.com/soyjavi/QuoJS/), [jQuery](https://github.com/jquery/jquery) or [Zepto](https://github.com/madrobby/zepto) for AJAX handler.
 
 We offers different builds depending on what you need

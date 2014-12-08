@@ -28,5 +28,8 @@
     "quojs": "*",
     "zepto": "*"
   },
-  "homepage": "https://github.com/sailorjs/parrotjs"
+  "homepage": "https://github.com/sailorjs/parrotjs",
+  "dependencies": {
+    "ua-parser-js": "*"
+  }
 }
