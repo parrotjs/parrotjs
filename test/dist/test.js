@@ -301,7 +301,7 @@
 }).call(this);
 
 (function() {
-  xdescribe('Notification ::', function() {
+  describe('Notification ::', function() {
     it('add new notification', function() {
       var notification;
       notification = {
