@@ -23,11 +23,12 @@
   },
   "homepage": "http://github.com/sailor/parrotjs",
   "keywords": [
+    "frontend",
+    "micro",
+    "modular",
+    "perfomance",
     "api",
-    "client",
-    "html5",
-    "connect",
-    "frontend"
+    "html5"
   ],
   "license": "MIT",
   "main": "dist/parrot.js",
