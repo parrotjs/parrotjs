@@ -75,8 +75,7 @@ For improve your perfomance experience, the code design of Parrot is modular and
 
 ## Documentation
 
-The documentation are divided for each module. Check Documentation section for more information about each module API.
-
+Check [Documentation](https://github.com/sailorjs/parrotjs/tree/beta/documentation) section for more information about each module API.
 
 ## License
 
