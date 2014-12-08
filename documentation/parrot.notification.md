@@ -1,14 +1,14 @@
 ### Notification
 
-`parrot.notification` represents the namespace for use HTML5 Notifications.
+`parrot.notification` represents the namespace for HTML5 notifications usage.
 
 #### parrot.notification
 
 ##### .add(&lt;Object&gt;)
 
-It registers a new `Notification`. This is useful when you need to use the same notification repeatedly or use a notification structure that you can edit before show it.
+It registers a new `Notification`. This is useful when you need to use the same notification repeatedly or to use a notification structure that you can edit before showing it.
 
-When you register a `Notification` you need to provide a `name` that referenced it with the rest of the `Notification` properties:
+When you register a `Notification`, you need to provide a `name` that references it with the rest of the `Notification` properties:
 
 ```coffee
 parrot.notification.add
@@ -21,7 +21,7 @@ The properties of the `Notification` are defined in the [Standard Notification P
 
 ##### .remove(&lt;String...&gt;)
 
-Remove a `Notification` that exists in the namespace.
+Removing a `Notification` that exists in the namespace.
 
 ```coffee
 parrot.nofitication.remove 'sample'
@@ -30,21 +30,21 @@ parrot.nofitication.remove 'sample'
 
 ##### .show(&lt;String&gt;, [Object])
 
-Show the notification.
+Showing the notification.
 
-You can do it of different ways. For example, if you have a previous notification registered only reference the name of the notification:
+You can do it in different ways. For example, if you have a previous notification registered, you only need to reference the name of the notification:
 
 ```coffee
 parrot.notification.show 'sample'
 ```
 
-Maybe you want to show the notification but first want to add or update any property. Just provide the new values:
+You may want to show the notification, but you want to add or update any property first. In that case, you just to provide the new values:
 
 ```coffee
 parrot.notification.show 'sample', icon:'icon.gif'
 ```
 
-If you prefer show a notification that is not registered you can do it providing the values of the notification:
+If you prefer to show a notification which is not registered, you can do it providing the values of the notification:
 
 ```coffee
 parrot.notification.show
