@@ -1,13 +1,15 @@
 ### Basic
 
-This module provide the `Parrot` namespace and global methods that other modules need, but are not interesting for you.
+This module provide the `parrot` namespace and global methods that other modules need, but are not interesting for you.
 
-#### .version
+#### parrot
+
+##### .version
 
 Returns the version of the library.
 
 ```coffee
-Parrot.version
+parrot.version
 # => '0.11.27'
 ```
 

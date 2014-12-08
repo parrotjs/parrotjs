@@ -9,14 +9,11 @@
 
 > Use browser features (Notification, Storage, Vibration, Battery...) and make easy the communication with your API.
 
-Parrot helps you connect your frontend with you API backend. Only need to say to Parrot what do, and Parrot will do the hard work!
+The most importante feature are:
 
-At this moment Parrot supports:
-
-- Register different environments (development, production, testing,...).
-- Register different URLs with different protocols (http, sockets) and make easy AJAX requests.
-- Manage uniformly sessionStorage and localStorage.
-- Chainable methods for make easy concatenate different actions.
+- Modular design with chainable methods.
+- AJAX Handler and URL Management.
+- Modules provide a uniform API for HTML5 features: Notification, Battery, Vibration, Geolocation,...
 
 For the future features check [Roadmap](https://github.com/sailorjs/Parrotjs/blob/master/ROADMAP.md) section.
 
@@ -44,17 +41,17 @@ We offers different builds depending on what you need
 
 ### Standalone
 
-Just Parrot code, without dependencies. Use it when you have a custom build with your other frontend dependencies:
+Just parrot code, without dependencies. Use it when you have a custom build with your other frontend dependencies:
 
 ```html
 <script src="bower_components/parrotjs/dist/parrot.standalone.js"></script>
 ```
 
-Notes that if you don't provide `jsurl` and AJAX handler parrot will not work!
+Notes that if you don't provide `jsurl`, `UAPaser` and AJAX handler parrot will not work!
 
 ### Standard
 
-Parrot code with the minimum dependencies (only `jsurl`). Use it build when you provide your own ajax handler in yours frontend dependencies:
+Parrot code with the minimum dependencies (`jsurl` and `UAPaserse`). Use it build when you provide your own ajax handler in yours frontend dependencies:
 
 ```html
 <script src="bower_components/parrotjs/dist/parrot.js"></script>
