@@ -1,14 +1,14 @@
 ### Storage
 
-This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both are different namespaces: `parrot.local` and `parrot.session`. But both methods are the same.
+This module is a little interface for using the same pattern in `localStorage` and `sessionStorage`. Both of them have different namespaces: `parrot.local` and `parrot.session`. However, both methods are the same.
 
-Remember that the only difference between `localStorage` and `sessionStorage` is the time of life of the information in the browser. `localStorage` is persisten and only is deleted if you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, disappear).
+Remember that the only difference between `localStorage` and `sessionStorage` is the lifetime of the information in the browser. `localStorage` is persistent and is deleted only when you clean it. `sessionStorage` is only for the session (for example, if you close and open the tab, it disappears).
 
 #### parrot.local
 
 ##### .add(&lt;key&gt;, &lt;value&gt;)
 
-Stores something in `session` or `local` storage, depending on the namespace that you uses.
+It stores something in `session` or `local` storage, depending on the namespace that you use.
 
 ```coffee
 parrot.local.add('foo', 'bar')
@@ -38,7 +38,7 @@ parrot.local.myObject()
 
 ##### .remove(&lt;String...&gt;)
 
-Removes the key and the value from the `local` or `session` storage:
+It removes the key and the value from the `local` or `session` storage:
 
 ```coffee
 parrot.local.remove 'one'
@@ -54,7 +54,7 @@ parrot.local.remove 'one', 'foo'
 
 ##### .removeAll()
 
-Removes all the elements from tal` or `session` storage:
+It removes all the elements from tal` or `session` storage:
 
 ```coffee
 parrot.local.removeAll()
@@ -63,7 +63,7 @@ parrot.session.removeAll()
 
 ##### .size()
 
-Returns the length of the `local` or `session` storage:
+It returns the length of the `local` or `session` storage:
 
 ```coffee
 parrot.local.size()
@@ -74,7 +74,7 @@ parrot.session.size()
 
 ##### .isAvailable(&lt;key&gt;)
 
-Returns if a certain value if available in the `local` or `session` storage:
+It returns if a certain value is available in the `local` or `session` storage:
 
 ```coffee
 parrot.local.isAvailable 'foo'
@@ -85,15 +85,15 @@ parrot.local.isAvailable 'bar'
 
 #### parrot.session
 
-`parrot.session` has a special helpers to make easy save and retrieve the session. It's similar to the standard actions, but you have to write less code for do the same.
+`parrot.session` has special helpers to make easier to save and retrieve the session. It's similar to the standard actions, but it lets you to write less code for doing the same.
 
-If you don't provide a key in `parrot.session`, the default key is `session`. For example, if you want to store in session a object only write:
+If you don't provide a key in the `parrot.session`, the default key is `session`. For instance, if you want to store in a session an object, just write:
 
 ```coffee
 parrot.session.add(user)
 ```
 
-Automatically is associated with the key `session`. If you need to `get`, `remove` or check if `isAvailable` write the command without parameter and is resolved with `session` key:
+It is automatically associated with the key `session`. If you need to `get`, `remove` or check if it `isAvailable`, write the command without parameters and it will be resolved with `session` key:
 
 ```coffee
 parrot.session.get()
