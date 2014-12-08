@@ -1,6 +1,6 @@
 ### Basic
 
-This module provide the `parrot` namespace and global methods that other modules need, but are not interesting for you.
+This module provides the `parrot` namespace and the global methods that other modules need, which are not interesting for you.
 
 #### parrot
 
