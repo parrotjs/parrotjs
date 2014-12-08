@@ -17,23 +17,26 @@ pkg     = require './package.json'
 path =
   core:
     src   : [ 'source/parrot.coffee'
-              'source/parrot.initialize.coffee'
-              'source/parrot.endpoint.coffee'
               'source/parrot.url.coffee'
-              'source/parrot.store.coffee' ]
+              'source/parrot.ajax.coffee'
+              'source/parrot.store.coffee'
+              'source/parrot.notification.coffee'
+              'source/parrot.device.coffee' ]
     dist  : 'dist'
     build : 'dist/parrot.standalone.js'
 
   dependencies:
-    jquery : 'components/jquery/dist/jquery.min.js'
-    quo    : ['components/quojs/quo.js', 'components/quojs/quo.ajax.js']
-    zepto  : 'components/zepto/zepto.min.js'
-    jsurl  : 'components/jsurl/url.min.js'
+    jquery    : 'components/jquery/dist/jquery.min.js'
+    quo       : ['components/quojs/quo.js', 'components/quojs/quo.ajax.js']
+    zepto     : 'components/zepto/zepto.min.js'
+    jsurl     : 'components/jsurl/url.min.js'
+    ua_parser : 'components/ua-parser-js/dist/ua-parser.min.js'
 
   test:
     src   : ['test/source/test.url.coffee'
              'test/source/test.ajax.coffee'
-             'test/source/test.storage.coffee']
+             'test/source/test.store.coffee'
+             'test/source/test.notification.coffee']
     dist  : 'test/dist'
     index : 'test/index.html'
 
@@ -70,6 +73,7 @@ gulp.task 'standalone', ->
 gulp.task 'standard', ->
   origin = []
   origin.push path.dependencies.jsurl
+  origin.push path.dependencies.ua_parser
   origin.push path.core.build
   gulp.src origin
   .pipe concat 'parrot.js'
@@ -82,6 +86,7 @@ gulp.task 'standard', ->
 gulp.task 'quo', ->
   origin = path.dependencies.quo
   origin.push path.dependencies.jsurl
+  origin.push path.dependencies.ua_parser
   origin.push path.core.build
   gulp.src origin
   .pipe uglify()
@@ -95,6 +100,7 @@ gulp.task 'jquery', ->
   origin = []
   origin.push path.dependencies.jquery
   origin.push path.dependencies.jsurl
+  origin.push path.dependencies.ua_parser
   origin.push path.core.build
   gulp.src origin
   .pipe uglify()
@@ -108,6 +114,7 @@ gulp.task 'zepto', ->
   origin = []
   origin.push path.dependencies.zepto
   origin.push path.dependencies.jsurl
+  origin.push path.dependencies.ua_parser
   origin.push path.core.build
   gulp.src origin
   .pipe uglify()

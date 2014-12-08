@@ -1,99 +1,93 @@
-do (fn = parrot) ->
+do ->
 
   ## -- Private ----------------------------------------------------------------
 
-  fn._init = ->
+  _initStorage = do ->
     for key in Object.keys(localStorage)
-      @['local'][key] = parrot._partial(@_get, 'local', key).bind(fn)
+      parrot['local'][key] = parrot._partial(_get, 'local', key)
     for key in Object.keys(sessionStorage)
-      @['session'][key] = parrot._partial(@_get, 'session', key).bind(fn)
+      parrot['session'][key] = parrot._partial(_get, 'session', key)
 
-  fn._storage = (type) ->
+  _storage = (type) ->
     if type is 'local' then localStorage else sessionStorage
 
-  fn._get = (type, key) ->
-    data = @_storage(type).getItem(key)
+  _get = (type, key) ->
+    data = _storage(type).getItem(key)
     try
       data = JSON.parse(data)
     catch e
       data
 
-  fn._set = (type, key, data) ->
+  _add = (type, key, data) ->
     data = JSON.stringify(data) unless typeof data is 'string'
-    @_storage(type).setItem(key, data)
-    @[type][key] = parrot._partial(@_get, type, key).bind(fn)
+    _storage(type).setItem(key, data)
+    parrot[type][key] = parrot._partial(_get, type, key)
 
-  fn._clear = (type, key) ->
-    delete @[type][key]
-    @_storage(type).removeItem(key)
+  _remove = (type, key) ->
+    delete parrot[type][key]
+    _storage(type).removeItem(key)
 
-  fn._clearAll = (type) ->
-    keys = Object.keys(@_storage(type))
-    delete @[type][key] for key in keys
-    @_storage(type).clear()
+  _removeAll = (type) ->
+    keys = Object.keys(_storage(type))
+    delete parrot[type][key] for key in keys
+    _storage(type).clear()
 
-  fn._size = (type) ->
-    @_storage(type).length
+  _size = (type) ->
+    _storage(type).length
 
-  fn._is = (type, key) ->
-    @_storage(type)[key]?
+  _is = (type, key) ->
+    _storage(type)[key]?
 
   ## -- Public -----------------------------------------------------------------
 
-  ## LocalStorage
+  parrot.local =
+    add: (key, data) ->
+      _add 'local', key, data
+      this
 
-  fn.local.set = (key, data) ->
-    parrot._set 'local', key, data
-    this
+    remove: ->
+      _remove 'local', key for key in arguments
+      this
 
-  fn.local.clear = ->
-    parrot._clear 'local', key for key in arguments
-    this
+    removeAll: ->
+      _removeAll 'local'
+      this
 
-  fn.local.clearAll = ->
-    parrot._clearAll 'local'
-    this
+    size: ->
+      _size 'local'
 
-  fn.local.size = ->
-    parrot._size 'local'
+    isAvailable: (key) ->
+      _is 'local', key
 
-  fn.local.isAvailable = (key) ->
-    parrot._is 'local', key
+  parrot.session =
+    get: ->
+      _get 'session', 'session'
 
-  ## sessionStorage
+    add: ->
+      if arguments.length is 1
+        key  = 'session'
+        data = arguments[0]
+      else
+        key  = arguments[0]
+        data = arguments[1]
 
-  fn.session.get = ->
-    parrot._get 'session', 'session'
+      _add 'session', key, data
+      this
 
-  fn.session.set = ->
-    if arguments.length is 1
-      key  = 'session'
-      data = arguments[0]
-    else
-      key  = arguments[0]
-      data = arguments[1]
+    remove: ->
+      if arguments.length is 0
+        _remove 'session', 'session'
+      else
+        _remove 'session', key for key in arguments
+      this
 
-    parrot._set 'session', key, data
-    this
+    removeAll: ->
+      _removeAll 'session'
+      this
 
-  fn.session.clear = ->
-    if arguments.length is 0
-      parrot._clear 'session', 'session'
-    else
-      parrot._clear 'session', key for key in arguments
-    this
+    size: ->
+      _size 'session'
 
-  fn.session.clearAll = ->
-    parrot._clearAll 'session'
-    this
-
-  fn.session.size = ->
-    parrot._size 'session'
-
-  fn.session.isAvailable = ->
-    key = if arguments.length is 0 then 'session' else arguments[0]
-    parrot._is 'session', key
-
-  ## -- Initialize -----------------------------------------------------------
-
-  parrot._init()
+    isAvailable: ->
+      key = if arguments.length is 0 then 'session' else arguments[0]
+      _is 'session', key

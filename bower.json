@@ -1,18 +1,18 @@
 {
   "name": "parrotjs",
-  "version": "0.11.27",
+  "version": "0.12.8beta",
   "authors": [
     "Kiko Beats <josefrancisco.verdu@gmail.com>"
   ],
-  "description": "Client library to connect your frontend application with whatever API backend",
+  "description": "Use browser features (Notification, Storage, Vibration, Battery...) and make easy the communication with your API.",
   "main": "dist/parrot.js",
   "keywords": [
-    "sails",
-    "client",
-    "sailor",
-    "connect",
     "frontend",
-    "api"
+    "micro",
+    "modular",
+    "perfomance",
+    "api",
+    "html5"
   ],
   "license": "MIT",
   "ignore": [
@@ -28,5 +28,8 @@
     "quojs": "*",
     "zepto": "*"
   },
-  "homepage": "https://github.com/sailorjs/parrotjs"
+  "homepage": "https://github.com/sailorjs/parrotjs",
+  "dependencies": {
+    "ua-parser-js": "*"
+  }
 }
