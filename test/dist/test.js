@@ -1,36 +1,34 @@
 (function() {
-  describe('Language ::', function() {
-    return it('set default language', function() {
-      return parrot.language.should.eql('en');
-    });
-  });
-
-  describe('Endpoint ::', function() {
-    it('add', function() {
-      parrot.endpoint.add({
-        name: 'development',
-        url: 'http://localhost:1337'
-      });
-      return parrot.endpoint.development().should.eql('http://localhost:1337');
-    });
-    it('add concatenate', function() {
-      parrot.endpoint.add({
-        name: 'development',
-        url: 'http://localhost:1334'
-      }).add({
-        name: 'production',
-        url: 'http://api.com'
-      });
-      parrot.endpoint.development().should.eql('http://localhost:1334');
-      return parrot.endpoint.production().should.eql('http://api.com');
-    });
-    return it('set', function() {
-      parrot.endpoint.set('production');
-      return parrot.environment.should.eql('production');
-    });
-  });
-
   describe('URL ::', function() {
+    describe('Language ::', function() {
+      return it('set default language', function() {
+        return parrot.language.should.eql('en');
+      });
+    });
+    describe('Endpoint ::', function() {
+      it('add', function() {
+        parrot.endpoint.add({
+          name: 'development',
+          url: 'http://localhost:1337'
+        });
+        return parrot.endpoint.development().should.eql('http://localhost:1337');
+      });
+      it('add concatenate', function() {
+        parrot.endpoint.add({
+          name: 'development',
+          url: 'http://localhost:1334'
+        }).add({
+          name: 'production',
+          url: 'http://api.com'
+        });
+        parrot.endpoint.development().should.eql('http://localhost:1334');
+        return parrot.endpoint.production().should.eql('http://api.com');
+      });
+      return it('set', function() {
+        parrot.endpoint.set('production');
+        return parrot.environment.should.eql('production');
+      });
+    });
     it('add with default values', function() {
       var _default;
       _default = {};

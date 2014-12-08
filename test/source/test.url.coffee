@@ -1,25 +1,26 @@
-describe 'Language ::', ->
-  it 'set default language', ->
-    parrot.language.should.eql 'en'
-
-describe 'Endpoint ::', ->
-
-  it 'add', ->
-    parrot.endpoint.add(name: 'development', url:'http://localhost:1337')
-    parrot.endpoint.development().should.eql 'http://localhost:1337'
-
-  it 'add concatenate', ->
-    parrot.endpoint
-    .add(name: 'development', url:'http://localhost:1334')
-    .add(name: 'production', url:'http://api.com')
-    parrot.endpoint.development().should.eql 'http://localhost:1334'
-    parrot.endpoint.production().should.eql 'http://api.com'
-
-  it 'set', ->
-    parrot.endpoint.set('production')
-    parrot.environment.should.eql 'production'
-
 describe 'URL ::', ->
+
+  describe 'Language ::', ->
+
+    it 'set default language', ->
+      parrot.language.should.eql 'en'
+
+  describe 'Endpoint ::', ->
+
+    it 'add', ->
+      parrot.endpoint.add(name: 'development', url:'http://localhost:1337')
+      parrot.endpoint.development().should.eql 'http://localhost:1337'
+
+    it 'add concatenate', ->
+      parrot.endpoint
+      .add(name: 'development', url:'http://localhost:1334')
+      .add(name: 'production', url:'http://api.com')
+      parrot.endpoint.development().should.eql 'http://localhost:1334'
+      parrot.endpoint.production().should.eql 'http://api.com'
+
+    it 'set', ->
+      parrot.endpoint.set('production')
+      parrot.environment.should.eql 'production'
 
   it 'add with default values', ->
     _default = {}
