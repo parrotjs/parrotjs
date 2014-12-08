@@ -11,12 +11,11 @@
 
 Parrot helps you connect your frontend with you API backend. Only need to say to Parrot what do, and Parrot will do the hard work!
 
-At this moment Parrot supports:
+The most important Parrot features are:
 
-- Register different environments (development, production, testing,...).
-- Register different URLs with different protocols (http, sockets) and make easy AJAX requests.
-- Manage uniformly sessionStorage and localStorage.
-- Chainable methods for make easy concatenate different actions.
+- Modular Design with chainable methods for make easy concatenate different actions.
+- Divided in modules that provide a uniform API for handler HTML5 API's: Notification, Vibration, Battery, LocalStorage, SessionStorage,...
+- AJAX Handler and URL Management.
 
 For the future features check [Roadmap](https://github.com/sailorjs/Parrotjs/blob/master/ROADMAP.md) section.
 
