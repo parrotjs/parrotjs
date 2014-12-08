@@ -1,7 +1,4 @@
 do ->
-
-  ## -- Public -----------------------------------------------------------------
-
   parrot.ajax = (obj, cb) ->
     ajaxPromise = (obj) ->
       DEFAULT =
@@ -12,7 +9,7 @@ do ->
         DATATYPE     : 'json'
         CONTENT_TYPE : 'application/x-www-form-urlencoded'
 
-      new Promise((resolve, reject) =>
+      new Promise((resolve, reject) ->
         parrot.$.ajax
           url         : obj.url
           type        : obj.method or DEFAULT.METHOD
@@ -37,7 +34,7 @@ do ->
             reject(code: xhr.status, message: message)
       )
 
-    promise = (data, cb) =>
+    promise = (data, cb) ->
       ajaxPromise(data).then ((response) ->
         cb null, response
       ), (error) ->

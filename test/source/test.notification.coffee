@@ -1,4 +1,4 @@
-describe 'Notification ::', ->
+xdescribe 'Notification ::', ->
 
   it 'add new notification', ->
     notification =

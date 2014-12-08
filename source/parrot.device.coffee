@@ -1,5 +1,18 @@
+do ->
+  parrot.device =
+    detection: ->
+      parrot.$(document.body).attr "data-lang", parrot.language
+      parrot.$(document.body).attr "data-os", this.os.name
+      parrot.$(document.body).attr "data-device", this.type
+      parrot.$(document.body).attr "data-orientation", this.screen.orientation
+      parrot.$(document.body).attr "data-screen", this.screen.size
+
+    noDetection: ->
+      for detection in ['lang', 'os', 'device', 'orientation', 'screen']
+        parrot.$(document.body).removeAttr "data-#{detection}"
+
 parrot.$ ->
-  initialize = ->
+  initialize = do ->
     _detection = parrot.device.detection
     _noDetection = parrot.device.noDetection
 
@@ -32,7 +45,6 @@ parrot.$ ->
     parrot.device.detection = _detection
     parrot.device.noDetection = _noDetection
 
-  do initialize
   do parrot.device.detection
   parrot.$(window).on 'resize', initialize
   parrot.$(window).on 'orientationchange', initialize

@@ -1,4 +1,4 @@
-do (fn = parrot.url)->
+do ->
 
   ## -- Private ----------------------------------------------------------------
 
@@ -13,16 +13,17 @@ do (fn = parrot.url)->
 
   ## -- Public -----------------------------------------------------------------
 
-  fn.getOrUpdate = (name, update=undefined) ->
-    if update?
-      _URL[name][option] = update[option] for option of update
-      _URL[name].query = _getQuery(update.query) if update.query?
-    _URL[name]
+  parrot.url =
+    getOrUpdate: (name, update=undefined) ->
+      if update?
+        _URL[name][option] = update[option] for option of update
+        _URL[name].query = _getQuery(update.query) if update.query?
+      _URL[name]
 
-  fn.add = (opts) ->
-    name = opts.name
-    delete opts.name
-    opts.query = _getQuery(opts.query) if opts.query?
-    _URL[name] = opts
-    @[name]    = parrot._partial(@getOrUpdate, name).bind(fn)
-    this
+    add: (opts) ->
+      name = opts.name
+      delete opts.name
+      opts.query = _getQuery(opts.query) if opts.query?
+      _URL[name] = opts
+      @[name]    = parrot._partial(@getOrUpdate, name)
+      this
