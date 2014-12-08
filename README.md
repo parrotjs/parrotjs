@@ -10,25 +10,24 @@
 
 > Client library to connect your frontend application with whatever sails backend.
 
-Parrot helps you connect your frontend with you API backend. Only need to say to Parrot what do, and Parrot will do the hard work!
+Parrot helps you to connect your frontend with you API backend. You only need to say to Parrot what to do, and Parrot will do the hard work!
 
-At this moment Parrot supports:
+At this moment, Parrot supports:
 
-- Register different environments (development, production, testing,...).
-- Register different URLs with different protocols (http, sockets) and make easy AJAX requests.
-- Manage uniformly sessionStorage and localStorage.
-- Chainable methods for make easy concatenate different actions.
+- Registering different environments (development, production, testing,...).
+- Registering different URLs with different protocols (http, sockets) and easier AJAX requests.
+- Managing uniformly sessionStorage and localStorage.
+- Chain methods for make easy concatenate different actions.
 
-For the future features check [Roadmap](https://github.com/sailorjs/Parrotjs/blob/master/ROADMAP.md) section.
+For the future features, check [Roadmap](https://github.com/sailorjs/Parrotjs/blob/master/ROADMAP.md) section.
 
 ## Install
-
 
 ```bash
 bower install parrotjs
 ```
 
-## Browsers Compatibility
+## Browser Compatibility
 
 [![browser support](https://ci.testling.com/sailorjs/Parrotjs.png)
 ](https://ci.testling.com/sailorjs/Parrotjs)
@@ -40,7 +39,7 @@ At this moment, Parrot has two dependencies:
 - [jsurl](https://github.com/Mikhus/jsurl), a Polyfill of [URL Objects](http://www.w3.org/TR/url/)
 - [QuoJS](https://github.com/soyjavi/QuoJS/), [jQuery](https://github.com/jquery/jquery) or [Zepto](https://github.com/madrobby/zepto) for AJAX handler.
 
-We offers different builds depending on what you need
+We offer different builds depending on what you need.
 
 ### Standalone
 
@@ -50,11 +49,11 @@ Just Parrot code, without dependencies. Use it when you have a custom build with
 <script src="bower_components/parrotjs/dist/parrot.standalone.js"></script>
 ```
 
-Notes that if you don't provide `jsurl` and AJAX handler parrot will not work!
+Note that if you don't provide `jsurl` and an AJAX handler parrot will not work!
 
 ### Standard
 
-Parrot code with the minimum dependencies (only `jsurl`). Use it build when you provide your own ajax handler in yours frontend dependencies:
+Parrot code with the minimum dependencies (only `jsurl`). Use it when you provide your own ajax handler in your frontend dependencies:
 
 ```html
 <script src="bower_components/parrotjs/dist/parrot.js"></script>
@@ -62,7 +61,7 @@ Parrot code with the minimum dependencies (only `jsurl`). Use it build when you 
 
 ### QuoJS, jQuery or ZeptoJS
 
-Parrot code with all dependencies that he needs. Use it when you want to provide AJAX handler and not complicate yourself:
+Parrot code with all dependencies that it needs. Use it when you want to provide AJAX handler and you don't want to complicate yourself:
 
 ```html
 <script src="bower_components/parrotjs/dist/parrot.quo.js"></script>
@@ -76,11 +75,11 @@ The library is divided in different namespaces:
 
 ### Basic
 
-This method is available in `Parrot` namespace. This is the basic method that you need yo set up the library and know the current version.
+This method is available in `Parrot` namespace. This is the basic method that you need yo set up the library and to know the current version.
 
 #### .version
 
-Returns the version of the library.
+It returns the version of the library.
 
 ```coffee
 Parrot.version
@@ -89,25 +88,25 @@ Parrot.version
 
 #### .environment
 
-Returns the environment that you are using at this moment.
+It returns the environment that you are using at this moment.
 
 ```coffee
 Parrot.environment
 # => 'development'
 ```
 
-Default environment is `development`.
+The default environment is `development`.
 
 #### .language
 
-Returns the language that you want to use in the requests with your API's endpoints.
+It returns the language that you want to use in the requests with your API's endpoints.
 
 ```coffee
 Parrot.language
 # => 'en'
 ```
 
-Default language is obtained from `navigator.language`, that is the language of the browser of the user.
+The default language is obtained from `navigator.language`, which is the language of the browser of the user.
 
 #### .ajax(&lt;Object&gt; or &lt;String&gt;)
 
