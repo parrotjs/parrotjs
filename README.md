@@ -34,7 +34,7 @@ bower install parrotjs
 At this moment, Parrot has two dependencies:
 
 - [jsurl](https://github.com/Mikhus/jsurl), a Polyfill of [URL Objects](http://www.w3.org/TR/url/).
-- [UAParser](https://github.com/faisalman/ua-parser-js).
+- [UAParser](https://github.com/faisalman/ua-parser-js) for Device detection.
 - [QuoJS](https://github.com/soyjavi/QuoJS/), [jQuery](https://github.com/jquery/jquery) or [Zepto](https://github.com/madrobby/zepto) for AJAX handler.
 
 We offers different builds depending on what you need

@@ -17,21 +17,17 @@ parrot.$ ->
     _noDetection = parrot.device.noDetection
 
     parser = new UAParser().getResult()
-    parrot.device = parser.device
+    delete parser.ua
+    parser.cpu = parser.cpu.architecture if parser.cpu.architecture?
+    delete parser.cpu
+    _device = parser.device
     delete parser.device
-    for property, value of parser
-      continue if property is 'cpu' and not property.architecture? # no cpu detection
-      parrot.device[property] = value
-
-    # fix desktop detection
-    unless parrot.device.type?
-      parrot.device.type = 'desktop'
-      delete parrot.device.vendor
-      delete parrot.device.model
+    parser[property] = value for property, value of _device when value?
+    parrot.device = parser
 
     # screen
-    w = window.screen.availWidth
-    h = window.screen.availHeight
+    w = window.innerWidth
+    h = window.innerHeight
     size = if (h > w and w < 480) or (h < w and h < 480) then 'small' else 'normal'
     orientation = if ((h / w) < 1) then 'landscape' else 'portrait'
 
@@ -44,6 +40,10 @@ parrot.$ ->
     # detection
     parrot.device.detection = _detection
     parrot.device.noDetection = _noDetection
+
+    # fix desktop detection
+    unless parrot.device.type? and size is 'normal' and orientation is 'landscape'
+      parrot.device.type = 'desktop'
 
   do parrot.device.detection
   parrot.$(window).on 'resize', initialize
