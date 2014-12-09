@@ -19,7 +19,7 @@ It's insert in the `body` of your `html` useful information as [data attributes]
 For example:
 
 ```html
-<body data-lang="en" data-os="iOS" data-device="mobile" data-orientation="portrait" data-screen="small">
+<body data-lang="en" data-os="iOS" data-device="mobile" data-orientation="portrait" data-screen="small" data-retina="false">
 ```
 
 If you want to use other values you can redefine `detection` function with your custom configuration.
