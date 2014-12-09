@@ -135,7 +135,7 @@ gulp.task 'mocha', ->
 gulp.task 'server', ->
   connect.server
     port       : 8001
-    root       : 'test'
+    root       : [__dirname, 'test']
     livereload : true
   return
 

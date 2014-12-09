@@ -14,7 +14,7 @@ do ->
   ## -- Public -----------------------------------------------------------------
 
   parrot.environment = 'development'
-  parrot.language = window.navigator.language.slice(0, 2)
+  parrot.language = navigator.language.slice(0, 2)
   parrot.endpoint =
     add: (obj) ->
       @[obj.name] = -> obj.url

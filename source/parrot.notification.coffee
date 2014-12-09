@@ -25,9 +25,9 @@ do ->
         name = undefined
         options = arguments[0]
 
-      _createNotification = (opts) =>
+      _createNotification = (opts) ->
         try
-          window['Notification'].requestPermission()
+          Notification.requestPermission()
           title = opts.title
           delete opts.title
           new Notification title, opts

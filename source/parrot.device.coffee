@@ -1,20 +1,20 @@
 do ->
+  el = document.body
   parrot.device =
     detection: ->
-      body = window.document.body
-      body.dataset.lang        = parrot.language
-      body.dataset.os          = @os.name.toLowerCase()
-      body.dataset.device      = @type
-      body.dataset.orientation = @screen.orientation
-      body.dataset.screen      = @screen.size
-      body.dataset.retina      = (if @screen.pixelRatio is 1 then false else true)
+      el.dataset.lang        = parrot.language
+      el.dataset.os          = parrot.device.os.name.toLowerCase()
+      el.dataset.device      = parrot.device.type
+      el.dataset.orientation = parrot.device.screen.orientation
+      el.dataset.screen      = parrot.device.screen.size
+      el.dataset.retina      = (if @screen.pixelRatio is 1 then false else true)
 
     noDetection: ->
       for property in ['lang', 'os', 'device', 'orientation', 'screen', "retina"]
-        delete window.document.body.dataset[property]
+        delete el.dataset[property]
 
 parrot.$ ->
-  initialize = do ->
+  initialize = ->
     _detection   = parrot.device.detection
     _noDetection = parrot.device.noDetection
     reduceRatio  = (numerator, denominator) ->
@@ -49,7 +49,7 @@ parrot.$ ->
       height      : h
       size        : size
       orientation : orientation
-      pixelRatio  : window.devicePixelRatio or 'unsupported'
+      pixelRatio  : devicePixelRatio or 'unsupported'
       aspectRatio : reduceRatio w, h
 
     # fix desktop detection
@@ -59,6 +59,7 @@ parrot.$ ->
     parrot.device.detection = _detection
     parrot.device.noDetection = _noDetection
 
+  do initialize
   do parrot.device.detection
   parrot.$(window).on 'resize', initialize
   parrot.$(window).on 'orientationchange', initialize
