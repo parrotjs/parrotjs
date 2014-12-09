@@ -107,5 +107,5 @@ It's returns information about the screen of your device.
 
 ```coffee
 parrot.device.screen
-# => {width: 414, height: 736, size: "small", orientation: "portrait"}
+# => {aspectRatio: "16/9", width: 1080, height: 920, size: "small", orientation: "portrait", pixelRatio: 1}
 ```
