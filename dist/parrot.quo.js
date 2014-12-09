@@ -1,6 +1,6 @@
 /**
  * parrotjs - Use browser features (Notification, Storage, Vibration, Battery...) and make easy the communication with your API.
- * @version v0.11.27a
+ * @version v0.12.9
  * @link    http://github.com/sailor/parrotjs
  * @author  Kiko Beats (https://github.com/Kikobeats)
  * @license MIT
