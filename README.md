@@ -2,9 +2,9 @@
 
 # Parrot <a href="http://bower.io/search/?q=Parrotjs"><img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30"></a>
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/sailorjs/Parrotjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Dependency status](http://img.shields.io/david/sailorjs/Parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/Parrotjs)
-[![Dev Dependencies Status](http://img.shields.io/david/dev/sailorjs/Parrotjs.svg?style=flat)](https://david-dm.org/sailorjs/Parrotjs#info=devDependencies)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/parrotjs/Parrotjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Dependency status](http://img.shields.io/david/parrotjs/Parrotjs.svg?style=flat)](https://david-dm.org/parrotjs/Parrotjs)
+[![Dev Dependencies Status](http://img.shields.io/david/dev/parrotjs/Parrotjs.svg?style=flat)](https://david-dm.org/parrotjs/Parrotjs#info=devDependencies)
 [![Gittip](http://img.shields.io/gittip/Kikobeats.svg?style=flat)](https://www.gittip.com/Kikobeats/)
 
 > Use browser features (Notification, Storage, Vibration, Battery...) and make easy the communication with your API.
@@ -15,7 +15,7 @@ The most importante feature are:
 - AJAX Handler and URL Management.
 - Modules provide a uniform API for HTML5 features: Notification, Battery, Vibration, Geolocation,...
 
-For the future features check [Roadmap](https://github.com/sailorjs/Parrotjs/blob/master/ROADMAP.md) section.
+For the future features check [Roadmap](https://github.com/parrotjs/Parrotjs/blob/master/ROADMAP.md) section.
 
 ## Install
 
@@ -26,8 +26,8 @@ bower install parrotjs
 
 ## Browsers Compatibility
 
-[![browser support](https://ci.testling.com/sailorjs/Parrotjs.png)
-](https://ci.testling.com/sailorjs/Parrotjs)
+[![browser support](https://ci.testling.com/parrotjs/Parrotjs.png)
+](https://ci.testling.com/parrotjs/Parrotjs)
 
 ## Usage
 
@@ -73,8 +73,8 @@ For improve your perfomance experience, the code design of Parrot is modular and
 
 ## Documentation
 
-Check [Documentation](https://github.com/sailorjs/parrotjs/tree/beta/documentation) section for more information about each module API.
+Check [Documentation](https://github.com/parrotjs/parrotjs/tree/beta/documentation) section for more information about each module API.
 
 ## License
 
-MIT © sailorjs
+MIT © parrotjs
