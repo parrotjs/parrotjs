@@ -1,16 +1,17 @@
 do ->
   parrot.device =
     detection: ->
-      parrot.$(document.body).attr "data-lang", parrot.language
-      parrot.$(document.body).attr "data-os", @os.name.toLowerCase()
-      parrot.$(document.body).attr "data-device", @type
-      parrot.$(document.body).attr "data-orientation", @screen.orientation
-      parrot.$(document.body).attr "data-screen", @screen.size
-      parrot.$(document.body).attr "data-retina", (if @screen.pixelRatio is 1 then false else true)
+      body = window.document.body
+      body.dataset.lang        = parrot.language
+      body.dataset.os          = @os.name.toLowerCase()
+      body.dataset.device      = @type
+      body.dataset.orientation = @screen.orientation
+      body.dataset.screen      = @screen.size
+      body.dataset.retina      = (if @screen.pixelRatio is 1 then false else true)
 
     noDetection: ->
-      for detection in ['lang', 'os', 'device', 'orientation', 'screen', "retina"]
-        parrot.$(document.body).removeAttr "data-#{detection}"
+      for property in ['lang', 'os', 'device', 'orientation', 'screen', "retina"]
+        delete window.document.body.dataset[property]
 
 parrot.$ ->
   initialize = do ->

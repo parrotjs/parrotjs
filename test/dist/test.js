@@ -299,7 +299,7 @@
 }).call(this);
 
 (function() {
-  describe('Notification ::', function() {
+  xdescribe('Notification ::', function() {
     it('add new notification', function() {
       var notification;
       notification = {
