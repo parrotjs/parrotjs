@@ -49,8 +49,9 @@ parrot.$ ->
       height      : h
       size        : size
       orientation : orientation
-      pixelRatio  : devicePixelRatio or 'unsupported'
       aspectRatio : reduceRatio w, h
+
+    parrot.device.screen.pixelRatio = devicePixelRatio if devicePixelRatio?
 
     # fix desktop detection
     parrot.device.type = 'desktop' if not parrot.device.type? and size is 'normal'
