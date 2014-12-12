@@ -2,11 +2,13 @@ do ->
 
   ## -- Private ----------------------------------------------------------------
 
+  _partial = require 'fn-partial'
+
   _initStorage = do ->
     for key in Object.keys(localStorage)
-      parrot['local'][key] = parrot._partial(_get, 'local', key)
+      parrot['local'][key] = _partial(_get, 'local', key)
     for key in Object.keys(sessionStorage)
-      parrot['session'][key] = parrot._partial(_get, 'session', key)
+      parrot['session'][key] = _partial(_get, 'session', key)
 
   _storage = (type) ->
     if type is 'local' then localStorage else sessionStorage
@@ -21,7 +23,7 @@ do ->
   _add = (type, key, data) ->
     data = JSON.stringify(data) unless typeof data is 'string'
     _storage(type).setItem(key, data)
-    parrot[type][key] = parrot._partial(_get, type, key)
+    parrot[type][key] = _partial(_get, type, key)
 
   _remove = (type, key) ->
     delete parrot[type][key]

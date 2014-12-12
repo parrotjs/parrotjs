@@ -3,6 +3,7 @@ do ->
   ## -- Private ----------------------------------------------------------------
 
   _Notification = {}
+  _partial = require 'fn-partial'
 
   ## -- Public -----------------------------------------------------------------
 
@@ -17,7 +18,7 @@ do ->
       name = opts.name
       delete opts.name
       _Notification[name] = opts
-      @[name] = parrot._partial(@getOrUpdate, name)
+      @[name] = _partial(@getOrUpdate, name)
       this
 
     show: (name, options) ->

@@ -10,6 +10,7 @@ do ->
     query             = url.toString()
     query             = query.substring(1) if query.charAt(0) is '?'
     query
+  _partial = require 'fn-partial'
 
   ## -- Public -----------------------------------------------------------------
 
@@ -36,5 +37,5 @@ do ->
       delete opts.name
       opts.query = _getQuery(opts.query) if opts.query?
       _URL[name] = opts
-      @[name]    = parrot._partial(@getOrUpdate, name)
+      @[name]    = _partial(@getOrUpdate, name)
       this
