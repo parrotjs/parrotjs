@@ -31,7 +31,7 @@ path =
     zepto     : 'components/zepto/zepto.min.js'
     jsurl     : 'components/jsurl/url.min.js'
     ua_parser : 'components/ua-parser-js/dist/ua-parser.min.js'
-    partial   : 'components/fn-partial/dist/fn.partial.js'
+    partial   : 'components/fn-partial/dist/fn-partial.js'
 
   test:
     src   : ['test/source/test.url.coffee'
