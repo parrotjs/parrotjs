@@ -32,6 +32,7 @@ path =
     jsurl     : 'components/jsurl/url.min.js'
     ua_parser : 'components/ua-parser-js/dist/ua-parser.min.js'
     partial   : 'components/fn-partial/dist/fn-partial.js'
+    ratio     : 'components/aspect-ratio/dist/aspect-ratio.js'
 
   test:
     src   : ['test/source/test.url.coffee'
@@ -73,7 +74,7 @@ gulp.task 'standalone', ->
 
 gulp.task 'standard', ->
   dep = path.dependencies
-  gulp.src [dep.jsurl, dep.ua_parser, dep.partial, path.core.build]
+  gulp.src [dep.jsurl, dep.ua_parser, dep.partial, dep.ratio, path.core.build]
   .pipe concat 'parrot.js'
   .pipe uglify()
   .pipe header banner, pkg: pkg
@@ -84,7 +85,7 @@ gulp.task 'standard', ->
 gulp.task 'quo', ->
   dep = path.dependencies
   origin = dep.quo
-  origin.push dep.jsurl, dep.ua_parser, dep.partial, path.core.build
+  origin.push dep.jsurl, dep.ua_parser, dep.partial, dep.ratio, path.core.build
   gulp.src origin
   .pipe uglify()
   .pipe concat 'parrot.quo.js'
@@ -95,7 +96,7 @@ gulp.task 'quo', ->
 
 gulp.task 'jquery', ->
   dep = path.dependencies
-  gulp.src [dep.jquery, dep.jsurl, dep.ua_parser, dep.partial, path.core.build]
+  gulp.src [dep.jquery, dep.jsurl, dep.ua_parser, dep.partial, dep.ratio, path.core.build]
   .pipe uglify()
   .pipe concat 'parrot.jquery.js'
   .pipe header banner, pkg: pkg
@@ -105,7 +106,7 @@ gulp.task 'jquery', ->
 
 gulp.task 'zepto', ->
   dep = path.dependencies
-  gulp.src [dep.zepto, dep.jsurl, dep.ua_parser, dep.partial, path.core.build]
+  gulp.src [dep.zepto, dep.jsurl, dep.ua_parser, dep.partial, dep.ratio, path.core.build]
   .pipe uglify()
   .pipe concat 'parrot.zepto.js'
   .pipe header banner, pkg: pkg
