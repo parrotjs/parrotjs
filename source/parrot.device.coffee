@@ -17,17 +17,6 @@ parrot.$ ->
   initialize = ->
     _detection   = parrot.device.detection
     _noDetection = parrot.device.noDetection
-    reduceRatio  = (numerator, denominator) ->
-      gcd = (a, b) ->
-        return a  if b is 0
-        gcd b, a % b
-      return "1/1"  if numerator is denominator
-      if numerator < denominator
-        temp = numerator
-        numerator = denominator
-        denominator = temp
-      divisor = gcd(numerator, denominator)
-      (if "undefined" is typeof temp then (numerator / divisor) + "/" + (denominator / divisor) else (denominator / divisor) + "/" + (numerator / divisor))
 
     parser = new UAParser().getResult()
     delete parser.ua
@@ -49,7 +38,7 @@ parrot.$ ->
       height      : h
       size        : size
       orientation : orientation
-      aspectRatio : reduceRatio w, h
+      aspectRatio : require('aspect-ratio')(w,h)
 
     parrot.device.screen.pixelRatio = devicePixelRatio if devicePixelRatio?
 

@@ -1,6 +1,6 @@
 {
   "name": "parrotjs",
-  "version": "0.12.12",
+  "version": "0.12.13",
   "authors": [
     "Kiko Beats <josefrancisco.verdu@gmail.com>"
   ],
@@ -31,6 +31,7 @@
   "homepage": "https://github.com/sailorjs/parrotjs",
   "dependencies": {
     "ua-parser-js": "*",
-    "fn-partial": "*"
+    "fn-partial": "*",
+    "aspect-ratio": "*"
   }
 }
