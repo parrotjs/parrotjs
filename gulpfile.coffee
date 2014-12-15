@@ -27,7 +27,7 @@ path =
 
   dependency:
     jquery  : 'components/jquery/dist/jquery.min.js'
-    quo     : ['components/quojs/quo.js', 'components/quojs/quo.ajax.js']
+    quo     : 'components/quojs/quo.standalone.js'
     zepto   : 'components/zepto/zepto.min.js'
     partial : 'components/fn-partial/dist/fn-partial.js'
 
@@ -71,10 +71,7 @@ gulp.task 'standalone', ->
 
 gulp.task 'quo', ->
   dep = path.dependency
-  origin = dep.quo
-  origin.push path.dependency.partial
-  origin.push path.core.build
-  gulp.src origin
+  gulp.src [dep.quo, dep.partial, path.core.build]
   .pipe uglify()
   .pipe concat 'parrot.quo.js'
   .pipe header banner, pkg: pkg
