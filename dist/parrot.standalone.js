@@ -5,4 +5,4 @@
  * @author  Kiko Beats (https://github.com/Kikobeats)
  * @license MIT
  */
-(function(){"use strict";var t;t=this.parrot={version:"0.12.14",$:"undefined"!=typeof $$&&null!==$$?$$:$}}).call(this);
+(function(){"use strict";var a;a=this.parrot={version:"0.12.14",language:navigator.language.slice(0,2),$:"undefined"!=typeof $$&&null!==$$?$$:$}}).call(this);
