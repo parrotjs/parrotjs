@@ -23,7 +23,7 @@ The design of code is modular. Only use the wrappers that you need. All code is 
 | [parrot-boilerplate](https://github.com/parrotjs/parrot-boilerplate)                 | If you want to create a parrot-module, clone this repository and you have the standard scaffold and pre-configuration for do it.    |
 | [parrot-module-ajax](https://github.com/parrotjs/parrot-module-ajax)                 | Make easy do AJAX petitions with different backend. Using with URL module for better experience.                                    |
 | [parrot-module-url](https://github.com/parrotjs/parrot-module-url)                   | URL Management with support for different environments (testing, production, development,...). Use with AJAX for better experience. |
-| [parrot-module-storage](https://github.com/parrotjs/parrot-module-storage)           | Provide a uniformly API for management localStorage and SessionStorage.                                                             |
+| [parrot-module-storage](https://github.com/parrotjs/parrot-module-storage)           | Provide a uniformly API for manage localStorage and SessionStorage.                                                             |
 | [parrot-module-notification](https://github.com/parrotjs/parrot-module-notification) | Interact with HTML5 Notifications. It makes easy to reuse notifications.                                                            |
 | [parrot-module-device](https://github.com/parrotjs/parrot-module-device)             | Automatically detect your device and provide some useful information: vendor, screen properties, browser vendor and version,...     |
 
