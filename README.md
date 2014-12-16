@@ -63,6 +63,38 @@ For use different modules, just chain the modules in your `html`:
 
 Remember that for `production` you can concatenate all files that you need in one creating a simple Gulp/Grunt task.
 
+## Documentation
+
+This module provides the `parrot` namespace and the global methods that other modules need, which are not interesting for you.
+
+### parrot
+
+#### .version
+
+Returns the version of the library.
+
+```coffee
+parrot.version
+# => '0.11.27'
+```
+
+### .$
+
+Returns the instance of the DOM handlers (QuoJS, jQuery or ZeptoJS)
+
+```coffee
+parrot.$
+```
+
+### .language
+
+Returns the language detected in the browser.
+
+```
+parrot.language
+# => 'en'
+```
+
 ## License
 
 MIT © parrotjs
