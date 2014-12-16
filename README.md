@@ -13,37 +13,55 @@ On the other hand, the API of this news features are too primitive: the browsers
 
 Parrot is a high-level wrapper for browser features: It's provide you concise methods for use this features today.
 
-## Examples
-
 ## Get Started
 
-The code are divided in modules and each do a different thing:
+The design of code is modular. Only use the wrappers that you need. All code is minifier and prepare for production.
 
-## Install
+| Name                                                                                 | Description                                                                                                                         |
+|--------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| [parrot](https://github.com/parrotjs/parrotjs)                                       | This repository and have the basic code provide DOM Handler and other minimal things.                                                    |
+| [parrot-boilerplate](https://github.com/parrotjs/parrot-boilerplate)                 | If you want to create a parrot-module, clone this repository and you have the standard scaffold and pre-configuration for do it.    |
+| [parrot-module-ajax](https://github.com/parrotjs/parrot-module-ajax)                 | Make easy do AJAX petitions with different backend. Using with URL module for better experience.                                    |
+| [parrot-module-url](https://github.com/parrotjs/parrot-module-url)                   | URL Management with support for different environments (testing, production, development,...). Use with AJAX for better experience. |
+| [parrot-module-storage](https://github.com/parrotjs/parrot-module-storage)           | Provide a uniformly API for management localStorage and SessionStorage.                                                             |
+| [parrot-module-notification](https://github.com/parrotjs/parrot-module-notification) | Interact with HTML5 Notifications. It makes easy to reuse notifications.                                                            |
+| [parrot-module-device](https://github.com/parrotjs/parrot-module-device)             | Automatically detect your device and provide some useful information: vendor, screen properties, browser vendor and version,...     |
+
+For install the library use `bower`:
 
 ```bash
 bower install parrotjs
+bower install parrot-module-device
 ```
 
 We offers different builds depending on what you need
 
-### Standalone
+**Standalone (without DOM Handler)**
 
-Just parrot code, without dependencies. Use it when you have a custom build with your other frontend dependencies:
+Just parrot code. You need to provide an DOM handler:
 
 ```html
 <script src="bower_components/parrotjs/dist/parrot.standalone.js"></script>
 ```
 
-### QuoJS, jQuery or ZeptoJS
+**Standard (with QuoJS, jQuery or ZeptoJS as DOM Handler)**
 
-Parrot code with all dependencies that he needs. Use it when you want to provide AJAX handler and not complicate yourself:
+Parrot code + DOM Handler. We have 3 different builds:
 
 ```html
 <script src="bower_components/parrotjs/dist/parrot.quo.js"></script>
 <script src="bower_components/parrotjs/dist/parrot.jquery.js"></script>
 <script src="bower_components/parrotjs/dist/parrot.zepto.js"></script>
 ```
+
+For use different modules, just chain the modules in your `html`:
+
+```html
+<script src="bower_components/parrotjs/dist/parrot.quo.js"></script>
+<script src="bower_components/parrot-module-device/dist/parrot.device.js"></script>
+```
+
+Remember that for `production` you can concatenate all files that you need in one creating a simple Gulp/Grunt task.
 
 ## License
 

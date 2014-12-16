@@ -1,10 +1,10 @@
 {
   "name": "parrotjs",
-  "version": "0.12.15",
+  "version": "0.12.16",
   "authors": [
     "Kiko Beats <josefrancisco.verdu@gmail.com>"
   ],
-  "description": "Browser features today. High-level wrapper for browsers features.",
+  "description": "Browser features today. High-level wrapper for browser features.",
   "main": "dist/parrot.js",
   "keywords": [
     "frontend",
