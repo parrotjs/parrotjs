@@ -25,14 +25,11 @@ path =
     dist  : 'dist'
     build : 'dist/parrot.standalone.js'
 
-  dependencies:
-    jquery    : 'components/jquery/dist/jquery.min.js'
-    quo       : ['components/quojs/quo.js', 'components/quojs/quo.ajax.js']
-    zepto     : 'components/zepto/zepto.min.js'
-    jsurl     : 'components/jsurl/url.min.js'
-    ua_parser : 'components/ua-parser-js/dist/ua-parser.min.js'
-    partial   : 'components/fn-partial/dist/fn-partial.js'
-    ratio     : 'components/aspect-ratio/dist/aspect-ratio.js'
+  dependency:
+    jquery  : 'components/jquery/dist/jquery.min.js'
+    quo     : 'components/quojs/quo.standalone.js'
+    zepto   : 'components/zepto/zepto.min.js'
+    partial : 'components/fn-partial/dist/fn-partial.js'
 
   test:
     src   : ['test/source/test.url.coffee'
@@ -72,21 +69,9 @@ gulp.task 'standalone', ->
   .pipe connect.reload()
   return
 
-gulp.task 'standard', ->
-  dep = path.dependencies
-  gulp.src [dep.jsurl, dep.ua_parser, dep.partial, dep.ratio, path.core.build]
-  .pipe concat 'parrot.js'
-  .pipe uglify()
-  .pipe header banner, pkg: pkg
-  .pipe gulp.dest path.core.dist
-  .pipe connect.reload()
-  return
-
 gulp.task 'quo', ->
-  dep = path.dependencies
-  origin = dep.quo
-  origin.push dep.jsurl, dep.ua_parser, dep.partial, dep.ratio, path.core.build
-  gulp.src origin
+  dep = path.dependency
+  gulp.src [dep.quo, dep.partial, path.core.build]
   .pipe uglify()
   .pipe concat 'parrot.quo.js'
   .pipe header banner, pkg: pkg
@@ -95,8 +80,8 @@ gulp.task 'quo', ->
   return
 
 gulp.task 'jquery', ->
-  dep = path.dependencies
-  gulp.src [dep.jquery, dep.jsurl, dep.ua_parser, dep.partial, dep.ratio, path.core.build]
+  dep = path.dependency
+  gulp.src [dep.jquery, dep.partial, path.core.build]
   .pipe uglify()
   .pipe concat 'parrot.jquery.js'
   .pipe header banner, pkg: pkg
@@ -105,8 +90,8 @@ gulp.task 'jquery', ->
   return
 
 gulp.task 'zepto', ->
-  dep = path.dependencies
-  gulp.src [dep.zepto, dep.jsurl, dep.ua_parser, dep.partial, dep.ratio, path.core.build]
+  dep = path.dependency
+  gulp.src [dep.zepto, dep.partial, path.core.build]
   .pipe uglify()
   .pipe concat 'parrot.zepto.js'
   .pipe header banner, pkg: pkg
@@ -146,7 +131,7 @@ gulp.task 'dev', ->
   return
 
 gulp.task 'build', ->
-  gulp.start ['develop', 'standalone', 'standard', 'quo', 'jquery', 'zepto']
+  gulp.start ['develop', 'standalone', 'quo', 'jquery', 'zepto']
   return
 
 gulp.task 'default', ->

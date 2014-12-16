@@ -1,7 +1,7 @@
 {
   "name": "parrotjs",
-  "description": "Use browser features (Notification, Storage, Vibration, Battery...) and make easy the communication with your API.",
-  "version": "0.12.13",
+  "description": "Browser features today. High-level wrapper for browser features.",
+  "version": "0.12.16",
   "author": {
     "name": "Kiko Beats",
     "email": "josefrancisco.verdu@gmail.com",

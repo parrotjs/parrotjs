@@ -1,10 +1,10 @@
 {
   "name": "parrotjs",
-  "version": "0.12.13",
+  "version": "0.12.16",
   "authors": [
     "Kiko Beats <josefrancisco.verdu@gmail.com>"
   ],
-  "description": "Use browser features (Notification, Storage, Vibration, Battery...) and make easy the communication with your API.",
+  "description": "Browser features today. High-level wrapper for browser features.",
   "main": "dist/parrot.js",
   "keywords": [
     "frontend",
@@ -24,14 +24,11 @@
   ],
   "devDependencies": {
     "jquery": "1.x",
-    "jsurl": "*",
     "quojs": "*",
     "zepto": "*"
   },
   "homepage": "https://github.com/sailorjs/parrotjs",
   "dependencies": {
-    "ua-parser-js": "*",
-    "fn-partial": "*",
-    "aspect-ratio": "*"
+    "fn-partial": "*"
   }
 }
