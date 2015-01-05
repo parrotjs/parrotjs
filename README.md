@@ -26,6 +26,7 @@ The design of code is modular. Only use the wrappers that you need. All code is 
 | [parrot-module-storage](https://github.com/parrotjs/parrot-module-storage)           | Provides a uniformly API for management localStorage and SessionStorage.                                                             |
 | [parrot-module-notification](https://github.com/parrotjs/parrot-module-notification) | Interact with HTML5 Notifications. It makes easy to reuse notifications.                                                            |
 | [parrot-module-device](https://github.com/parrotjs/parrot-module-device)             | Automatically detect your device and provide some useful information: vendor, screen properties, browser vendor and version,...     |
+| [parrot-module-geolocation](https://github.com/parrotjs/parrot-module-geolocation)   | Using geolocation with guarantees to obtain a good approximation |
 
 For install the library use `bower`:
 
