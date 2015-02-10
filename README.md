@@ -1,4 +1,4 @@
-<center>![](http://i.imgur.com/SmLtxEo.png)</center>
+# <img align="center" src="http://i.imgur.com/SmLtxEo.png" alt="parrot">
 
 # Parrot <a href="http://bower.io/search/?q=Parrotjs"><img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30"></a>
 
