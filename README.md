@@ -15,7 +15,7 @@ Parrot is a high-level wrapper for browser features: It's provide you concise me
 
 ## Get Started
 
-The design of code is modular. Only use the wrappers that you need. All code is minifier and prepare for production.
+One of the most important thing in parrot is that the design of code is modular, and you can only use the wrappers that you need. This is very nice for use the minimum code in different projects. All code is minifier and prepare for production.
 
 | Name                                                                                 | Description                                                                                                                         |
 |--------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
