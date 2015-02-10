@@ -13,7 +13,18 @@ On the other hand, the API of this news features are too primitive: the browsers
 
 Parrot is a high-level wrapper for browser features: It's provide you concise methods for use this features today.
 
-## Get Started
+## Install
+
+For install the library use `bower`:
+
+```bash
+$ bower install parrotjs
+$ bower install parrot-module-device
+```
+
+You need always install parrotjs core and later the modules that you want to use.
+
+## Modules
 
 One of the most important thing in parrot is that the design of code is modular, and you can only use the wrappers that you need. This is very nice for use the minimum code in different projects. All code is minifier and prepare for production.
 
@@ -30,12 +41,7 @@ When you are programming for the frontend side, each line of code is importat. T
 | [parrot-module-device](https://github.com/parrotjs/parrot-module-device)             | Automatically detect your device and provide some useful information: vendor, screen properties, browser vendor and version,...     |
 | [parrot-module-geolocation](https://github.com/parrotjs/parrot-module-geolocation)   | Using geolocation with guarantees to obtain a good approximation |
 
-For install the library use `bower`:
-
-```bash
-bower install parrotjs
-bower install parrot-module-device
-```
+## Builds
 
 We offers different builds depending on what you need
 
