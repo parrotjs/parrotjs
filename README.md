@@ -17,6 +17,8 @@ Parrot is a high-level wrapper for browser features: It's provide you concise me
 
 One of the most important thing in parrot is that the design of code is modular, and you can only use the wrappers that you need. This is very nice for use the minimum code in different projects. All code is minifier and prepare for production.
 
+When you are programming for the frontend side, each line of code is importat. The core of parrot provide you a facade for the DOM handler (jQuery, QuoJS or Zepto) and useful helpers methods to use across the module, but nothing more.
+
 | Name                                                                                 | Description                                                                                                                         |
 |--------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | [parrot](https://github.com/parrotjs/parrotjs)                                       | This repository and have the basic code provide DOM Handler and other minimal things.                                                    |
