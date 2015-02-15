@@ -1,6 +1,8 @@
 'use strict'
 
-parrot = @parrot =
-  version  : '1.1.25'
+## -- Public ------------------------------------------------------------------
+
+parrot = @parrot = do ->
+  version  : '1.2'
   language : navigator.language.slice 0, 2
-  $        : if $$? then $$ else $ # DOM Handler Facade
+  $        : $$ or $ # DOM Handler Facade
