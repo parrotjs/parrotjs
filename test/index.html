@@ -6,19 +6,15 @@
 </head>
 <body>
   <div id="mocha"></div>
-  <script src="../components/quojs/quo.standalone.js"></script>
-  <!-- <script src="../components/jquery/dist/jquery.min.js"></script> -->
-  <script src="../components/jsurl/url.min.js"></script>
-  <script src="../components/ua-parser-js/dist/ua-parser.min.js"></script>
-  <script src="../components/fn-partial/dist/fn-partial.js"></script>
-  <script src="../components/aspect-ratio/dist/aspect-ratio.js"></script>
-  <script src="../dist/parrot.develop.js"></script>
-  <!-- <script src="../dist/parrot.quo.js"></script> -->
+  <!-- <script src="../dist/parrot.jquery.js"></script> -->
+  <script src="../dist/parrot.quo.js"></script>
+  <!-- <script src="../dist/parrot.zepto.js"></script> -->
+<!--   <script src="../components/quojs/quo.js"></script>
+  <script src="../dist/parrot.develop.js"></script> -->
   <script src="../node_modules/should/should.min.js"></script>
   <script src="../node_modules/mocha/mocha.js"></script>
   <script>mocha.setup('bdd')</script>
   <script src="dist/test.js"></script>
-  <!-- <script src="dist/test.sailor.js"></script> -->
   <script>
     // mocha.checkLeaks();
     mocha.globals(['should', 'parrot']);

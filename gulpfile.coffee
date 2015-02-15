@@ -1,6 +1,6 @@
 'use strict'
 
-# -- Dependencies --------------------------------------------------------------
+# -- Dependencies -------------------------------------------------------------
 
 gulp    = require 'gulp'
 concat  = require 'gulp-concat'
@@ -12,30 +12,21 @@ connect = require 'gulp-connect'
 open    = require 'gulp-open'
 pkg     = require './package.json'
 
-# -- Files ---------------------------------------------------------------------
+# -- Files --------------------------------------------------------------------
 
 path =
   core:
-    src   : [ 'source/parrot.coffee'
-              'source/parrot.url.coffee'
-              'source/parrot.ajax.coffee'
-              'source/parrot.store.coffee'
-              'source/parrot.notification.coffee'
-              'source/parrot.device.coffee' ]
-    dist  : 'dist'
-    build : 'dist/parrot.standalone.js'
+    src      : 'source/parrot.coffee'
+    debug    : 'parrot.develop.js'
+    dist     : 'dist'
 
   dependency:
     jquery  : 'components/jquery/dist/jquery.min.js'
     quo     : 'components/quojs/quo.standalone.js'
     zepto   : 'components/zepto/zepto.min.js'
-    partial : 'components/fn-partial/dist/fn-partial.js'
 
   test:
-    src   : ['test/source/test.url.coffee'
-             'test/source/test.ajax.coffee'
-             'test/source/test.store.coffee'
-             'test/source/test.notification.coffee']
+    src   : 'test/source/test.parrot.coffee'
     dist  : 'test/dist'
     index : 'test/index.html'
 
@@ -50,13 +41,14 @@ banner = [ "/**"
 
 # -- Tasks ---------------------------------------------------------------------
 
-gulp.task 'develop', ->
+gulp.task 'develop', (cb) ->
   gulp.src path.core.src
-  .pipe concat 'parrot.develop.js'
+  .pipe concat path.core.debug
   .pipe coffee().on 'error', gutil.log
   .pipe header banner, pkg: pkg
   .pipe gulp.dest path.core.dist
   .pipe connect.reload()
+  cb()
   return
 
 gulp.task 'standalone', ->
@@ -69,34 +61,24 @@ gulp.task 'standalone', ->
   .pipe connect.reload()
   return
 
-gulp.task 'quo', ->
-  dep = path.dependency
-  gulp.src [dep.quo, dep.partial, path.core.build]
+gulp.task 'build', ['develop'], ->
+  gulp.src [path.dependency.quo, 'dist/parrot.standalone.js']
   .pipe uglify()
   .pipe concat 'parrot.quo.js'
   .pipe header banner, pkg: pkg
   .pipe gulp.dest path.core.dist
-  .pipe connect.reload()
-  return
 
-gulp.task 'jquery', ->
-  dep = path.dependency
-  gulp.src [dep.jquery, dep.partial, path.core.build]
+  gulp.src [path.dependency.jquery, 'dist/parrot.standalone.js']
   .pipe uglify()
   .pipe concat 'parrot.jquery.js'
   .pipe header banner, pkg: pkg
   .pipe gulp.dest path.core.dist
-  .pipe connect.reload()
-  return
 
-gulp.task 'zepto', ->
-  dep = path.dependency
-  gulp.src [dep.zepto, dep.partial, path.core.build]
+  gulp.src [path.dependency.zepto, 'dist/parrot.standalone.js']
   .pipe uglify()
   .pipe concat 'parrot.zepto.js'
   .pipe header banner, pkg: pkg
   .pipe gulp.dest path.core.dist
-  .pipe connect.reload()
   return
 
 gulp.task 'mocha', ->
@@ -120,18 +102,14 @@ gulp.task 'browser', ->
   return
 
 gulp.task 'test', ->
-  gulp.start ['develop', 'mocha', 'server', 'browser']
-  gulp.watch path.core.src, ['develop']
+  gulp.start ['build', 'mocha', 'server', 'browser']
+  gulp.watch path.core.src, ['build']
   gulp.watch path.test.src, ['mocha']
   return
 
 gulp.task 'dev', ->
   gulp.start ['develop']
   gulp.watch path.core.src, ['develop']
-  return
-
-gulp.task 'build', ->
-  gulp.start ['develop', 'standalone', 'quo', 'jquery', 'zepto']
   return
 
 gulp.task 'default', ->

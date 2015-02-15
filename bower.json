@@ -1,7 +1,7 @@
 {
   "name": "parrotjs",
   "description": "Browser features today. High-level wrapper for browser features.",
-  "version": "1.2",
+  "version": "1.2.0",
   "authors": [
     "Kiko Beats <josefrancisco.verdu@gmail.com>"
   ],
